@@ -15,6 +15,7 @@
 		F098FD6A2204958C00656B8F /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD692204958C00656B8F /* ContactsTests.swift */; };
 		F098FD752204958C00656B8F /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD742204958C00656B8F /* ContactsUITests.swift */; };
 		F098FD832204961700656B8F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD822204961700656B8F /* ViewController.swift */; };
+		F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD8A22049B6D00656B8F /* R.generated.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		F098FD742204958C00656B8F /* ContactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUITests.swift; sourceTree = "<group>"; };
 		F098FD762204958C00656B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F098FD822204961700656B8F /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F098FD8A22049B6D00656B8F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +157,7 @@
 		F098FD84220496BF00656B8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F098FD8A22049B6D00656B8F /* R.generated.swift */,
 				F098FD602204958C00656B8F /* Info.plist */,
 			);
 			path = "Supporting Files";
@@ -189,6 +192,7 @@
 			buildConfigurationList = F098FD792204958C00656B8F /* Build configuration list for PBXNativeTarget "contacts-ios" */;
 			buildPhases = (
 				E556745D3C317F6BB0E0480B /* [CP] Check Pods Manifest.lock */,
+				F098FD8922049B0900656B8F /* R.Swift */,
 				F098FD4D2204958A00656B8F /* Sources */,
 				F098FD4E2204958A00656B8F /* Frameworks */,
 				F098FD4F2204958A00656B8F /* Resources */,
@@ -262,7 +266,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F098FD4C2204958A00656B8F /* Build configuration list for PBXProject "Contacts" */;
+			buildConfigurationList = F098FD4C2204958A00656B8F /* Build configuration list for PBXProject "contacts" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -360,6 +364,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F098FD8922049B0900656B8F /* R.Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = R.Swift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/sources/Supporting Files\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -369,6 +391,7 @@
 			files = (
 				F098FD832204961700656B8F /* ViewController.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
+				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,7 +685,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F098FD4C2204958A00656B8F /* Build configuration list for PBXProject "Contacts" */ = {
+		F098FD4C2204958A00656B8F /* Build configuration list for PBXProject "contacts" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F098FD772204958C00656B8F /* Debug */,
