@@ -12,6 +12,8 @@ included: # paths to include during linting. `--path` is ignored if present.
   - sources
   - ContactsTests
   - ContactsUITests
+  - ContactModels
+  - ContactModelsTests
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
   - 'sources/Supporting Files/R.generated.swift'
