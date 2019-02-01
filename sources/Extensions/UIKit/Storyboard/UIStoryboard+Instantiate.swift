@@ -16,7 +16,7 @@ extension UIStoryboard {
     convenience init(storyboard: StoryboardFileNameConvertible, bundle: Bundle) {
         self.init(name: storyboard.filename, bundle: bundle)
     }
-    
+
     class func storyboard(storyboard: StoryboardFileNameConvertible, bundle: Bundle) -> UIStoryboard {
         return UIStoryboard(name: storyboard.filename, bundle: bundle)
     }

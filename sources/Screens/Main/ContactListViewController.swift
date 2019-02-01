@@ -9,4 +9,3 @@
 import UIKit
 
 class ContactListViewController: UIViewController, UIStoryboardIdentifiable {}
-
