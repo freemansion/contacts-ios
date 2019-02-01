@@ -1,0 +1,7 @@
+sources: 
+  - sources
+  # - ContactsNetwork
+templates:
+  - sources/CodeGeneration/
+output:
+  sources/CodeGeneration/Generated
