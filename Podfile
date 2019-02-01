@@ -7,8 +7,9 @@ use_frameworks!
 inhibit_all_warnings!
 
 def main_pods
-    # Metacode
+    # Utils
     pod 'R.swift', '~> 5.0.0.alpha.3'
+    pod 'SwiftLint'
     pod 'Sourcery'
 end
 

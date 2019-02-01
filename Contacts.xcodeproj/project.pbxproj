@@ -247,6 +247,7 @@
 				E556745D3C317F6BB0E0480B /* [CP] Check Pods Manifest.lock */,
 				F098FD8922049B0900656B8F /* R.Swift */,
 				F098FD8C22049BEC00656B8F /* Sourcery */,
+				F098FDA32204A4AD00656B8F /* Swift Lint */,
 				F098FD4D2204958A00656B8F /* Sources */,
 				F098FD4E2204958A00656B8F /* Frameworks */,
 				F098FD4F2204958A00656B8F /* Resources */,
@@ -454,6 +455,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sourcery --config .sourcery.yml\n";
+		};
+		F098FDA32204A4AD00656B8F /* Swift Lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Lint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
