@@ -20,15 +20,15 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lb6-0A-0ky">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="lb6-0A-0ky" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="9vM-Js-cDS"/>
                             <constraint firstItem="lb6-0A-0ky" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MH1-kN-JTH"/>
                             <constraint firstItem="lb6-0A-0ky" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="UT9-Hg-WJe"/>
-                            <constraint firstItem="lb6-0A-0ky" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="xC4-GO-8OV"/>
+                            <constraint firstItem="lb6-0A-0ky" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="xC4-GO-8OV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

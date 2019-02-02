@@ -10,7 +10,28 @@ import UIKit
 
 class ContactsMainContactCell: UITableViewCell {
 
-    @IBOutlet weak var contactNameLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var contactNameLabel: UILabel!
+    @IBOutlet private weak var favoriteIcon: UIImageView!
 
-    
+    enum Constants {
+        static let contentHeight: CGFloat = 64
+    }
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        avatarImageView.layer.masksToBounds = true
+        contactNameLabel.textColor = UIColor.Theme.greyishBrown
+        avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
+    }
+
+    func configure(with viewModel: ContactsMainContactCellViewModel) {
+        avatarImageView.image = viewModel.placeholderIcon
+        contactNameLabel.text = viewModel.fullName
+        favoriteIcon.isHidden = viewModel.isFavorite
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
+    }
 }

@@ -35,6 +35,7 @@
                         <color key="color" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     </activityIndicatorView>
                 </subviews>
+                <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="795-02-pB0" firstAttribute="centerX" secondItem="64v-dV-s0O" secondAttribute="centerX" id="7eY-Hp-mi4"/>
                     <constraint firstItem="64v-dV-s0O" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8m5-4c-hDB"/>

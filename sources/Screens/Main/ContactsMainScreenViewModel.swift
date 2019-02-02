@@ -12,7 +12,7 @@ import PromiseKit
 
 enum ContactsMainScreenUIItem {
     case loading(ContactsMainLoadingCellViewModel)
-    case contact(ContactsListPerson)
+    case contact(ContactsMainContactCellViewModel)
 }
 
 protocol ContactsMainScreenViewModelDataSource {
@@ -49,6 +49,7 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     private enum Constants {
         static let loadingTitle = R.string.localizable.contacts_main_loading_contacts_title()
+        static let personPlaceholder = R.image.person_placeholder()!
     }
 
     var dataSource: ContactsMainScreenViewModelDataSource { return self }
@@ -74,7 +75,9 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
                                                              isAnimating: true)
             newDataSourceItems += [[.loading(viewModel)]]
         } else if !state.contacts.isEmpty {
-            let contacts = state.contacts.map { ContactsMainScreenUIItem.contact($0) }
+            let contacts = state.contacts.map { ContactsMainContactCellViewModel(contact: $0,
+                                                                                 placeholderIcon: Constants.personPlaceholder) }
+                                         .map { ContactsMainScreenUIItem.contact($0) }
             newDataSourceItems += [contacts]
         } else {
             // no data :/

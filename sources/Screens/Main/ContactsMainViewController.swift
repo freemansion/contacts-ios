@@ -34,6 +34,7 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
         tableView.tableFooterView = UIView(frame: .zero) // to remove empty rows
         tableView.register(R.nib.contactsMainContactCell.self)
         tableView.register(R.nib.contactsMainLoadingCell.self)
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     @IBAction func didTouchAddContactButton(_ sender: Any) {
@@ -79,7 +80,7 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
         case .loading:
             return ContactsMainLoadingCell.size(forBoundingSize: boundingSize).height
         case .contact:
-            return 54
+            return UITableView.automaticDimension
         }
     }
 
@@ -104,12 +105,12 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
                 return
             }
             cell.configure(with: viewModel)
-        case .contact(let contact):
+        case .contact(let viewModel):
             guard let cell = cell as? ContactsMainContactCell else {
                 assertionFailure("unexpected cell type found")
                 return
             }
-            cell.contactNameLabel.text = contact.fullName
+            cell.configure(with: viewModel)
         }
     }
 

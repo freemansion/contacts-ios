@@ -7,3 +7,28 @@
 //
 
 import Foundation
+import UIKit
+import ContactModels
+
+struct ContactsMainContactCellViewModel {
+    private let contact: ContactsListPerson
+    let placeholderIcon: UIImage
+
+    init(contact: ContactsListPerson, placeholderIcon: UIImage) {
+        self.contact = contact
+        self.placeholderIcon = placeholderIcon
+    }
+
+    var avatarURL: URL {
+        return contact.profileImageURL
+    }
+
+    var fullName: String {
+        return contact.fullName
+    }
+
+    var isFavorite: Bool {
+        return contact.isFavorite
+    }
+
+}

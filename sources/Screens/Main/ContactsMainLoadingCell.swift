@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactsMainLoadingCell: UITableViewCell {  
+class ContactsMainLoadingCell: UITableViewCell {
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
 
