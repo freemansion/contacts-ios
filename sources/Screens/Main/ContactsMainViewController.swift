@@ -12,7 +12,7 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
     @IBOutlet private weak var groupsBarButton: UIBarButtonItem!
     @IBOutlet private weak var addBarButton: UIBarButtonItem!
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var tableView: UITableView!
     private lazy var screenViewModel: ContactsMainScreenViewModelType = {
         let viewModel = ContactsMainScreenViewModel()
         viewModel.delegate = self
@@ -28,6 +28,12 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
     private func configureView() {
         navigationItem.title = R.string.localizable.contacts_main_screen_title()
         groupsBarButton.title = R.string.localizable.contacts_main_groups_button()
+
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.tableFooterView = UIView(frame: .zero) // to remove empty rows
+        tableView.register(R.nib.contactsMainContactCell.self)
+        tableView.register(R.nib.contactsMainLoadingCell.self)
     }
 
     @IBAction func didTouchAddContactButton(_ sender: Any) {
@@ -46,10 +52,65 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 extension ContactsMainViewController: ContactsMainScreenViewModelDelegate, ErrorAlertPresentable {
     func contactsMainSetNeedReloadUI(_ event: ContactsMainEvent, viewModel: ContactsMainScreenViewModelType) {
         switch event {
-        case .didLoadData:
-            collectionView.reloadData()
+        case .loading(let loading):
+            UIApplication.shared.isNetworkActivityIndicatorVisible = loading
+            tableView.reloadData()
+        case .didLoadContacts:
+            tableView.reloadData()
         case .error(let errorMessage):
             presentErrorAlert(message: errorMessage)
         }
     }
+}
+
+extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return screenViewModel.dataSource.numberOfSections
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return screenViewModel.dataSource.numberOfItems(in: section)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = screenViewModel.dataSource.item(for: indexPath)
+        let boundingSize = tableView.bounds.size
+        switch item {
+        case .loading:
+            return ContactsMainLoadingCell.size(forBoundingSize: boundingSize).height
+        case .contact:
+            return 54
+        }
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = screenViewModel.dataSource.item(for: indexPath)
+        switch item {
+        case .loading:
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.contactsMainLoadingCell, for: indexPath)!
+            return cell
+        case .contact:
+            return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.contactsMainContactCell, for: indexPath)!
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let item = screenViewModel.dataSource.item(for: indexPath)
+
+        switch item {
+        case .loading(let viewModel):
+            guard let cell = cell as? ContactsMainLoadingCell else {
+                assertionFailure("unexpected cell type found")
+                return
+            }
+            cell.configure(with: viewModel)
+        case .contact(let contact):
+            guard let cell = cell as? ContactsMainContactCell else {
+                assertionFailure("unexpected cell type found")
+                return
+            }
+            cell.contactNameLabel.text = contact.fullName
+        }
+    }
+
 }

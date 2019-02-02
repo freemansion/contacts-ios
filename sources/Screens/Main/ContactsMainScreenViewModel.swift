@@ -11,7 +11,8 @@ import ContactModels
 import PromiseKit
 
 enum ContactsMainScreenUIItem {
-    case loading
+    case loading(ContactsMainLoadingCellViewModel)
+    case contact(ContactsListPerson)
 }
 
 protocol ContactsMainScreenViewModelDataSource {
@@ -25,8 +26,9 @@ protocol ContactsMainScreenViewModelActions {
 }
 
 enum ContactsMainEvent {
+    case loading(Bool)
     case error(String)
-    case didLoadData
+    case didLoadContacts([ContactsListPerson])
 }
 
 protocol ContactsMainScreenViewModelDelegate: class {
@@ -39,7 +41,15 @@ protocol ContactsMainScreenViewModelType {
     var delegate: ContactsMainScreenViewModelDelegate? { get set }
 }
 
+struct ContactsMainState {
+    var contacts: [ContactsListPerson] = []
+}
+
 final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, ContactsMainScreenViewModelDataSource, ContactsMainScreenViewModelActions {
+
+    private enum Constants {
+        static let loadingTitle = R.string.localizable.contacts_main_loading_contacts_title()
+    }
 
     var dataSource: ContactsMainScreenViewModelDataSource { return self }
     var actions: ContactsMainScreenViewModelActions { return self }
@@ -49,14 +59,28 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     typealias Dependencies = HasNetworkDataProvider
     private let dependencies: Dependencies
+    private var state: ContactsMainState
 
-    init(dependencies: Dependencies = AppDependencies.shared) {
+    init(state: ContactsMainState = ContactsMainState(), dependencies: Dependencies = AppDependencies.shared) {
+        self.state = state
         self.dependencies = dependencies
         updateDataSource()
     }
 
     private func updateDataSource() {
+        var newDataSourceItems: [[ContactsMainScreenUIItem]] = []
+        if isLoading {
+            let viewModel = ContactsMainLoadingCellViewModel(title: Constants.loadingTitle,
+                                                             isAnimating: true)
+            newDataSourceItems += [[.loading(viewModel)]]
+        } else if !state.contacts.isEmpty {
+            let contacts = state.contacts.map { ContactsMainScreenUIItem.contact($0) }
+            newDataSourceItems += [contacts]
+        } else {
+            // no data :/
+        }
 
+        dataSourceItems = newDataSourceItems
     }
 
     // MARK: DataSource
@@ -74,7 +98,6 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     // MARK: Actions:
     func viewWillAppear() {
-        isLoading = true
         fetchContacts()
     }
 }
@@ -82,13 +105,23 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 extension ContactsMainScreenViewModel {
     // MARK: private
     private func fetchContacts() {
+        sendUIEvent(.loading(true))
         firstly { Promises.fetchAllContacts()
-        }.done { _ in self.sendUIEvent(.didLoadData)
-        }.ensure { self.updateDataSource()
+        }.done { self.sendUIEvent(.didLoadContacts($0))
+        }.ensure { self.sendUIEvent(.loading(false))
         }.catch { self.sendUIEvent(.error($0.localizedDescription)) }
     }
 
     private func sendUIEvent(_ event: ContactsMainEvent) {
+        switch event {
+        case .didLoadContacts(let contacts):
+            state.contacts = contacts
+        case .loading(let loading):
+            isLoading = loading
+        case .error:
+            break
+        }
+        updateDataSource()
         delegate?.contactsMainSetNeedReloadUI(event, viewModel: self)
     }
 }

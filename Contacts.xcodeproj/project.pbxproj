@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6F7FE6E3347712F465FB66DF /* Pods_contacts_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2B46BB651FAC9FD385204B /* Pods_contacts_ios.framework */; };
 		717FD60948D8834CBEDA9C31 /* Pods_ContactsNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C556B5978A188A036A5C58 /* Pods_ContactsNetwork.framework */; };
+		F098A00222058E6800E68C95 /* ContactsMainContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */; };
+		F098A00322058E6800E68C95 /* ContactsMainContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */; };
+		F098A006220591F300E68C95 /* ContactsMainLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */; };
+		F098A007220591F300E68C95 /* ContactsMainLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */; };
+		F098A0092205938500E68C95 /* ContactsMainLoadingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */; };
 		F098FD552204958A00656B8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD542204958A00656B8F /* AppDelegate.swift */; };
 		F098FD5A2204958A00656B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F098FD582204958A00656B8F /* Main.storyboard */; };
 		F098FD5C2204958C00656B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F098FD5B2204958C00656B8F /* Assets.xcassets */; };
@@ -123,6 +128,11 @@
 		B43456E1CCD0BAA8E69E5FFC /* Pods-contacts-ios.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-contacts-ios.release.xcconfig"; path = "Pods/Target Support Files/Pods-contacts-ios/Pods-contacts-ios.release.xcconfig"; sourceTree = "<group>"; };
 		CC2B46BB651FAC9FD385204B /* Pods_contacts_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_contacts_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5305A0234C921A5D1285E78 /* Pods-ContactsNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactsNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContactsNetwork/Pods-ContactsNetwork.debug.xcconfig"; sourceTree = "<group>"; };
+		F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainContactCell.swift; sourceTree = "<group>"; };
+		F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainContactCell.xib; sourceTree = "<group>"; };
+		F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainLoadingCell.swift; sourceTree = "<group>"; };
+		F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainLoadingCell.xib; sourceTree = "<group>"; };
+		F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainLoadingCellViewModel.swift; sourceTree = "<group>"; };
 		F098FD512204958A00656B8F /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F098FD542204958A00656B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F098FD592204958A00656B8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -399,6 +409,11 @@
 				F098FD582204958A00656B8F /* Main.storyboard */,
 				F098FD822204961700656B8F /* ContactsMainViewController.swift */,
 				F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */,
+				F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */,
+				F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */,
+				F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */,
+				F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */,
+				F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -716,9 +731,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F098A00322058E6800E68C95 /* ContactsMainContactCell.xib in Resources */,
 				F098FD5F2204958C00656B8F /* LaunchScreen.storyboard in Resources */,
 				F098FE0B2205663200656B8F /* SFUIText-Semibold.ttf in Resources */,
 				F098FD5C2204958C00656B8F /* Assets.xcassets in Resources */,
+				F098A007220591F300E68C95 /* ContactsMainLoadingCell.xib in Resources */,
 				F098FE092205663200656B8F /* SF-UI-Display-Regular.otf in Resources */,
 				F098FE1C220583D700656B8F /* Localizable.strings in Resources */,
 				F098FD8E22049D7900656B8F /* NetworkApiService.stencil in Resources */,
@@ -948,8 +965,11 @@
 				F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */,
 				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
 				F098FE1522057DBD00656B8F /* AppDependencies.swift in Sources */,
+				F098A0092205938500E68C95 /* ContactsMainLoadingCellViewModel.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
+				F098A006220591F300E68C95 /* ContactsMainLoadingCell.swift in Sources */,
 				F098FE1322057A5200656B8F /* NetworkDataProvider+PromiseKit.swift in Sources */,
+				F098A00222058E6800E68C95 /* ContactsMainContactCell.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
