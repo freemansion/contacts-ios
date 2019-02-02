@@ -5,6 +5,15 @@ PODS:
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - PromiseKit (6.7.0):
+    - PromiseKit/CorePromise (= 6.7.0)
+    - PromiseKit/Foundation (= 6.7.0)
+    - PromiseKit/UIKit (= 6.7.0)
+  - PromiseKit/CorePromise (6.7.0)
+  - PromiseKit/Foundation (6.7.0):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.7.0):
+    - PromiseKit/CorePromise
   - R.swift (5.0.0.alpha.3):
     - R.swift.Library (~> 5.0.0.alpha.2)
   - R.swift.Library (5.0.0.alpha.2)
@@ -14,6 +23,7 @@ PODS:
 
 DEPENDENCIES:
   - Moya (~> 11.0)
+  - PromiseKit (~> 6.0)
   - R.swift (~> 5.0.0.alpha.3)
   - Sourcery
   - SwiftLint
@@ -22,6 +32,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Moya
+    - PromiseKit
     - R.swift
     - R.swift.Library
     - Result
@@ -31,12 +42,13 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Moya: a725035953bc1c0eb1be505ab903984501d82440
+  PromiseKit: 453ddcc947fe7b302f3ef41882b81d31c554df7f
   R.swift: ca4207ecc94545a1611ca0b2ae1197458b6ba30a
   R.swift.Library: 3c21b823839bf5a6769dc7f96cb44479dab51b1b
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: 71d21add2e48cdc6d6409067a474098aed9c072b
+PODFILE CHECKSUM: d53bc37ce19c31dfeb8aabd2d4690b47ae4cc483
 
 COCOAPODS: 1.5.3

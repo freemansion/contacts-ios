@@ -49,6 +49,8 @@
 		F098FE0B2205663200656B8F /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE072205663200656B8F /* SFUIText-Semibold.ttf */; };
 		F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */; };
 		F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0E2205713300656B8F /* RootCoordinator.swift */; };
+		F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE10220578AA00656B8F /* NetworkDataProvider.swift */; };
+		F098FE1322057A5200656B8F /* NetworkDataProvide+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		F098FE072205663200656B8F /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
 		F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainScreenViewModel.swift; sourceTree = "<group>"; };
 		F098FE0E2205713300656B8F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
+		F098FE10220578AA00656B8F /* NetworkDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
+		F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkDataProvide+PromiseKit.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +287,8 @@
 				F098FD542204958A00656B8F /* AppDelegate.swift */,
 				F098FD9522049FF700656B8F /* AppConfig.swift */,
 				F098FD972204A04500656B8F /* AppScreenManager.swift */,
+				F098FE10220578AA00656B8F /* NetworkDataProvider.swift */,
+				F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */,
 				F098FD88220497C300656B8F /* Screens */,
 				F098FD5D2204958C00656B8F /* LaunchScreen.storyboard */,
 				F098FD5B2204958C00656B8F /* Assets.xcassets */,
@@ -789,6 +795,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -798,6 +805,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -927,10 +935,12 @@
 				F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */,
 				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
+				F098FE1322057A5200656B8F /* NetworkDataProvide+PromiseKit.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
+				F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,
 				F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */,
 				F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */,

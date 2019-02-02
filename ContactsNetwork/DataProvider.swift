@@ -10,8 +10,12 @@ import Foundation
 import Moya
 import Alamofire
 
+public protocol DataProviderProtocol {
+    func request<T: Codable>(_ route: NetworkApiService, source: DataProvider.Source, decoder: JSONDecoder?, completion: @escaping (Result<T>) -> Void)
+}
+
 public final class DataProvider {
-    public enum NetworkDataSource {
+    public enum Source {
         case network
         case sampleData
     }
@@ -31,36 +35,10 @@ public final class DataProvider {
     }()
 
     private init() {}
-
-    public func request<T: Decodable>(_ route: NetworkApiService,
-                                      source: NetworkDataSource = .network,
-                                      decoder: JSONDecoder? = nil,
-                                      completion: @escaping (Result<T>) -> Void) {
-        let _decoder = decoder ?? self.decoder
-        let provider = dataProvider(forSource: source)
-        provider.request(route) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let response):
-                    do {
-                        let filteredResponse = try response.filterSuccessfulStatusCodes()
-                        let json = try filteredResponse.mapJSON()
-                        let decodedObject = try ModelMapper.default.map(T.self, from: json, decoder: _decoder)
-                        completion(.success(decodedObject))
-                    } catch {
-                        let _error = ServerAPIError.other(error)
-                        completion(.failure(_error))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        }
-    }
 }
 
 extension DataProvider {
-    private static func dataProvider(forSource source: NetworkDataSource) -> MoyaProvider<NetworkApiService> {
+    private static func dataProvider(forSource source: Source) -> MoyaProvider<NetworkApiService> {
 
         let configuration: URLSessionConfiguration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
@@ -90,12 +68,40 @@ extension DataProvider {
         }
     }
 
-    private func dataProvider(forSource source: NetworkDataSource) -> MoyaProvider<NetworkApiService> {
+    private func dataProvider(forSource source: Source) -> MoyaProvider<NetworkApiService> {
         switch source {
         case .network:
             return DataProvider.dataProvider(forSource: .network)
         case .sampleData:
             return DataProvider.dataProvider(forSource: .sampleData)
+        }
+    }
+}
+
+extension DataProvider: DataProviderProtocol {
+    public func request<T: Codable>(_ route: NetworkApiService,
+                                    source: Source = .network,
+                                    decoder: JSONDecoder? = nil,
+                                    completion: @escaping (Result<T>) -> Void) {
+        let _decoder = decoder ?? self.decoder
+        let provider = dataProvider(forSource: source)
+        provider.request(route) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    do {
+                        let filteredResponse = try response.filterSuccessfulStatusCodes()
+                        let json = try filteredResponse.mapJSON()
+                        let decodedObject = try ModelMapper.default.map(T.self, from: json, decoder: _decoder)
+                        completion(.success(decodedObject))
+                    } catch {
+                        let _error = ServerAPIError.other(error)
+                        completion(.failure(_error))
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
         }
     }
 }

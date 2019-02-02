@@ -11,6 +11,7 @@ def main_pods
     pod 'R.swift', '~> 5.0.0.alpha.3'
     pod 'SwiftLint'
     pod 'Sourcery'
+    pod 'PromiseKit', '~> 6.0'
 end
 
 def network_pods
