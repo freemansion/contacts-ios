@@ -24,7 +24,7 @@ final class AppDependencies: HasAppConfig, HasAppScreenManager, HasNetworkDataPr
     let appConfig: AppConfig
     let appScreenManager: AppScreenManager
     let dataProvider: NetworkDataProvider
-    
+
     static let shared = AppDependencies()
 
     init(appConfig: AppConfig = .default,

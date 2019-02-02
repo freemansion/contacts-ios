@@ -1,5 +1,5 @@
 //
-//  NetworkDataProvide+PromiseKit.swift
+//  NetworkDataProvider+PromiseKit.swift
 //  contacts-ios
 //
 //  Created by Stanislau Baranouski on 2/2/19.
