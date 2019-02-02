@@ -118,7 +118,7 @@ extension ContactsMainScreenViewModel {
     private func sendUIEvent(_ event: ContactsMainEvent) {
         switch event {
         case .didLoadContacts(let contacts):
-            state.contacts = contacts
+            state.contacts = contacts.sorted(by: { $0.fullName < $1.fullName })
         case .loading(let loading):
             isLoading = loading
         case .error:
