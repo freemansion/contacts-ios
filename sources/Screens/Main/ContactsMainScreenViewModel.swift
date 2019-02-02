@@ -8,15 +8,13 @@
 
 import Foundation
 import ContactModels
-import ContactsNetwork
-import Alamofire
+import PromiseKit
 
 enum ContactsMainScreenUIItem {
     case loading
 }
 
 protocol ContactsMainScreenViewModelDataSource {
-    var screenTitle: String { get }
     var numberOfSections: Int { get }
     func numberOfItems(in section: Int) -> Int
     func item(for indexPath: IndexPath) -> ContactsMainScreenUIItem
@@ -26,8 +24,13 @@ protocol ContactsMainScreenViewModelActions {
     func viewWillAppear()
 }
 
-protocol ContactsMainScreenViewModelDelegate: class {
+enum ContactsMainEvent {
+    case error(String)
+    case didLoadData
+}
 
+protocol ContactsMainScreenViewModelDelegate: class {
+    func contactsMainSetNeedReloadUI(_ event: ContactsMainEvent, viewModel: ContactsMainScreenViewModelType)
 }
 
 protocol ContactsMainScreenViewModelType {
@@ -44,7 +47,11 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
     private var isLoading = false
     private var dataSourceItems: [[ContactsMainScreenUIItem]] = []
 
-    init() {
+    typealias Dependencies = HasNetworkDataProvider
+    private let dependencies: Dependencies
+
+    init(dependencies: Dependencies = AppDependencies.shared) {
+        self.dependencies = dependencies
         updateDataSource()
     }
 
@@ -53,10 +60,6 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
     }
 
     // MARK: DataSource
-    var screenTitle: String {
-        return "Contacts"
-    }
-
     var numberOfSections: Int {
         return dataSourceItems.count
     }
@@ -79,15 +82,13 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 extension ContactsMainScreenViewModel {
     // MARK: private
     private func fetchContacts() {
-        let request = FetchContactsRequest()
-        DataProvider.shared.request(.fetchAllContacts(request), source: .network) { (result: Result<[ContactsListPerson]>) in
-            switch result {
-            case .success(let contacts):
-                print(contacts.map { "\($0.fullName)" })
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-            self.isLoading = false
-        }
+        firstly { Promises.fetchAllContacts()
+        }.done { _ in self.sendUIEvent(.didLoadData)
+        }.ensure { self.updateDataSource()
+        }.catch { self.sendUIEvent(.error($0.localizedDescription)) }
+    }
+
+    private func sendUIEvent(_ event: ContactsMainEvent) {
+        delegate?.contactsMainSetNeedReloadUI(event, viewModel: self)
     }
 }

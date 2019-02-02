@@ -26,9 +26,10 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
     }
 
     private func configureView() {
-        navigationItem.title = screenViewModel.dataSource.screenTitle
+        navigationItem.title = R.string.localizable.contacts_main_screen_title()
+        groupsBarButton.title = R.string.localizable.contacts_main_groups_button()
     }
-    
+
     @IBAction func didTouchAddContactButton(_ sender: Any) {
         print("didTouchAddContactButton")
     }
@@ -42,6 +43,13 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
     }
 }
 
-extension ContactsMainViewController: ContactsMainScreenViewModelDelegate {
-
+extension ContactsMainViewController: ContactsMainScreenViewModelDelegate, ErrorAlertPresentable {
+    func contactsMainSetNeedReloadUI(_ event: ContactsMainEvent, viewModel: ContactsMainScreenViewModelType) {
+        switch event {
+        case .didLoadData:
+            collectionView.reloadData()
+        case .error(let errorMessage):
+            presentErrorAlert(message: errorMessage)
+        }
+    }
 }
