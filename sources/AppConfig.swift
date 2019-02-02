@@ -22,7 +22,7 @@ final class AppConfig {
         let barButtonAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: themeColor,
                                                                   .font: R.font.sfuiTextRegular(size: 17)!]
 
-        let navigationTitleAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.Theme.darkGray,
+        let navigationTitleAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.Theme.greyishBrown,
                                                                .font: R.font.sfuiTextSemibold(size: 17)!]
 
         UINavigationBar.appearance().titleTextAttributes = navigationTitleAttributes
