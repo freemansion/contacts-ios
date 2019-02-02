@@ -22,8 +22,13 @@ struct ContactsMainContactCellViewModel {
     }
 
     var avatarURL: URL? {
-        let baseURL = AppConfig.Constants.apiBaseURL
-        return baseURL.appendingPathComponent(contact.profileImageURL.absoluteString)
+        // Note: hack, as fetched url format is not consistent
+        if !contact.profileImageURL.absoluteString.contains("http") {
+            let baseURL = AppConfig.Constants.apiBaseURL
+            return baseURL.appendingPathComponent(contact.profileImageURL.absoluteString)
+        } else {
+            return contact.profileImageURL
+        }
     }
 
     var fullName: String {
