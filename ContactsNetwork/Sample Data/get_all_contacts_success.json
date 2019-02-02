@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "first_name": "John",
+        "last_name": "Doe",
+        "profile_pic": "https://bit.ly/2UzKAmF",
+        "favorite": false,
+        "url": "https://young-atoll-90416.herokuapp.com/contacts/1.json"
+    },
+    {
+        "id": 2,
+        "first_name": "Elon",
+        "last_name": "Musk",
+        "profile_pic": "https://bit.ly/2TrtYxv",
+        "favorite": true,
+        "url": "https://young-atoll-90416.herokuapp.com/contacts/2.json"
+    },
+    {
+        "id": 3,
+        "first_name": "Stan",
+        "last_name": "Baranouski",
+        "profile_pic": "https://bit.ly/2Gg7w6J",
+        "favorite": true,
+        "url": "https://young-atoll-90416.herokuapp.com/contacts/3.json"
+    },
+]

@@ -17,9 +17,9 @@ def network_pods
     pod 'Moya', '~> 11.0'
 end
 
-# target 'ContactsNetwork' do
-#   network_pods
-# end
+target 'ContactsNetwork' do
+  network_pods
+end
 
 target 'contacts-ios' do
   main_pods

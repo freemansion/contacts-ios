@@ -28,6 +28,20 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F098FDC922053A7A00656B8F"
+               BuildableName = "ContactsNetwork.framework"
+               BlueprintName = "ContactsNetwork"
+               ReferencedContainer = "container:contacts.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
                BlueprintIdentifier = "F098FD502204958A00656B8F"
                BuildableName = "Contacts.app"
                BlueprintName = "contacts-ios"
@@ -59,6 +73,16 @@
                BlueprintIdentifier = "F098FD6F2204958C00656B8F"
                BuildableName = "ContactsUITests.xctest"
                BlueprintName = "ContactsUITests"
+               ReferencedContainer = "container:contacts.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F098FDD122053A7B00656B8F"
+               BuildableName = "ContactsNetworkTests.xctest"
+               BlueprintName = "ContactsNetworkTests"
                ReferencedContainer = "container:contacts.xcodeproj">
             </BuildableReference>
          </TestableReference>

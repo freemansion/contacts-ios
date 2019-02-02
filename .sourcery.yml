@@ -1,6 +1,6 @@
 sources: 
   - sources
-  # - ContactsNetwork
+  - ContactsNetwork
 templates:
   - sources/CodeGeneration/
 output:

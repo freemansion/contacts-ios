@@ -1,1 +1,25 @@
+{% for enum in types.implementing.NetworkApiServiceRepresentable %}
+extension {{ enum.name }} {
+    var requestData: RequestDataProvidable {
+        switch self {
+    {% for case in enum.cases %}
+        {% for associatedValue in case.associatedValues %}
+            {% for associatedValue in case.associatedValues %}
+                {% if associatedValue.type.implements.NetworkApiServiceRepresentable %}
+                    {% for _case in associatedValue.type.cases %}
+            case .{{ case.name }}(.{{ _case.name }}(let request)):
+                return request
+                    {% endfor %}
+                {% else %}
+            case .{{case.name}}(let request):
+                return request
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+        }
+    }
+}
+
+{% endfor %}
 

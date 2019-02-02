@@ -2,4 +2,13 @@
 // DO NOT EDIT
 
 
+extension NetworkApiService {
+    var requestData: RequestDataProvidable {
+        switch self {
+            case .fetchAllContacts(let request):
+                return request
+        }
+    }
+}
+
 
