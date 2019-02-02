@@ -51,6 +51,7 @@
 		F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0E2205713300656B8F /* RootCoordinator.swift */; };
 		F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE10220578AA00656B8F /* NetworkDataProvider.swift */; };
 		F098FE1322057A5200656B8F /* NetworkDataProvide+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */; };
+		F098FE1522057DBD00656B8F /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE1422057DBD00656B8F /* AppDependencies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,6 +172,7 @@
 		F098FE0E2205713300656B8F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		F098FE10220578AA00656B8F /* NetworkDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
 		F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkDataProvide+PromiseKit.swift"; sourceTree = "<group>"; };
+		F098FE1422057DBD00656B8F /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,6 +289,7 @@
 				F098FD542204958A00656B8F /* AppDelegate.swift */,
 				F098FD9522049FF700656B8F /* AppConfig.swift */,
 				F098FD972204A04500656B8F /* AppScreenManager.swift */,
+				F098FE1422057DBD00656B8F /* AppDependencies.swift */,
 				F098FE10220578AA00656B8F /* NetworkDataProvider.swift */,
 				F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */,
 				F098FD88220497C300656B8F /* Screens */,
@@ -934,6 +937,7 @@
 			files = (
 				F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */,
 				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
+				F098FE1522057DBD00656B8F /* AppDependencies.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
 				F098FE1322057A5200656B8F /* NetworkDataProvide+PromiseKit.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
