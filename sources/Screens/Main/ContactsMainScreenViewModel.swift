@@ -19,6 +19,7 @@ protocol ContactsMainScreenViewModelDataSource {
     var numberOfSections: Int { get }
     func numberOfItems(in section: Int) -> Int
     func item(for indexPath: IndexPath) -> ContactsMainScreenUIItem
+    var sectionIndexTitles: [String]? { get }
 }
 
 protocol ContactsMainScreenViewModelActions {
@@ -101,6 +102,10 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     func item(for indexPath: IndexPath) -> ContactsMainScreenUIItem {
         return dataSourceItems[indexPath.section][indexPath.row]
+    }
+
+    var sectionIndexTitles: [String]? {
+        return state.groupedContacts.map { $0.0 }
     }
 
     // MARK: Actions:

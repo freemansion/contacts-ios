@@ -36,7 +36,7 @@ extension Nuke.ImageLoadingOptions {
                                         transition: .fadeIn(duration: 0.33),
                                         failureImage: nil,
                                         failureImageTransition: .fadeIn(duration: 0.33),
-                                        contentModes: .init(success: .scaleAspectFit,
+                                        contentModes: .init(success: .scaleAspectFill,
                                                             failure: .center,
                                                             placeholder: .center))
     }

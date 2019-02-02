@@ -32,8 +32,10 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.tableFooterView = UIView(frame: .zero) // to remove empty rows
+        tableView.sectionIndexColor = UIColor.black.withAlphaComponent(0.26)
         tableView.register(R.nib.contactsMainContactCell.self)
         tableView.register(R.nib.contactsMainLoadingCell.self)
+        tableView.separatorStyle = .none
         tableView.register(ContactsMainHeaderView.nib, forHeaderFooterViewReuseIdentifier: ContactsMainHeaderView.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
     }
@@ -120,6 +122,10 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
         case .contact:
             return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.contactsMainContactCell, for: indexPath)!
         }
+    }
+
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return screenViewModel.dataSource.sectionIndexTitles
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
