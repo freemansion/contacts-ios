@@ -50,8 +50,11 @@
 		F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */; };
 		F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0E2205713300656B8F /* RootCoordinator.swift */; };
 		F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE10220578AA00656B8F /* NetworkDataProvider.swift */; };
-		F098FE1322057A5200656B8F /* NetworkDataProvide+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */; };
+		F098FE1322057A5200656B8F /* NetworkDataProvider+PromiseKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE1222057A5200656B8F /* NetworkDataProvider+PromiseKit.swift */; };
 		F098FE1522057DBD00656B8F /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE1422057DBD00656B8F /* AppDependencies.swift */; };
+		F098FE172205806200656B8F /* Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE162205806200656B8F /* Promises.swift */; };
+		F098FE192205834A00656B8F /* ErrorAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */; };
+		F098FE1C220583D700656B8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F098FE1E220583D700656B8F /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -171,8 +174,11 @@
 		F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainScreenViewModel.swift; sourceTree = "<group>"; };
 		F098FE0E2205713300656B8F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		F098FE10220578AA00656B8F /* NetworkDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataProvider.swift; sourceTree = "<group>"; };
-		F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkDataProvide+PromiseKit.swift"; sourceTree = "<group>"; };
+		F098FE1222057A5200656B8F /* NetworkDataProvider+PromiseKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NetworkDataProvider+PromiseKit.swift"; sourceTree = "<group>"; };
 		F098FE1422057DBD00656B8F /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
+		F098FE162205806200656B8F /* Promises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promises.swift; sourceTree = "<group>"; };
+		F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertPresentable.swift; sourceTree = "<group>"; };
+		F098FE1D220583D700656B8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,7 +297,8 @@
 				F098FD972204A04500656B8F /* AppScreenManager.swift */,
 				F098FE1422057DBD00656B8F /* AppDependencies.swift */,
 				F098FE10220578AA00656B8F /* NetworkDataProvider.swift */,
-				F098FE1222057A5200656B8F /* NetworkDataProvide+PromiseKit.swift */,
+				F098FE1222057A5200656B8F /* NetworkDataProvider+PromiseKit.swift */,
+				F098FE162205806200656B8F /* Promises.swift */,
 				F098FD88220497C300656B8F /* Screens */,
 				F098FD5D2204958C00656B8F /* LaunchScreen.storyboard */,
 				F098FD5B2204958C00656B8F /* Assets.xcassets */,
@@ -326,6 +333,7 @@
 			children = (
 				F098FE032205660C00656B8F /* Fonts */,
 				F098FD8A22049B6D00656B8F /* R.generated.swift */,
+				F098FE1E220583D700656B8F /* Localizable.strings */,
 				F098FD602204958C00656B8F /* Info.plist */,
 			);
 			path = "Supporting Files";
@@ -370,6 +378,7 @@
 			children = (
 				F098FD9A2204A07A00656B8F /* Storyboard */,
 				F098FDFE22055E1A00656B8F /* UIColor+Extensions.swift */,
+				F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -711,6 +720,7 @@
 				F098FE0B2205663200656B8F /* SFUIText-Semibold.ttf in Resources */,
 				F098FD5C2204958C00656B8F /* Assets.xcassets in Resources */,
 				F098FE092205663200656B8F /* SF-UI-Display-Regular.otf in Resources */,
+				F098FE1C220583D700656B8F /* Localizable.strings in Resources */,
 				F098FD8E22049D7900656B8F /* NetworkApiService.stencil in Resources */,
 				F098FE0A2205663200656B8F /* SFUIText-Regular.ttf in Resources */,
 				F098FE082205663200656B8F /* SFUIText-Bold.ttf in Resources */,
@@ -939,14 +949,16 @@
 				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
 				F098FE1522057DBD00656B8F /* AppDependencies.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
-				F098FE1322057A5200656B8F /* NetworkDataProvide+PromiseKit.swift in Sources */,
+				F098FE1322057A5200656B8F /* NetworkDataProvider+PromiseKit.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
+				F098FE172205806200656B8F /* Promises.swift in Sources */,
 				F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,
 				F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */,
+				F098FE192205834A00656B8F /* ErrorAlertPresentable.swift in Sources */,
 				F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */,
 				F098FD9E2204A09F00656B8F /* UIStoryboard+Instantiate.swift in Sources */,
 			);
@@ -1058,6 +1070,14 @@
 				F098FD5E2204958C00656B8F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F098FE1E220583D700656B8F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F098FE1D220583D700656B8F /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
