@@ -11,11 +11,23 @@ import UIKit
 
 final class AppConfig {
     static let `default` = AppConfig()
-
     private let screenManager = AppScreenManager.shared
 
     func setup() {
-        // TODO: setup dependencies here if needed
+        configureAppearance()
+    }
+
+    private func configureAppearance() {
+        let themeColor = UIColor.Theme.lightGreen
+        let barButtonAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: themeColor,
+                                                                  .font: R.font.sfuiTextRegular(size: 17)!]
+
+        let navigationTitleAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.Theme.darkGray,
+                                                               .font: R.font.sfuiTextSemibold(size: 17)!]
+
+        UINavigationBar.appearance().titleTextAttributes = navigationTitleAttributes
+        UINavigationBar.appearance().tintColor = themeColor
+        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).setTitleTextAttributes(barButtonAttributes, for: .normal)
     }
 
 }

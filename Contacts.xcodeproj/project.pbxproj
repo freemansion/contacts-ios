@@ -15,7 +15,7 @@
 		F098FD5F2204958C00656B8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F098FD5D2204958C00656B8F /* LaunchScreen.storyboard */; };
 		F098FD6A2204958C00656B8F /* ContactsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD692204958C00656B8F /* ContactsTests.swift */; };
 		F098FD752204958C00656B8F /* ContactsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD742204958C00656B8F /* ContactsUITests.swift */; };
-		F098FD832204961700656B8F /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD822204961700656B8F /* ContactListViewController.swift */; };
+		F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD822204961700656B8F /* ContactsMainViewController.swift */; };
 		F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD8A22049B6D00656B8F /* R.generated.swift */; };
 		F098FD8E22049D7900656B8F /* NetworkApiService.stencil in Resources */ = {isa = PBXBuildFile; fileRef = F098FD8D22049D7900656B8F /* NetworkApiService.stencil */; };
 		F098FD9622049FF700656B8F /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD9522049FF700656B8F /* AppConfig.swift */; };
@@ -42,6 +42,11 @@
 		F098FDF722053D3C00656B8F /* FetchContactsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FDF622053D3C00656B8F /* FetchContactsRequest.swift */; };
 		F098FDFA22053D8B00656B8F /* get_all_contacts_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F098FDF922053D8B00656B8F /* get_all_contacts_success.json */; };
 		F098FDFD2205414300656B8F /* NetworkApiService.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD9122049E5400656B8F /* NetworkApiService.generated.swift */; };
+		F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FDFE22055E1A00656B8F /* UIColor+Extensions.swift */; };
+		F098FE082205663200656B8F /* SFUIText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE042205663100656B8F /* SFUIText-Bold.ttf */; };
+		F098FE092205663200656B8F /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE052205663100656B8F /* SF-UI-Display-Regular.otf */; };
+		F098FE0A2205663200656B8F /* SFUIText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE062205663200656B8F /* SFUIText-Regular.ttf */; };
+		F098FE0B2205663200656B8F /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE072205663200656B8F /* SFUIText-Semibold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,7 +127,7 @@
 		F098FD702204958C00656B8F /* ContactsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F098FD742204958C00656B8F /* ContactsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUITests.swift; sourceTree = "<group>"; };
 		F098FD762204958C00656B8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F098FD822204961700656B8F /* ContactListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
+		F098FD822204961700656B8F /* ContactsMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsMainViewController.swift; sourceTree = "<group>"; };
 		F098FD8A22049B6D00656B8F /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		F098FD8D22049D7900656B8F /* NetworkApiService.stencil */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NetworkApiService.stencil; sourceTree = "<group>"; };
 		F098FD9122049E5400656B8F /* NetworkApiService.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkApiService.generated.swift; sourceTree = "<group>"; };
@@ -153,6 +158,11 @@
 		F098FDF422053CEB00656B8F /* NetworkLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLogger.swift; sourceTree = "<group>"; };
 		F098FDF622053D3C00656B8F /* FetchContactsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchContactsRequest.swift; sourceTree = "<group>"; };
 		F098FDF922053D8B00656B8F /* get_all_contacts_success.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = get_all_contacts_success.json; sourceTree = "<group>"; };
+		F098FDFE22055E1A00656B8F /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		F098FE042205663100656B8F /* SFUIText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Bold.ttf"; sourceTree = "<group>"; };
+		F098FE052205663100656B8F /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
+		F098FE062205663200656B8F /* SFUIText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Regular.ttf"; sourceTree = "<group>"; };
+		F098FE072205663200656B8F /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,6 +283,7 @@
 				F098FD5D2204958C00656B8F /* LaunchScreen.storyboard */,
 				F098FD5B2204958C00656B8F /* Assets.xcassets */,
 				F098FD8F22049DED00656B8F /* CodeGeneration */,
+				F098FE002205627200656B8F /* Views */,
 				F098FD852204976E00656B8F /* Extensions */,
 				F098FD84220496BF00656B8F /* Supporting Files */,
 			);
@@ -300,6 +311,7 @@
 		F098FD84220496BF00656B8F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F098FE032205660C00656B8F /* Fonts */,
 				F098FD8A22049B6D00656B8F /* R.generated.swift */,
 				F098FD602204958C00656B8F /* Info.plist */,
 			);
@@ -343,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				F098FD9A2204A07A00656B8F /* Storyboard */,
+				F098FDFE22055E1A00656B8F /* UIColor+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -360,7 +373,7 @@
 		F098FDA12204A17300656B8F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F098FD822204961700656B8F /* ContactListViewController.swift */,
+				F098FD822204961700656B8F /* ContactsMainViewController.swift */,
 				F098FD582204958A00656B8F /* Main.storyboard */,
 			);
 			path = Main;
@@ -434,6 +447,24 @@
 				F098FDF922053D8B00656B8F /* get_all_contacts_success.json */,
 			);
 			path = "Sample Data";
+			sourceTree = "<group>";
+		};
+		F098FE002205627200656B8F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F098FE032205660C00656B8F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F098FE052205663100656B8F /* SF-UI-Display-Regular.otf */,
+				F098FE042205663100656B8F /* SFUIText-Bold.ttf */,
+				F098FE062205663200656B8F /* SFUIText-Regular.ttf */,
+				F098FE072205663200656B8F /* SFUIText-Semibold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -662,8 +693,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F098FD5F2204958C00656B8F /* LaunchScreen.storyboard in Resources */,
+				F098FE0B2205663200656B8F /* SFUIText-Semibold.ttf in Resources */,
 				F098FD5C2204958C00656B8F /* Assets.xcassets in Resources */,
+				F098FE092205663200656B8F /* SF-UI-Display-Regular.otf in Resources */,
 				F098FD8E22049D7900656B8F /* NetworkApiService.stencil in Resources */,
+				F098FE0A2205663200656B8F /* SFUIText-Regular.ttf in Resources */,
+				F098FE082205663200656B8F /* SFUIText-Bold.ttf in Resources */,
 				F098FD5A2204958A00656B8F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -883,13 +918,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F098FD832204961700656B8F /* ContactListViewController.swift in Sources */,
+				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,
+				F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */,
 				F098FD9E2204A09F00656B8F /* UIStoryboard+Instantiate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
