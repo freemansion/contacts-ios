@@ -43,6 +43,7 @@ protocol ContactsMainScreenViewModelType {
 
 struct ContactsMainState {
     var contacts: [ContactsListPerson] = []
+    var groupedContacts: [(String, [ContactsListPerson])] = []
 }
 
 final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, ContactsMainScreenViewModelDataSource, ContactsMainScreenViewModelActions {
@@ -75,10 +76,13 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
                                                              isAnimating: true)
             newDataSourceItems += [[.loading(viewModel)]]
         } else if !state.contacts.isEmpty {
-            let contacts = state.contacts.map { ContactsMainContactCellViewModel(contact: $0,
-                                                                                 placeholderIcon: Constants.personPlaceholder) }
-                                         .map { ContactsMainScreenUIItem.contact($0) }
-            newDataSourceItems += [contacts]
+            for group in state.groupedContacts {
+                let contacts = group.1.map { ContactsMainContactCellViewModel(groupName: group.0,
+                                                                              contact: $0,
+                                                                              placeholderIcon: Constants.personPlaceholder) }
+                                      .map { ContactsMainScreenUIItem.contact($0) }
+                newDataSourceItems += [contacts]
+            }
         } else {
             // no data :/
         }
@@ -118,7 +122,7 @@ extension ContactsMainScreenViewModel {
     private func sendUIEvent(_ event: ContactsMainEvent) {
         switch event {
         case .didLoadContacts(let contacts):
-            state.contacts = contacts.sorted(by: { $0.fullName < $1.fullName })
+            processContacts(contacts)
         case .loading(let loading):
             isLoading = loading
         case .error:
@@ -126,5 +130,32 @@ extension ContactsMainScreenViewModel {
         }
         updateDataSource()
         delegate?.contactsMainSetNeedReloadUI(event, viewModel: self)
+    }
+
+    private func processContacts(_ contacts: [ContactsListPerson]) {
+        // 1. sort alpabetically by full name
+        let sorted = contacts.sorted(by: { $0.fullName < $1.fullName })
+
+        // 2. split by groups
+        var result: [(String, [ContactsListPerson])] = []
+        var idx = 0
+        for contact in sorted {
+            if let firstChar = contact.fullName.first, let section = result.last, String(firstChar) == section.0 {
+                // updating existing group
+                let group = (String(firstChar), (section.1 + [contact]))
+                result.removeLast()
+                result.append(group)
+            } else if let firstChar = contact.fullName.first {
+                // creating new one
+                let group = (String(firstChar), [contact])
+                result.insert(group, at: idx)
+                idx += 1
+            }
+
+            // print("\(result.map { "section: \($0.0), contacts: \($0.1.count)" })\n")
+        }
+
+        state.contacts = sorted
+        state.groupedContacts = result
     }
 }

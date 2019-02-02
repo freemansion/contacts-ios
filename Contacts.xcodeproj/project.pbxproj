@@ -64,6 +64,8 @@
 		F098FE172205806200656B8F /* Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE162205806200656B8F /* Promises.swift */; };
 		F098FE192205834A00656B8F /* ErrorAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */; };
 		F098FE1C220583D700656B8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F098FE1E220583D700656B8F /* Localizable.strings */; };
+		F0EE71872205BD5C000809C6 /* ContactsMainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */; };
+		F0EE71892205BD65000809C6 /* ContactsMainHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -203,6 +205,8 @@
 		F098FE162205806200656B8F /* Promises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promises.swift; sourceTree = "<group>"; };
 		F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertPresentable.swift; sourceTree = "<group>"; };
 		F098FE1D220583D700656B8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainHeaderView.swift; sourceTree = "<group>"; };
+		F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainHeaderView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -422,15 +426,10 @@
 		F098FDA12204A17300656B8F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				F0EE71852205BD32000809C6 /* Views */,
 				F098FD582204958A00656B8F /* Main.storyboard */,
 				F098FD822204961700656B8F /* ContactsMainViewController.swift */,
 				F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */,
-				F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */,
-				F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */,
-				F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */,
-				F098A00A220595F700E68C95 /* ContactsMainContactCellViewModel.swift */,
-				F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */,
-				F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -521,6 +520,21 @@
 				F098FE072205663200656B8F /* SFUIText-Semibold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F0EE71852205BD32000809C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */,
+				F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */,
+				F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */,
+				F098A00A220595F700E68C95 /* ContactsMainContactCellViewModel.swift */,
+				F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */,
+				F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */,
+				F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */,
+				F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -760,6 +774,7 @@
 				F098FE0A2205663200656B8F /* SFUIText-Regular.ttf in Resources */,
 				F098FE082205663200656B8F /* SFUIText-Bold.ttf in Resources */,
 				F098FD5A2204958A00656B8F /* Main.storyboard in Resources */,
+				F0EE71892205BD65000809C6 /* ContactsMainHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -991,6 +1006,7 @@
 				F098A006220591F300E68C95 /* ContactsMainLoadingCell.swift in Sources */,
 				F098FE1322057A5200656B8F /* NetworkDataProvider+PromiseKit.swift in Sources */,
 				F098A00222058E6800E68C95 /* ContactsMainContactCell.swift in Sources */,
+				F0EE71872205BD5C000809C6 /* ContactsMainHeaderView.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,

@@ -34,6 +34,7 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
         tableView.tableFooterView = UIView(frame: .zero) // to remove empty rows
         tableView.register(R.nib.contactsMainContactCell.self)
         tableView.register(R.nib.contactsMainLoadingCell.self)
+        tableView.register(ContactsMainHeaderView.nib, forHeaderFooterViewReuseIdentifier: ContactsMainHeaderView.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
     }
 
@@ -81,6 +82,32 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
             return ContactsMainLoadingCell.size(forBoundingSize: boundingSize).height
         case .contact:
             return UITableView.automaticDimension
+        }
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let indexPath = IndexPath(row: 0, section: section)
+        let item = screenViewModel.dataSource.item(for: indexPath)
+        switch item {
+        case .loading:
+            return nil
+        case .contact(let viewModel):
+            guard let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ContactsMainHeaderView.reuseIdentifier) as? ContactsMainHeaderView else {
+                return nil
+            }
+            headerView.titleLabel.text = viewModel.groupName
+            return headerView
+        }
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let indexPath = IndexPath(row: 0, section: section)
+        let item = screenViewModel.dataSource.item(for: indexPath)
+        switch item {
+        case .loading:
+            return 0
+        case .contact:
+            return ContactsMainHeaderView.height
         }
     }
 

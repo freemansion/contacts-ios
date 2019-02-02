@@ -12,9 +12,11 @@ import ContactModels
 
 struct ContactsMainContactCellViewModel {
     private let contact: ContactsListPerson
+    let groupName: String
     let placeholderIcon: UIImage
 
-    init(contact: ContactsListPerson, placeholderIcon: UIImage) {
+    init(groupName: String, contact: ContactsListPerson, placeholderIcon: UIImage) {
+        self.groupName = groupName
         self.contact = contact
         self.placeholderIcon = placeholderIcon
     }
