@@ -12,6 +12,7 @@ def main_pods
     pod 'SwiftLint'
     pod 'Sourcery'
     pod 'PromiseKit', '~> 6.0'
+    pod 'Nuke'
 end
 
 def network_pods

@@ -25,7 +25,9 @@ class ContactsMainContactCell: UITableViewCell {
     }
 
     func configure(with viewModel: ContactsMainContactCellViewModel) {
-        avatarImageView.image = viewModel.placeholderIcon
+        ImageLoader.default.loadImage(url: viewModel.avatarURL,
+                                  options: .imageLoadingOptions(placeholder: viewModel.placeholderIcon),
+                                     into: avatarImageView)
         contactNameLabel.text = viewModel.fullName
         favoriteIcon.isHidden = viewModel.isFavorite
     }

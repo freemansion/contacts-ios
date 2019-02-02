@@ -19,8 +19,9 @@ struct ContactsMainContactCellViewModel {
         self.placeholderIcon = placeholderIcon
     }
 
-    var avatarURL: URL {
-        return contact.profileImageURL
+    var avatarURL: URL? {
+        let baseURL = AppConfig.Constants.apiBaseURL
+        return baseURL.appendingPathComponent(contact.profileImageURL.absoluteString)
     }
 
     var fullName: String {

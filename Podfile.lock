@@ -5,6 +5,7 @@ PODS:
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - Nuke (7.5.1)
   - PromiseKit (6.7.0):
     - PromiseKit/CorePromise (= 6.7.0)
     - PromiseKit/Foundation (= 6.7.0)
@@ -23,6 +24,7 @@ PODS:
 
 DEPENDENCIES:
   - Moya (~> 11.0)
+  - Nuke
   - PromiseKit (~> 6.0)
   - R.swift (~> 5.0.0.alpha.3)
   - Sourcery
@@ -32,6 +34,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Moya
+    - Nuke
     - PromiseKit
     - R.swift
     - R.swift.Library
@@ -42,6 +45,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   Moya: a725035953bc1c0eb1be505ab903984501d82440
+  Nuke: 3814db501e55f17951451839c726ffd91641e9a5
   PromiseKit: 453ddcc947fe7b302f3ef41882b81d31c554df7f
   R.swift: ca4207ecc94545a1611ca0b2ae1197458b6ba30a
   R.swift.Library: 3c21b823839bf5a6769dc7f96cb44479dab51b1b
@@ -49,6 +53,6 @@ SPEC CHECKSUMS:
   Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: d53bc37ce19c31dfeb8aabd2d4690b47ae4cc483
+PODFILE CHECKSUM: af2c51c7c5862880c9492c52a3a2e7423de13f36
 
 COCOAPODS: 1.5.3

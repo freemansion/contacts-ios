@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 final class AppConfig {
+    enum Constants {
+        static let apiBaseURL = URL(string: "https://young-atoll-90416.herokuapp.com")!
+    }
+
     static let `default` = AppConfig()
     private let screenManager = AppScreenManager.shared
 

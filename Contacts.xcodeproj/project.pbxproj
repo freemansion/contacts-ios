@@ -15,6 +15,9 @@
 		F098A007220591F300E68C95 /* ContactsMainLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */; };
 		F098A0092205938500E68C95 /* ContactsMainLoadingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */; };
 		F098A00B220595F700E68C95 /* ContactsMainContactCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A00A220595F700E68C95 /* ContactsMainContactCellViewModel.swift */; };
+		F098A00C2205A91D00E68C95 /* ContactModels.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F098FDA92204A7E400656B8F /* ContactModels.framework */; };
+		F098A00D2205A91D00E68C95 /* ContactModels.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F098FDA92204A7E400656B8F /* ContactModels.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F098A0112205AA0900E68C95 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A0102205AA0900E68C95 /* ImageLoader.swift */; };
 		F098FD552204958A00656B8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FD542204958A00656B8F /* AppDelegate.swift */; };
 		F098FD5A2204958A00656B8F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F098FD582204958A00656B8F /* Main.storyboard */; };
 		F098FD5C2204958C00656B8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F098FD5B2204958C00656B8F /* Assets.xcassets */; };
@@ -64,6 +67,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		F098A00E2205A91D00E68C95 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F098FD492204958A00656B8F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F098FDA82204A7E400656B8F;
+			remoteInfo = ContactModels;
+		};
 		F098FD662204958C00656B8F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F098FD492204958A00656B8F /* Project object */;
@@ -116,6 +126,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				F098FDE022053A7B00656B8F /* ContactsNetwork.framework in Embed Frameworks */,
+				F098A00D2205A91D00E68C95 /* ContactModels.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +146,7 @@
 		F098A005220591F300E68C95 /* ContactsMainLoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainLoadingCell.xib; sourceTree = "<group>"; };
 		F098A0082205938500E68C95 /* ContactsMainLoadingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainLoadingCellViewModel.swift; sourceTree = "<group>"; };
 		F098A00A220595F700E68C95 /* ContactsMainContactCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainContactCellViewModel.swift; sourceTree = "<group>"; };
+		F098A0102205AA0900E68C95 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		F098FD512204958A00656B8F /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F098FD542204958A00656B8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F098FD592204958A00656B8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -199,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F098FDDF22053A7B00656B8F /* ContactsNetwork.framework in Frameworks */,
+				F098A00C2205A91D00E68C95 /* ContactModels.framework in Frameworks */,
 				6F7FE6E3347712F465FB66DF /* Pods_contacts_ios.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -311,6 +324,7 @@
 				F098FE10220578AA00656B8F /* NetworkDataProvider.swift */,
 				F098FE1222057A5200656B8F /* NetworkDataProvider+PromiseKit.swift */,
 				F098FE162205806200656B8F /* Promises.swift */,
+				F098A0102205AA0900E68C95 /* ImageLoader.swift */,
 				F098FD88220497C300656B8F /* Screens */,
 				F098FD5D2204958C00656B8F /* LaunchScreen.storyboard */,
 				F098FD5B2204958C00656B8F /* Assets.xcassets */,
@@ -549,6 +563,7 @@
 			);
 			dependencies = (
 				F098FDDE22053A7B00656B8F /* PBXTargetDependency */,
+				F098A00F2205A91D00E68C95 /* PBXTargetDependency */,
 			);
 			name = "contacts-ios";
 			productName = Contacts;
@@ -828,6 +843,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
 			);
@@ -838,6 +854,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
 			);
@@ -979,6 +996,7 @@
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
 				F098FE172205806200656B8F /* Promises.swift in Sources */,
+				F098A0112205AA0900E68C95 /* ImageLoader.swift in Sources */,
 				F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,
 				F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */,
@@ -1047,6 +1065,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		F098A00F2205A91D00E68C95 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F098FDA82204A7E400656B8F /* ContactModels */;
+			targetProxy = F098A00E2205A91D00E68C95 /* PBXContainerItemProxy */;
+		};
 		F098FD672204958C00656B8F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = F098FD502204958A00656B8F /* contacts-ios */;
