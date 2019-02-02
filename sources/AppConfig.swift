@@ -18,7 +18,7 @@ final class AppConfig {
     }
 
     private func configureAppearance() {
-        let themeColor = UIColor.Theme.lightGreen
+        let themeColor = UIColor.Theme.greenishCyan
         let barButtonAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: themeColor,
                                                                   .font: R.font.sfuiTextRegular(size: 17)!]
 

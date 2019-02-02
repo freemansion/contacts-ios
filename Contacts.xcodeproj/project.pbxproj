@@ -47,6 +47,8 @@
 		F098FE092205663200656B8F /* SF-UI-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE052205663100656B8F /* SF-UI-Display-Regular.otf */; };
 		F098FE0A2205663200656B8F /* SFUIText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE062205663200656B8F /* SFUIText-Regular.ttf */; };
 		F098FE0B2205663200656B8F /* SFUIText-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F098FE072205663200656B8F /* SFUIText-Semibold.ttf */; };
+		F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */; };
+		F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE0E2205713300656B8F /* RootCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +165,8 @@
 		F098FE052205663100656B8F /* SF-UI-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-UI-Display-Regular.otf"; sourceTree = "<group>"; };
 		F098FE062205663200656B8F /* SFUIText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Regular.ttf"; sourceTree = "<group>"; };
 		F098FE072205663200656B8F /* SFUIText-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFUIText-Semibold.ttf"; sourceTree = "<group>"; };
+		F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainScreenViewModel.swift; sourceTree = "<group>"; };
+		F098FE0E2205713300656B8F /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,6 +333,7 @@
 		F098FD88220497C300656B8F /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F098FE0E2205713300656B8F /* RootCoordinator.swift */,
 				F098FDA12204A17300656B8F /* Main */,
 			);
 			path = Screens;
@@ -373,8 +378,9 @@
 		F098FDA12204A17300656B8F /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				F098FD822204961700656B8F /* ContactsMainViewController.swift */,
 				F098FD582204958A00656B8F /* Main.storyboard */,
+				F098FD822204961700656B8F /* ContactsMainViewController.swift */,
+				F098FE0C22056F1000656B8F /* ContactsMainScreenViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -918,6 +924,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F098FE0D22056F1000656B8F /* ContactsMainScreenViewModel.swift in Sources */,
 				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
@@ -926,6 +933,7 @@
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,
 				F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */,
+				F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */,
 				F098FD9E2204A09F00656B8F /* UIStoryboard+Instantiate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
