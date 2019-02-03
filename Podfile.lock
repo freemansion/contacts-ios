@@ -1,5 +1,10 @@
 PODS:
   - Alamofire (4.8.0)
+  - AWSCognito (2.7.4):
+    - AWSCore (= 2.7.4)
+  - AWSCore (2.7.4)
+  - AWSS3 (2.7.4):
+    - AWSCore (= 2.7.4)
   - IQKeyboardManagerSwift (6.2.0)
   - Moya (11.0.2):
     - Moya/Core (= 11.0.2)
@@ -24,6 +29,8 @@ PODS:
   - SwiftLint (0.29.1)
 
 DEPENDENCIES:
+  - AWSCognito
+  - AWSS3
   - IQKeyboardManagerSwift
   - Moya (~> 11.0)
   - Nuke
@@ -35,6 +42,9 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - AWSCognito
+    - AWSCore
+    - AWSS3
     - IQKeyboardManagerSwift
     - Moya
     - Nuke
@@ -47,6 +57,9 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  AWSCognito: 9de12d55c9c925449014116590f69eea5285524f
+  AWSCore: 9ff5ac15c4a5dd8419753fe19b9e98f7ba1b7859
+  AWSS3: eecae272ea2e50d0da583385906db100fd740dbd
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Moya: a725035953bc1c0eb1be505ab903984501d82440
   Nuke: 3814db501e55f17951451839c726ffd91641e9a5
@@ -57,6 +70,6 @@ SPEC CHECKSUMS:
   Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: 44d8dad80942280d3b1d87810efd85b6257b3de5
+PODFILE CHECKSUM: 7669f8d0a4fef1fc3e824cc59cc9f21988ff65f1
 
 COCOAPODS: 1.5.3

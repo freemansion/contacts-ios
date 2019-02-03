@@ -51,6 +51,7 @@ struct FieldsInput {
     var lastName: String?
     var mobile: String?
     var email: String?
+    var profileImageURLString: String? // AWS eTag
     var avatarImage: UIImage?
 }
 
@@ -218,16 +219,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     func didTouchDone() {
         switch state.initialMode {
         case .addNew:
-
-            // create entity and retrieve id
-            state.mode = .view(contactId: 1)
-
-            sendUIEvent(.didCreateNewContact(contactId: 1))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.sendUIEvent(.didCreateNewContact(contactId: 1))
-            }
-            return
-
+            addNewContact()
         case .view(let contactId):
             updateContactDetails(contactId: contactId)
         case .edit:
@@ -292,6 +284,22 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         case .email:
             state.currentInput?.email = value
         }
+    }
+
+    func didPickAnAvatarPicture(_ image: UIImage) {
+        state.currentInput?.avatarImage = image
+
+        let busy: (Bool) -> Void = { busy in
+            self.state.isUploadingImage = busy
+            self.updateDataSource()
+            self.sendUIEvent(.updatingOrLoadingContact(busy))
+            self.sendUIEvent(.setNeedReload)
+        }
+
+        firstly { S3ImageUploader.uploadImage(image: image)
+        }.done { self.state.currentInput?.profileImageURLString = $0
+        }.ensure { busy(false)
+        }.catch { self.sendUIEvent(.didReceiveAnError(.updateContact($0.localizedDescription))) }
     }
 }
 
@@ -380,7 +388,11 @@ extension ContactScreenViewModel {
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel(contact: contact, isUpdatingFavorite: state.isUpdatingFavourite)
+            let viewModel = ContactProfilePreviewCellViewModel(contact: contact,
+                                                               isUpdatingFavorite: state.isUpdatingFavourite,
+                                                               isUploadingImage: state.isUploadingImage,
+                                                               state: .edit,
+                                                               avatarImage: state.currentInput?.avatarImage)
             dataSource += [[.edit(.profileHeader(viewModel))]]
         }
 
@@ -429,28 +441,34 @@ extension ContactScreenViewModel {
 
         /*** Profile header ***/
         do {
-//            let viewModel = ContactProfilePreviewCellViewModel()
-//            dataSource += [[.addNew(.profileHeader(viewModel))]]
+            let viewModel = ContactProfilePreviewCellViewModel(contact: nil,
+                                                               isUpdatingFavorite: state.isUpdatingFavourite,
+                                                               state: .add,
+                                                               avatarImage: state.currentInput?.avatarImage)
+            dataSource += [[.addNew(.profileHeader(viewModel))]]
         }
 
         /*** First name ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.firstName,
-                                                      fieldValue: nil)
+                                                      fieldValue: nil,
+                                                      editingAllowed: true)
             dataSource += [[.addNew(.firstName(viewModel))]]
         }
 
         /*** Last name ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.lastName,
-                                                      fieldValue: nil)
+                                                      fieldValue: nil,
+                                                      editingAllowed: true)
             dataSource += [[.addNew(.lastName(viewModel))]]
         }
 
         /*** Mobile ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.mobile,
-                                                      fieldValue: nil)
+                                                      fieldValue: nil,
+                                                      editingAllowed: true)
             dataSource += [[.addNew(.mobilePhone(viewModel))]]
         }
 
@@ -458,6 +476,7 @@ extension ContactScreenViewModel {
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
                                                       fieldValue: nil,
+                                                      editingAllowed: true,
                                                       returnKeyType: .done)
             dataSource += [[.addNew(.email(viewModel))]]
         }
@@ -494,6 +513,7 @@ extension ContactScreenViewModel {
         }.done {
             self.processContact($0)
             self.updateDataSource()
+            self.sendUIEvent(.didUpdateContact(contactId: contactId))
             self.sendUIEvent(.setNeedReload)
         }.ensure {
             setBusy(false)
@@ -509,7 +529,8 @@ extension ContactScreenViewModel {
                   (contact.firstName != input.firstName) ||
                   (contact.lastName != input.lastName) ||
                   (contact.mobile != input.mobile) ||
-                  (contact.email.absoluteString != input.email) else {
+                  (contact.email.absoluteString != input.email) ||
+                  (contact.profileImageURL.absoluteString != input.profileImageURLString) else {
                 state.mode = .view(contactId: contactId)
                 updateDataSource()
                 sendUIEvent(.setNeedReload)
@@ -539,7 +560,49 @@ extension ContactScreenViewModel {
                                       lastName: state.currentInput?.lastName,
                                       email: state.currentInput?.email,
                                       mobile: state.currentInput?.mobile,
-                                      profileImageURL: nil)
+                                      profileImageURLString: state.currentInput?.profileImageURLString)
     }
 
+    private func addNewContact() {
+        let input = state.currentInput
+        guard let firstName = input?.firstName else {
+            sendUIEvent(.didReceiveAnError(.createContact("first name can not be empty")))
+            return
+        }
+        guard let lastName = input?.lastName else {
+            sendUIEvent(.didReceiveAnError(.createContact("last name can not be empty")))
+            return
+        }
+        guard let mobile = input?.mobile else {
+            sendUIEvent(.didReceiveAnError(.createContact("phone number can not be empty")))
+            return
+        }
+        guard let email = input?.email else {
+            sendUIEvent(.didReceiveAnError(.createContact("email can not be empty")))
+            return
+        }
+
+        let createContactPromise = Promises.createContact(firstName: firstName,
+                                                          lastName: lastName,
+                                                          email: email,
+                                                          mobile: mobile,
+                                                          profileImageURLString: state.currentInput?.profileImageURLString)
+
+        sendUIEvent(.updatingOrLoadingContact(true))
+        firstly {
+            createContactPromise
+        }.done {
+            self.processContact($0)
+            self.state.mode = .view(contactId: $0.id)
+            self.state.currentInput = FieldsInput()
+            self.sendUIEvent(.didCreateNewContact(contactId: $0.id))
+        }.ensure {
+            self.updateDataSource()
+            self.sendUIEvent(.updatingOrLoadingContact(false))
+            self.sendUIEvent(.setNeedReload)
+        }.catch {
+            self.sendUIEvent(.didReceiveAnError(.createContact($0.localizedDescription)))
+        }
+        return
+    }
 }

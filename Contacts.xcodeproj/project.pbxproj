@@ -68,6 +68,9 @@
 		F098FE172205806200656B8F /* Promises.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE162205806200656B8F /* Promises.swift */; };
 		F098FE192205834A00656B8F /* ErrorAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */; };
 		F098FE1C220583D700656B8F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F098FE1E220583D700656B8F /* Localizable.strings */; };
+		F0D62D1C22076411009A682B /* S3Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D62D1B22076411009A682B /* S3Uploader.swift */; };
+		F0D62D1E22076CD0009A682B /* CreateContactRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D62D1D22076CD0009A682B /* CreateContactRequest.swift */; };
+		F0D62D2022076E5A009A682B /* create_contact_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F0D62D1F22076E5A009A682B /* create_contact_success.json */; };
 		F0EE71872205BD5C000809C6 /* ContactsMainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */; };
 		F0EE71892205BD65000809C6 /* ContactsMainHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */; };
 		F0EE718B2205D3BD000809C6 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE718A2205D3BD000809C6 /* ContactViewController.swift */; };
@@ -238,6 +241,9 @@
 		F098FE162205806200656B8F /* Promises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Promises.swift; sourceTree = "<group>"; };
 		F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertPresentable.swift; sourceTree = "<group>"; };
 		F098FE1D220583D700656B8F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F0D62D1B22076411009A682B /* S3Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Uploader.swift; sourceTree = "<group>"; };
+		F0D62D1D22076CD0009A682B /* CreateContactRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContactRequest.swift; sourceTree = "<group>"; };
+		F0D62D1F22076E5A009A682B /* create_contact_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = create_contact_success.json; sourceTree = "<group>"; };
 		F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainHeaderView.swift; sourceTree = "<group>"; };
 		F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainHeaderView.xib; sourceTree = "<group>"; };
 		F0EE718A2205D3BD000809C6 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +393,7 @@
 				F098FE1222057A5200656B8F /* NetworkDataProvider+PromiseKit.swift */,
 				F098FE162205806200656B8F /* Promises.swift */,
 				F098A0102205AA0900E68C95 /* ImageLoader.swift */,
+				F0D62D1B22076411009A682B /* S3Uploader.swift */,
 				F098FD88220497C300656B8F /* Screens */,
 				F098FD5D2204958C00656B8F /* LaunchScreen.storyboard */,
 				F098FD5B2204958C00656B8F /* Assets.xcassets */,
@@ -558,8 +565,9 @@
 			children = (
 				F098FDF622053D3C00656B8F /* FetchContactsRequest.swift */,
 				F0EE71AA2206B8DD000809C6 /* FetchContactRequest.swift */,
-				F0EE71BE2206D752000809C6 /* DeleteContactRequest.swift */,
+				F0D62D1D22076CD0009A682B /* CreateContactRequest.swift */,
 				F01FCC202206FFE000C5B655 /* UpdateContactDetailsRequest.swift */,
+				F0EE71BE2206D752000809C6 /* DeleteContactRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -569,6 +577,7 @@
 			children = (
 				F098FDF922053D8B00656B8F /* get_all_contacts_success.json */,
 				F0EE71AC2206B943000809C6 /* fetch_contact_success.json */,
+				F0D62D1F22076E5A009A682B /* create_contact_success.json */,
 				F01FCC222207038900C5B655 /* update_contact_success.json */,
 				F0EE71C02206D7B9000809C6 /* delete_contact_success.json */,
 			);
@@ -920,6 +929,7 @@
 			files = (
 				F098FDFA22053D8B00656B8F /* get_all_contacts_success.json in Resources */,
 				F01FCC232207038900C5B655 /* update_contact_success.json in Resources */,
+				F0D62D2022076E5A009A682B /* create_contact_success.json in Resources */,
 				F0EE71AD2206B943000809C6 /* fetch_contact_success.json in Resources */,
 				F0EE71C12206D7B9000809C6 /* delete_contact_success.json in Resources */,
 			);
@@ -969,6 +979,9 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Nuke/Nuke.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
@@ -981,6 +994,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognito.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nuke.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
@@ -1118,6 +1134,7 @@
 				F01FCC1F2206F56500C5B655 /* UINavigationController+Extensions.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
 				F0EE71A52206A0EB000809C6 /* ContactFieldCellViewModel.swift in Sources */,
+				F0D62D1C22076411009A682B /* S3Uploader.swift in Sources */,
 				F0EE71A92206A117000809C6 /* ContactActionCellViewModel.swift in Sources */,
 				F098A006220591F300E68C95 /* ContactsMainLoadingCell.swift in Sources */,
 				F0EE718D2205DF4F000809C6 /* ContactScreenViewModel.swift in Sources */,
@@ -1192,6 +1209,7 @@
 			files = (
 				F098FDF522053CEB00656B8F /* NetworkLogger.swift in Sources */,
 				F098FDE922053B1600656B8F /* DataProvider.swift in Sources */,
+				F0D62D1E22076CD0009A682B /* CreateContactRequest.swift in Sources */,
 				F0EE71AB2206B8DD000809C6 /* FetchContactRequest.swift in Sources */,
 				F098FDFD2205414300656B8F /* NetworkApiService.generated.swift in Sources */,
 				F098FDEF22053B4400656B8F /* RequestDataProvidable.swift in Sources */,

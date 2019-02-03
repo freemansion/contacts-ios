@@ -12,6 +12,7 @@ import Moya
 public enum NetworkApiService {
     case fetchAllContacts(FetchContactsRequest)
     case fetchContact(FetchContactRequest)
+    case createContact(CreateContactRequest)
     case updateContact(UpdateContactDetailsRequest)
     case deleteContact(DeleteContactRequest)
 }
@@ -29,6 +30,8 @@ extension NetworkApiService: TargetType {
         switch self {
         case .fetchAllContacts, .fetchContact:
             return .get
+        case .createContact:
+            return .post
         case .updateContact:
             return .put
         case .deleteContact:
@@ -40,6 +43,7 @@ extension NetworkApiService: TargetType {
         switch self {
         case .fetchAllContacts: return sampleData(fromJsonFile: "get_all_contacts_success")
         case .fetchContact: return sampleData(fromJsonFile: "fetch_contact_success")
+        case .createContact: return sampleData(fromJsonFile: "create_contact_success")
         case .updateContact: return sampleData(fromJsonFile: "update_contact_success")
         case .deleteContact: return Data()
         }
@@ -49,7 +53,7 @@ extension NetworkApiService: TargetType {
         switch self {
         case .fetchAllContacts, .fetchContact:
             return .requestParameters(parameters: requestData.bodyParameters, encoding: URLEncoding.queryString)
-        case .updateContact, .deleteContact:
+        case .createContact, .updateContact, .deleteContact:
             if requestData.urlParameters.isEmpty {
                 return .requestParameters(parameters: requestData.bodyParameters,
                                           encoding: JSONEncoding.default)

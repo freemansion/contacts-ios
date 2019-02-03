@@ -14,6 +14,8 @@ def main_pods
     pod 'PromiseKit', '~> 6.0'
     pod 'Nuke'
     pod 'IQKeyboardManagerSwift'
+    pod 'AWSS3'
+    pod 'AWSCognito'
 end
 
 def network_pods

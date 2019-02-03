@@ -27,14 +27,24 @@ struct Promises {
                                                  route: .fetchContact(request))
     }
 
+    static func createContact(firstName: String,
+                              lastName: String,
+                              email: String,
+                              mobile: String,
+                              profileImageURLString: String? = nil) -> Promise<Person> {
+        let request = CreateContactRequest(firstName: firstName, lastName: lastName, email: email, mobile: mobile, profileImageURLString: profileImageURLString)
+        return dependencies.dataProvider.request(data: Person.self,
+                                                 route: .createContact(request))
+    }
+
     static func updateContact(id: Int,
                               firstName: String? = nil,
                               lastName: String? = nil,
                               email: String? = nil,
                               mobile: String? = nil,
-                              profileImageURL: URL? = nil,
+                              profileImageURLString: String? = nil,
                               isFavorite: Bool? = nil) -> Promise<Person> {
-        let request = UpdateContactDetailsRequest(contactId: id, firstName: firstName, lastName: lastName, email: email, mobile: mobile, profileImageURL: profileImageURL, isFavorite: isFavorite)
+        let request = UpdateContactDetailsRequest(contactId: id, firstName: firstName, lastName: lastName, email: email, mobile: mobile, profileImageURLString: profileImageURLString, isFavorite: isFavorite)
         return dependencies.dataProvider.request(data: Person.self,
                                                  route: .updateContact(request))
     }

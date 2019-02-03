@@ -321,6 +321,14 @@ extension ContactViewController: ContactFieldCellDelegate {
         }
         let item = screenViewModel.dataSource.item(for: indexPath)
         switch item {
+        case .addNew(.firstName):
+            screenViewModel.actions.didEditField(.firstName, value: value)
+        case .addNew(.lastName):
+            screenViewModel.actions.didEditField(.lastName, value: value)
+        case .addNew(.mobilePhone):
+            screenViewModel.actions.didEditField(.mobile, value: value)
+        case .addNew(.email):
+            screenViewModel.actions.didEditField(.email, value: value)
         case .edit(.firstName):
             screenViewModel.actions.didEditField(.firstName, value: value)
         case .edit(.lastName):

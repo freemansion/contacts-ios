@@ -15,16 +15,16 @@ public struct UpdateContactDetailsRequest: RequestDataProvidable {
     public let lastName: String?
     public let email: String?
     public let mobile: String?
-    public let profileImageURL: URL?
+    public let profileImageURLString: String?
     public let isFavorite: Bool?
 
-    public init(contactId: Int, firstName: String?, lastName: String?, email: String?, mobile: String?, profileImageURL: URL?, isFavorite: Bool?) {
+    public init(contactId: Int, firstName: String?, lastName: String?, email: String?, mobile: String?, profileImageURLString: String?, isFavorite: Bool?) {
         self.contactId = contactId
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
         self.mobile = mobile
-        self.profileImageURL = profileImageURL
+        self.profileImageURLString = profileImageURLString
         self.isFavorite = isFavorite
     }
 
@@ -46,7 +46,7 @@ public struct UpdateContactDetailsRequest: RequestDataProvidable {
         if let value = mobile {
             params["phone_number"] = value
         }
-        if let value = profileImageURL?.absoluteString {
+        if let value = profileImageURLString {
             params["profile_pic"] = value
         }
         if let value = isFavorite {
