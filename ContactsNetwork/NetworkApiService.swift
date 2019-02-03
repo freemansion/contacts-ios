@@ -11,6 +11,7 @@ import Moya
 
 public enum NetworkApiService {
     case fetchAllContacts(FetchContactsRequest)
+    case fetchContact(FetchContactRequest)
 }
 
 extension NetworkApiService: TargetType {
@@ -24,7 +25,7 @@ extension NetworkApiService: TargetType {
 
     public var method: Moya.Method {
         switch self {
-        case .fetchAllContacts:
+        case .fetchAllContacts, .fetchContact:
             return .get
         }
     }
@@ -32,12 +33,13 @@ extension NetworkApiService: TargetType {
     public var sampleData: Data {
         switch self {
         case .fetchAllContacts: return sampleData(fromJsonFile: "get_all_contacts_success")
+        case .fetchContact: return sampleData(fromJsonFile: "fetch_contact_success")
         }
     }
 
     public var task: Task {
         switch self {
-        case .fetchAllContacts:
+        case .fetchAllContacts, .fetchContact:
             return .requestParameters(parameters: requestData.bodyParameters, encoding: URLEncoding.queryString)
         }
     }

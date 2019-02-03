@@ -20,4 +20,11 @@ struct Promises {
         return dependencies.dataProvider.request(data: [ContactsListPerson].self,
                                                  route: .fetchAllContacts(request))
     }
+
+    static func fetchContact(id: Int) -> Promise<Person> {
+        let request = FetchContactRequest(contactId: id)
+        return dependencies.dataProvider.request(data: Person.self,
+                                                 route: .fetchContact(request))
+    }
+
 }

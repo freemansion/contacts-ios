@@ -221,7 +221,7 @@ extension ContactScreenViewModel {
         }
 
         guard let id = contactId else { return }
-        
+
     }
 
     private func makePreviewDataSource() -> [[ContactScreenUIItem]] {

@@ -7,6 +7,8 @@ extension NetworkApiService {
         switch self {
             case .fetchAllContacts(let request):
                 return request
+            case .fetchContact(let request):
+                return request
         }
     }
 }
