@@ -9,6 +9,7 @@
 import Foundation
 import ContactModels
 import PromiseKit
+import UIKit
 
 enum ContactScreenUIItem {
     enum Preview {
@@ -50,6 +51,7 @@ struct FieldsInput {
     var lastName: String?
     var mobile: String?
     var email: String?
+    var avatarImage: UIImage?
 }
 
 struct ContactScreenState {
@@ -58,6 +60,7 @@ struct ContactScreenState {
     var contact: Person?
     var currentInput: FieldsInput?
     var isUpdatingFavourite: Bool
+    var isUploadingImage: Bool
 }
 
 protocol ContactScreenViewModelDataSource {
@@ -75,6 +78,7 @@ protocol ContactScreenViewModelActions {
     func deleteContact()
     func handleAction(_ action: ContactProfileAction)
     func didEditField(_ type: FieldsInput.FieldType, value: String?)
+    func didPickAnAvatarPicture(_ image: UIImage)
 }
 
 enum ContactScreenEvent {
@@ -137,7 +141,8 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
                                         mode: mode,
                                         contact: nil,
                                         currentInput: FieldsInput(),
-                                        isUpdatingFavourite: false)
+                                        isUpdatingFavourite: false,
+                                        isUploadingImage: false)
         self.dependencies = dependencies
         updateDataSource()
     }
@@ -271,6 +276,8 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             print("email")
         case .favorite:
             setIsFavorite(!contact.isFavorite, contactId: contact.id)
+        case .camera:
+            break
         }
     }
 
@@ -301,6 +308,8 @@ extension ContactScreenViewModel {
     }
 
     private func fetchDataIfNeeded() {
+        guard state.contact == nil else { return }
+
         let contactId: Int?
         switch state.mode {
         case .edit(let id):
@@ -335,7 +344,9 @@ extension ContactScreenViewModel {
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel(contact: contact, isUpdatingFavorite: state.isUpdatingFavourite)
+            let viewModel = ContactProfilePreviewCellViewModel(contact: contact,
+                                                               isUpdatingFavorite: state.isUpdatingFavourite,
+                                                               state: .view)
             dataSource += [[.preview(.profileHeader(viewModel))]]
         }
 

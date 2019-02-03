@@ -305,7 +305,12 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
 
 extension ContactViewController: ContactProfilePreviewCellDelegate {
     func contactProfileDidReceiveAction(_ action: ContactProfileAction, cell: ContactProfilePreviewCell) {
-        screenViewModel.actions.handleAction(action)
+        switch action {
+        case .camera:
+            presentImagePicker()
+        case .message, .call, .email, .favorite:
+            screenViewModel.actions.handleAction(action)
+        }
     }
 }
 
@@ -331,3 +336,23 @@ extension ContactViewController: ContactFieldCellDelegate {
 }
 
 extension ContactViewController: ConfirmationAlertPresentable {}
+
+extension ContactViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[.originalImage] as? UIImage else {
+            return
+        }
+        screenViewModel.actions.didPickAnAvatarPicture(image)
+    }
+
+    private func presentImagePicker() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+            present(imagePicker, animated: true)
+        }
+    }
+}

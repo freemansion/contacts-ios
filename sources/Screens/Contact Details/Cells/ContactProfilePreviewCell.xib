@@ -61,6 +61,35 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BWY-1e-qLR" customClass="DesignableView" customModule="Contacts" customModuleProvider="target">
+                                <rect key="frame" x="127.5" y="19" width="120" height="120"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="dbj-4o-Zi4">
+                                        <rect key="frame" x="50" y="50" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="dbj-4o-Zi4" firstAttribute="centerX" secondItem="BWY-1e-qLR" secondAttribute="centerX" id="5Lv-Y0-Ejn"/>
+                                    <constraint firstItem="dbj-4o-Zi4" firstAttribute="centerY" secondItem="BWY-1e-qLR" secondAttribute="centerY" id="cOK-Vd-k5c"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="60"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YhQ-Fq-4op">
+                                <rect key="frame" x="206.5" y="98" width="41" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="HmL-zf-fA6"/>
+                                    <constraint firstAttribute="width" constant="41" id="XMa-d5-HYd"/>
+                                </constraints>
+                                <state key="normal" image="camera_icon"/>
+                                <connections>
+                                    <action selector="cameraButtonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="21r-LJ-ZQH"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Polly Richardson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHJ-xq-EGX">
                                 <rect key="frame" x="103" y="147" width="169" height="24"/>
                                 <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="20"/>
@@ -203,13 +232,19 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YHJ-xq-EGX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NfM-D9-y88" secondAttribute="leading" constant="15" id="3QS-fR-JZn"/>
+                            <constraint firstItem="BWY-1e-qLR" firstAttribute="centerY" secondItem="97l-L5-PnH" secondAttribute="centerY" id="Byx-pE-9vh"/>
+                            <constraint firstItem="YhQ-Fq-4op" firstAttribute="bottom" secondItem="97l-L5-PnH" secondAttribute="bottom" id="CyN-Hq-H6D"/>
                             <constraint firstItem="YHJ-xq-EGX" firstAttribute="top" secondItem="97l-L5-PnH" secondAttribute="bottom" constant="8" id="FJd-lX-FhK"/>
                             <constraint firstItem="YHJ-xq-EGX" firstAttribute="centerX" secondItem="NfM-D9-y88" secondAttribute="centerX" id="Fve-l6-bVC"/>
                             <constraint firstItem="6Ia-yg-nPI" firstAttribute="leading" secondItem="NfM-D9-y88" secondAttribute="leading" constant="45" id="GN6-sm-2Gl"/>
                             <constraint firstItem="6Ia-yg-nPI" firstAttribute="top" secondItem="YHJ-xq-EGX" secondAttribute="bottom" constant="24" id="SgE-Wc-8DR"/>
+                            <constraint firstItem="BWY-1e-qLR" firstAttribute="centerX" secondItem="97l-L5-PnH" secondAttribute="centerX" id="US9-Nk-HpL"/>
+                            <constraint firstItem="BWY-1e-qLR" firstAttribute="width" secondItem="97l-L5-PnH" secondAttribute="width" id="jbf-ud-cox"/>
                             <constraint firstItem="97l-L5-PnH" firstAttribute="top" secondItem="NfM-D9-y88" secondAttribute="top" constant="19" id="nDO-hZ-M0i"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="YHJ-xq-EGX" secondAttribute="trailing" constant="15" id="oD0-in-8Xk"/>
                             <constraint firstAttribute="trailing" secondItem="6Ia-yg-nPI" secondAttribute="trailing" constant="45" id="pZp-Jh-hCP"/>
+                            <constraint firstItem="BWY-1e-qLR" firstAttribute="height" secondItem="97l-L5-PnH" secondAttribute="height" id="rEd-2M-gI8"/>
+                            <constraint firstItem="YhQ-Fq-4op" firstAttribute="trailing" secondItem="97l-L5-PnH" secondAttribute="trailing" id="riV-sg-ycF"/>
                             <constraint firstItem="97l-L5-PnH" firstAttribute="centerX" secondItem="NfM-D9-y88" secondAttribute="centerX" id="wdE-XE-0n2"/>
                         </constraints>
                     </view>
@@ -229,9 +264,13 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="271" height="50"/>
             <connections>
+                <outlet property="actionsContainerView" destination="6Ia-yg-nPI" id="cuZ-xi-ut2"/>
+                <outlet property="avatarActivityIndicator" destination="dbj-4o-Zi4" id="63Z-SF-6Pi"/>
                 <outlet property="avatarImageView" destination="97l-L5-PnH" id="ppp-FL-SFj"/>
+                <outlet property="avatarOverlayView" destination="BWY-1e-qLR" id="UYM-qu-3ZC"/>
                 <outlet property="callButton" destination="dCR-7i-Jmx" id="y8f-ey-hDm"/>
                 <outlet property="callLabel" destination="QeG-JN-Uhy" id="mbV-7i-hyw"/>
+                <outlet property="cameraButton" destination="YhQ-Fq-4op" id="lXh-1r-FdU"/>
                 <outlet property="emailButton" destination="FSL-CT-DuR" id="sIb-fZ-PF8"/>
                 <outlet property="emailLabel" destination="MmF-AY-JtX" id="kJ1-9D-BH0"/>
                 <outlet property="favoriteButton" destination="kYR-SY-fom" id="9Qn-Jz-HfJ"/>
@@ -245,6 +284,7 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="camera_icon" width="41" height="41"/>
         <image name="contact_call" width="45" height="44"/>
         <image name="contact_email" width="45" height="44"/>
         <image name="contact_favorite_normal" width="44" height="44"/>

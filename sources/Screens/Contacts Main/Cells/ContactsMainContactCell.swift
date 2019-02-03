@@ -29,7 +29,7 @@ class ContactsMainContactCell: UITableViewCell {
                                   options: .imageLoadingOptions(placeholder: viewModel.placeholderIcon),
                                      into: avatarImageView)
         contactNameLabel.text = viewModel.fullName
-        favoriteIcon.isHidden = viewModel.isFavorite
+        favoriteIcon.isHidden = !viewModel.isFavorite
     }
 
     override func layoutSubviews() {
