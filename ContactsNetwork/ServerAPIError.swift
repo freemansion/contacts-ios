@@ -11,7 +11,7 @@ import Foundation
 public enum ServerAPIError: LocalizedError {
     case wrongStatusCode(error: Error, statusCode: Int, expectedStatusCodes: ClosedRange<Int>)
     case unexpectedDataFormat
-    case other(Error)
+    case other(error: Error, description: String?)
 
     public var errorDescription: String? {
         switch self {
@@ -20,8 +20,8 @@ public enum ServerAPIError: LocalizedError {
             return "Wrong status code: \(statusCode), expected status codes: \(expectedCodesString)"
         case .unexpectedDataFormat:
             return "Unexpected data format"
-        case .other(let error):
-            return error.localizedDescription
+        case .other(let error, let description):
+            return description ?? error.localizedDescription
         }
     }
 }

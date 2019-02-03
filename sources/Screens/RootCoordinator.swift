@@ -61,4 +61,8 @@ extension RootCoordinator: ContactViewControllerDelegate {
     func contactViewDidCreateNewContact(viewController: ContactViewController) {
         viewController.navigationController?.dismiss(animated: true)
     }
+
+    func contactViewFailedToLoadContact(viewController: ContactViewController) {
+        viewController.navigationController?.popViewController(animated: true)
+    }
 }

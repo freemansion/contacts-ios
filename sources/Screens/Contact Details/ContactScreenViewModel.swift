@@ -70,12 +70,17 @@ protocol ContactScreenViewModelActions {
 }
 
 enum ContactScreenEvent {
+    enum Error {
+        case loadingData(String)
+        case createContact(String)
+    }
+    
     case setNeedReload
     case cancelAddNewContact
     case creatingNewContact
     case didCreateNewContact
     case loadingContact(Bool)
-    case didReceiveAnError(String)
+    case didReceiveAnError(ContactScreenEvent.Error)
 }
 
 protocol ContactScreenViewModelDelegate: class {
@@ -242,7 +247,11 @@ extension ContactScreenViewModel {
             self.updateDataSource()
             self.sendUIEvent(.setNeedReload)
         }.ensure { self.sendUIEvent(.loadingContact(false))
-        }.catch { self.sendUIEvent(.didReceiveAnError($0.localizedDescription)) }
+        }.catch {
+            self.dataSourceItems = []
+            self.sendUIEvent(.setNeedReload)
+            self.sendUIEvent(.didReceiveAnError(.loadingData($0.localizedDescription)))
+        }
     }
 
     private func makePreviewDataSource() -> [[ContactScreenUIItem]] {

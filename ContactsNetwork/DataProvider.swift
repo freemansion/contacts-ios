@@ -95,8 +95,24 @@ extension DataProvider: DataProviderProtocol {
                         let decodedObject = try ModelMapper.default.map(T.self, from: json, decoder: _decoder)
                         completion(.success(decodedObject))
                     } catch {
-                        let _error = ServerAPIError.other(error)
-                        completion(.failure(_error))
+                        if let decodingError = error as? DecodingError {
+                            let description: String?
+                            switch decodingError {
+                            case .dataCorrupted(let context):
+                                description = context.debugDescription
+                            case .keyNotFound(_, let context):
+                                description = context.debugDescription
+                            case .typeMismatch(_, let context):
+                                description = context.debugDescription
+                            case .valueNotFound(_, let context):
+                                description = context.debugDescription
+                            }
+                            let _error = ServerAPIError.other(error: decodingError, description: description)
+                            completion(.failure(_error))
+                        } else {
+                            let _error = ServerAPIError.other(error: error, description: nil)
+                            completion(.failure(_error))
+                        }
                     }
                 case .failure(let error):
                     completion(.failure(error))

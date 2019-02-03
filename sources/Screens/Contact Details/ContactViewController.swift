@@ -11,6 +11,7 @@ import UIKit
 protocol ContactViewControllerDelegate: class {
     func contactViewDidTouchCancel(viewController: ContactViewController, mode: ContactScreenViewModel.Mode)
     func contactViewDidCreateNewContact(viewController: ContactViewController)
+    func contactViewFailedToLoadContact(viewController: ContactViewController)
 }
 
 class ContactViewController: UIViewController, UIStoryboardIdentifiable {
@@ -102,8 +103,13 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
             delegate?.contactViewDidCreateNewContact(viewController: self)
         case .loadingContact(let isLoading):
             collectionView.reloadData()
-            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = isLoading }
-        case .didReceiveAnError(let errorMessage):
+            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !isLoading }
+        case .didReceiveAnError(.loadingData(let errorMessage)):
+            presentErrorAlert(message: errorMessage, animated: true, handler: { [weak self] _ in
+                guard let self = self else { return }
+                self.delegate?.contactViewFailedToLoadContact(viewController: self)
+            })
+        case .didReceiveAnError(.createContact(let errorMessage)):
             presentErrorAlert(message: errorMessage)
         }
     }
@@ -136,7 +142,7 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
         switch item {
         case .loadingContact(let viewModel):
             return ContactLoadingCell.size(for: viewModel, boundingSize: boundingSize)
- 
+
         case .preview(.profileHeader(let viewModel)):
             return ContactProfilePreviewCell.size(for: viewModel, boundingSize: boundingSize)
         case .preview(.mobilePhone(let viewModel)):
