@@ -8,9 +8,13 @@
 
 import UIKit
 
-protocol ContactsMainViewControllerDelegate: class {
+protocol ContactsMainOutput: class {
     func didTouchAddContact(viewController: ContactsMainViewController)
     func showDetailsOfContact(_ contactId: Int, viewController: ContactsMainViewController)
+}
+
+protocol ContactsMainInput: class {
+    func setNeedRefetchData()
 }
 
 class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
@@ -18,7 +22,7 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
     @IBOutlet private weak var groupsBarButton: UIBarButtonItem!
     @IBOutlet private weak var addBarButton: UIBarButtonItem!
     @IBOutlet private weak var tableView: UITableView!
-    weak var delegate: ContactsMainViewControllerDelegate?
+    weak var output: ContactsMainOutput?
     private lazy var screenViewModel: ContactsMainScreenViewModelType = {
         let viewModel = ContactsMainScreenViewModel()
         viewModel.delegate = self
@@ -47,7 +51,7 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
     }
 
     @IBAction func didTouchAddContactButton(_ sender: Any) {
-        delegate?.didTouchAddContact(viewController: self)
+        output?.didTouchAddContact(viewController: self)
     }
 
     @IBAction func didTouchContactGroupsButton(_ sender: Any) {
@@ -160,8 +164,14 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
             return
         case .contact(let viewModel):
             tableView.deselectRow(at: indexPath, animated: true)
-            delegate?.showDetailsOfContact(viewModel.contactId, viewController: self)
+            output?.showDetailsOfContact(viewModel.contactId, viewController: self)
         }
     }
 
+}
+
+extension ContactsMainViewController: ContactsMainInput {
+    func setNeedRefetchData() {
+        screenViewModel.actions.setNeedReloadDataSource()
+    }
 }

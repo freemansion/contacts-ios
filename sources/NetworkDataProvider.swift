@@ -24,6 +24,13 @@ extension NetworkDataProvider: DataProviderProtocol {
                     source: DataProvider.Source = .network,
                     decoder: JSONDecoder? = nil,
                     completion: @escaping (Alamofire.Result<T>) -> Void) where T: Codable {
-        return dataProvider.request(route, source: source, decoder: decoder, completion: completion)
+        dataProvider.request(route, source: source, decoder: decoder, completion: completion)
+    }
+
+    func request(_ route: NetworkApiService,
+                 source: DataProvider.Source = .network,
+                 successStatusCodes: ClosedRange<Int>? = nil,
+                 completion: @escaping (Result<Bool>) -> Void) {
+        dataProvider.request(route, source: source, successStatusCodes: successStatusCodes, completion: completion)
     }
 }

@@ -23,6 +23,15 @@ protocol NetworkDataPromisable {
                              route: NetworkApiService,
                              source: DataProvider.Source,
                              decoder: JSONDecoder?) -> Promise<T>
+
+    /** returns promise containing Codable model object
+    - parameter route: enum case containing network request data.
+    - parameter source: data source where to request a data, i.e. from network or local json file.
+    - parameter expectedStatusCodes: range of accpeted status codes, result will containt boolean value depending on a given range.
+    */
+    func request(route: NetworkApiService,
+                 source: DataProvider.Source,
+                 expectedStatusCodes: ClosedRange<Int>?) -> Promise<Bool>
 }
 
 extension NetworkDataProvider: NetworkDataPromisable {
@@ -32,6 +41,21 @@ extension NetworkDataProvider: NetworkDataPromisable {
                              decoder: JSONDecoder? = nil) -> Promise<T> {
         return Promise { resolver in
             request(route, source: source, decoder: decoder, completion: { (result: Alamofire.Result<T>) in
+                switch result {
+                case .success(let value):
+                    resolver.fulfill(value)
+                case .failure(let error):
+                    resolver.reject(error)
+                }
+            })
+        }
+    }
+
+    func request(route: NetworkApiService,
+                 source: DataProvider.Source = .network,
+                 expectedStatusCodes: ClosedRange<Int>? = nil) -> Promise<Bool> {
+        return Promise { resolver in
+            request(route, source: source, successStatusCodes: expectedStatusCodes, completion: { (result: Alamofire.Result<Bool>) in
                 switch result {
                 case .success(let value):
                     resolver.fulfill(value)

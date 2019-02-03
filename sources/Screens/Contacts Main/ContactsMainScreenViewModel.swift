@@ -24,6 +24,7 @@ protocol ContactsMainScreenViewModelDataSource {
 
 protocol ContactsMainScreenViewModelActions {
     func viewWillAppear()
+    func setNeedReloadDataSource()
 }
 
 enum ContactsMainEvent {
@@ -113,6 +114,10 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
         if state.contacts.isEmpty {
             fetchContacts()
         }
+    }
+    
+    func setNeedReloadDataSource() {
+        fetchContacts()
     }
 }
 

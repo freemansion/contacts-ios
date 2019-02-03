@@ -9,9 +9,9 @@
 import UIKit
 
 final class RootCoordinator {
-    private lazy var rootViewController: UIViewController = {
+    private lazy var rootViewController: ContactsMainViewController = {
         let vc = ContactsMainViewController.makeInstance()
-        vc.delegate = self
+        vc.output = self
         return vc
     }()
 
@@ -32,7 +32,7 @@ final class RootCoordinator {
     }
 }
 
-extension RootCoordinator: ContactsMainViewControllerDelegate {
+extension RootCoordinator: ContactsMainOutput {
     func didTouchAddContact(viewController: ContactsMainViewController) {
         let contactViewController = ContactViewController.makeInstance(mode: .addNew)
         contactViewController.delegate = self
@@ -64,5 +64,10 @@ extension RootCoordinator: ContactViewControllerDelegate {
 
     func contactViewFailedToLoadContact(viewController: ContactViewController) {
         viewController.navigationController?.popViewController(animated: true)
+    }
+
+    func contactViewDidDeleteContact(viewController: ContactViewController) {
+        viewController.navigationController?.popViewController(animated: true)
+        rootViewController.setNeedRefetchData()
     }
 }

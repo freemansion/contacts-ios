@@ -12,12 +12,17 @@ import Alamofire
 
 public protocol DataProviderProtocol {
     func request<T: Codable>(_ route: NetworkApiService, source: DataProvider.Source, decoder: JSONDecoder?, completion: @escaping (Result<T>) -> Void)
+    func request(_ route: NetworkApiService, source: DataProvider.Source, successStatusCodes: ClosedRange<Int>?, completion: @escaping (Result<Bool>) -> Void)
 }
 
 public final class DataProvider {
     public enum Source {
         case network
         case sampleData
+    }
+
+    enum Constants {
+        static let successStatusCodes: ClosedRange<Int> = 200...299
     }
 
     public static let shared = DataProvider()
@@ -113,6 +118,30 @@ extension DataProvider: DataProviderProtocol {
                             let _error = ServerAPIError.other(error: error, description: nil)
                             completion(.failure(_error))
                         }
+                    }
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+
+    public func request(_ route: NetworkApiService,
+                        source: DataProvider.Source = .network,
+                        successStatusCodes: ClosedRange<Int>? = nil,
+                        completion: @escaping (Result<Bool>) -> Void) {
+        let _successStatusCodes = successStatusCodes ?? Constants.successStatusCodes
+        let provider = dataProvider(forSource: source)
+        provider.request(route) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    do {
+                        _ = try response.filter(statusCodes: _successStatusCodes)
+                        completion(.success(true))
+                    } catch {
+                        let _error = ServerAPIError.other(error: error, description: nil)
+                        completion(.failure(_error))
                     }
                 case .failure(let error):
                     completion(.failure(error))

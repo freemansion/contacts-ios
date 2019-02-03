@@ -12,6 +12,7 @@ protocol ContactViewControllerDelegate: class {
     func contactViewDidTouchCancel(viewController: ContactViewController, mode: ContactScreenViewModel.Mode)
     func contactViewDidCreateNewContact(viewController: ContactViewController)
     func contactViewFailedToLoadContact(viewController: ContactViewController)
+    func contactViewDidDeleteContact(viewController: ContactViewController)
 }
 
 class ContactViewController: UIViewController, UIStoryboardIdentifiable {
@@ -101,15 +102,19 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
             navigationItem.rightBarButtonItem = .activityIndicatorButton
         case .didCreateNewContact:
             delegate?.contactViewDidCreateNewContact(viewController: self)
-        case .loadingContact(let isLoading):
+        case .didDeleteContact:
+            delegate?.contactViewDidDeleteContact(viewController: self)
+        case .setBusy(let busy):
             collectionView.reloadData()
-            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !isLoading }
+            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !busy }
         case .didReceiveAnError(.loadingData(let errorMessage)):
             presentErrorAlert(message: errorMessage, animated: true, handler: { [weak self] _ in
                 guard let self = self else { return }
                 self.delegate?.contactViewFailedToLoadContact(viewController: self)
             })
         case .didReceiveAnError(.createContact(let errorMessage)):
+            presentErrorAlert(message: errorMessage)
+        case .didReceiveAnError(.deleteContact(let errorMessage)):
             presentErrorAlert(message: errorMessage)
         }
     }

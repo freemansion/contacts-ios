@@ -88,6 +88,8 @@
 		F0EE71B92206CE3B000809C6 /* GenericCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */; };
 		F0EE71BB2206D299000809C6 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71BA2206D299000809C6 /* UIAlertController+Extensions.swift */; };
 		F0EE71BD2206D567000809C6 /* ConfirmationAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71BC2206D567000809C6 /* ConfirmationAlertPresentable.swift */; };
+		F0EE71BF2206D752000809C6 /* DeleteContactRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71BE2206D752000809C6 /* DeleteContactRequest.swift */; };
+		F0EE71C12206D7B9000809C6 /* delete_contact_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71C02206D7B9000809C6 /* delete_contact_success.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -251,6 +253,8 @@
 		F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericCollectionViewCell.xib; sourceTree = "<group>"; };
 		F0EE71BA2206D299000809C6 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
 		F0EE71BC2206D567000809C6 /* ConfirmationAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlertPresentable.swift; sourceTree = "<group>"; };
+		F0EE71BE2206D752000809C6 /* DeleteContactRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteContactRequest.swift; sourceTree = "<group>"; };
+		F0EE71C02206D7B9000809C6 /* delete_contact_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = delete_contact_success.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -541,6 +545,7 @@
 			children = (
 				F098FDF622053D3C00656B8F /* FetchContactsRequest.swift */,
 				F0EE71AA2206B8DD000809C6 /* FetchContactRequest.swift */,
+				F0EE71BE2206D752000809C6 /* DeleteContactRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 			children = (
 				F098FDF922053D8B00656B8F /* get_all_contacts_success.json */,
 				F0EE71AC2206B943000809C6 /* fetch_contact_success.json */,
+				F0EE71C02206D7B9000809C6 /* delete_contact_success.json */,
 			);
 			path = "Sample Data";
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 			files = (
 				F098FDFA22053D8B00656B8F /* get_all_contacts_success.json in Resources */,
 				F0EE71AD2206B943000809C6 /* fetch_contact_success.json in Resources */,
+				F0EE71C12206D7B9000809C6 /* delete_contact_success.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1178,7 @@
 				F098FDF722053D3C00656B8F /* FetchContactsRequest.swift in Sources */,
 				F098FDED22053B3800656B8F /* ServerAPIError.swift in Sources */,
 				F098FDF122053BC200656B8F /* ModelMapper.swift in Sources */,
+				F0EE71BF2206D752000809C6 /* DeleteContactRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

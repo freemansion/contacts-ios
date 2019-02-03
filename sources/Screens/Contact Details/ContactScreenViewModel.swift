@@ -75,13 +75,15 @@ enum ContactScreenEvent {
     enum Error {
         case loadingData(String)
         case createContact(String)
+        case deleteContact(String)
     }
 
     case setNeedReload
     case cancelAddNewContact
     case creatingNewContact
     case didCreateNewContact
-    case loadingContact(Bool)
+    case didDeleteContact
+    case setBusy(Bool)
     case didReceiveAnError(ContactScreenEvent.Error)
 }
 
@@ -229,7 +231,17 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         }
 
         guard let id = contactId else { return }
-        print()
+
+        sendUIEvent(.setBusy(true))
+        firstly { Promises.deleteContact(id: id)
+        }.done { _ in
+            self.sendUIEvent(.didDeleteContact)
+        }.ensure { self.sendUIEvent(.setBusy(false))
+        }.catch {
+            self.updateDataSource()
+            self.sendUIEvent(.setNeedReload)
+            self.sendUIEvent(.didReceiveAnError(.deleteContact($0.localizedDescription)))
+        }
     }
 }
 
@@ -258,13 +270,13 @@ extension ContactScreenViewModel {
 
         guard let id = contactId else { return }
 
-        sendUIEvent(.loadingContact(true))
+        sendUIEvent(.setBusy(true))
         firstly { Promises.fetchContact(id: id)
         }.done {
             self.processContact($0)
             self.updateDataSource()
             self.sendUIEvent(.setNeedReload)
-        }.ensure { self.sendUIEvent(.loadingContact(false))
+        }.ensure { self.sendUIEvent(.setBusy(false))
         }.catch {
             self.dataSourceItems = []
             self.sendUIEvent(.setNeedReload)
