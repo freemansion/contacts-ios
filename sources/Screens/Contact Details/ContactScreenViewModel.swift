@@ -38,6 +38,7 @@ enum ContactScreenUIItem {
     case edit(Edit)
     case addNew(AddNew)
     case loadingContact(ContactLoadingCellViewModel)
+    case verticalSpace(CGFloat)
 }
 
 struct FieldsInput {
@@ -74,7 +75,7 @@ enum ContactScreenEvent {
         case loadingData(String)
         case createContact(String)
     }
-    
+
     case setNeedReload
     case cancelAddNewContact
     case creatingNewContact
@@ -106,6 +107,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         static let lastName = R.string.localizable.contacts_details_last_name_field_title()
         static let mobile = R.string.localizable.contacts_details_mobile_field_title()
         static let email = R.string.localizable.contacts_details_email_field_title()
+        static let deleteAction = R.string.localizable.contacts_details_delete_title()
     }
 
     var dataSource: ContactScreenViewModelDataSource { return self }
@@ -279,8 +281,10 @@ extension ContactScreenViewModel {
 
         /*** Delete button ***/
         do {
-            let viewModel = ContactActionCellViewModel()
+            let viewModel = ContactActionCellViewModel(actionTitle: FieldDescription.deleteAction)
+            dataSource += [[.verticalSpace(23)]]
             dataSource += [[.preview(.deleteContact(viewModel))]]
+            dataSource += [[.verticalSpace(25)]]
         }
 
         return dataSource

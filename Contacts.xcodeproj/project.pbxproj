@@ -83,6 +83,9 @@
 		F0EE71B02206BC65000809C6 /* ContactLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71AE2206BC65000809C6 /* ContactLoadingCell.swift */; };
 		F0EE71B12206BC65000809C6 /* ContactLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71AF2206BC65000809C6 /* ContactLoadingCell.xib */; };
 		F0EE71B32206BD53000809C6 /* ContactLoadingCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71B22206BD53000809C6 /* ContactLoadingCellViewModel.swift */; };
+		F0EE71B52206CDE3000809C6 /* GenericReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71B42206CDE3000809C6 /* GenericReusableCell.swift */; };
+		F0EE71B82206CE3B000809C6 /* GenericCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71B62206CE3B000809C6 /* GenericCollectionViewCell.swift */; };
+		F0EE71B92206CE3B000809C6 /* GenericCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -241,6 +244,9 @@
 		F0EE71AE2206BC65000809C6 /* ContactLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactLoadingCell.swift; sourceTree = "<group>"; };
 		F0EE71AF2206BC65000809C6 /* ContactLoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactLoadingCell.xib; sourceTree = "<group>"; };
 		F0EE71B22206BD53000809C6 /* ContactLoadingCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactLoadingCellViewModel.swift; sourceTree = "<group>"; };
+		F0EE71B42206CDE3000809C6 /* GenericReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericReusableCell.swift; sourceTree = "<group>"; };
+		F0EE71B62206CE3B000809C6 /* GenericCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -545,6 +551,9 @@
 		F098FE002205627200656B8F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0EE71B42206CDE3000809C6 /* GenericReusableCell.swift */,
+				F0EE71B62206CE3B000809C6 /* GenericCollectionViewCell.swift */,
+				F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -838,6 +847,7 @@
 				F0EE71992206A003000809C6 /* ContactFieldCell.xib in Resources */,
 				F098FD5C2204958C00656B8F /* Assets.xcassets in Resources */,
 				F098A007220591F300E68C95 /* ContactsMainLoadingCell.xib in Resources */,
+				F0EE71B92206CE3B000809C6 /* GenericCollectionViewCell.xib in Resources */,
 				F0EE719522069FAD000809C6 /* ContactProfilePreviewCell.xib in Resources */,
 				F098FE092205663200656B8F /* SF-UI-Display-Regular.otf in Resources */,
 				F098FE1C220583D700656B8F /* Localizable.strings in Resources */,
@@ -1087,10 +1097,12 @@
 				F098FD552204958A00656B8F /* AppDelegate.swift in Sources */,
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
+				F0EE71B52206CDE3000809C6 /* GenericReusableCell.swift in Sources */,
 				F0EE719422069FAD000809C6 /* ContactProfilePreviewCell.swift in Sources */,
 				F0EE71982206A003000809C6 /* ContactFieldCell.swift in Sources */,
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
 				F098FE172205806200656B8F /* Promises.swift in Sources */,
+				F0EE71B82206CE3B000809C6 /* GenericCollectionViewCell.swift in Sources */,
 				F098A0112205AA0900E68C95 /* ImageLoader.swift in Sources */,
 				F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,

@@ -8,20 +8,16 @@
 
 import UIKit
 
-protocol ContactActionCellDelegate: class {
-
-}
-
 class ContactActionCell: UICollectionViewCell {
+
+    @IBOutlet private weak var titleLabel: UILabel!
 
     private enum Constants {
         static let contentHeight: CGFloat = 44
     }
 
-    weak var delegate: ContactActionCellDelegate?
-
-    func configure(with viewModel: ContactActionCellViewModel, delegate: ContactActionCellDelegate? = nil) {
-        self.delegate = delegate
+    func configure(with viewModel: ContactActionCellViewModel) {
+        titleLabel.text = viewModel.actionTitle
     }
 
     static func size(for viewModel: ContactActionCellViewModel, boundingSize: CGSize) -> CGSize {

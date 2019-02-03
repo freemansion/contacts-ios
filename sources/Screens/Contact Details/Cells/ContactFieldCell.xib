@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SFUIText-Regular.ttf">
+            <string>SFUIText-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -19,16 +24,83 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ContactFieldCell" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OL2-Zb-jgT">
-                        <rect key="frame" x="9" y="15" width="127" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyF-tb-TXS" userLabel="ContentView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5yX-DM-vgp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAN-aq-cwX">
+                                        <rect key="frame" x="0.0" y="0.0" width="102" height="56"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mobile" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGn-ss-ajP">
+                                                <rect key="frame" x="16" y="18.5" width="86" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="102" id="3rt-BC-zfr"/>
+                                            <constraint firstItem="uFn-2a-u0z" firstAttribute="trailing" secondItem="VGn-ss-ajP" secondAttribute="trailing" id="5Oh-Rj-qUA"/>
+                                            <constraint firstItem="VGn-ss-ajP" firstAttribute="centerY" secondItem="YAN-aq-cwX" secondAttribute="centerY" id="7yu-JY-Rwd"/>
+                                            <constraint firstItem="VGn-ss-ajP" firstAttribute="leading" secondItem="uFn-2a-u0z" secondAttribute="leading" constant="16" id="tVz-5e-3Pd"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="uFn-2a-u0z"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Sb-AN-mM0">
+                                        <rect key="frame" x="102" y="0.0" width="273" height="56"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 91 7868765643" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nww-or-THy">
+                                                <rect key="frame" x="21" y="18.5" width="236" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                                                <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="my0-a5-e87" firstAttribute="trailing" secondItem="nww-or-THy" secondAttribute="trailing" constant="16" id="Dud-Pm-91I"/>
+                                            <constraint firstItem="nww-or-THy" firstAttribute="leading" secondItem="my0-a5-e87" secondAttribute="leading" constant="21" id="WTQ-TG-fdM"/>
+                                            <constraint firstItem="nww-or-THy" firstAttribute="centerY" secondItem="4Sb-AN-mM0" secondAttribute="centerY" id="dlK-79-Jdc"/>
+                                        </constraints>
+                                        <viewLayoutGuide key="safeArea" id="my0-a5-e87"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iYF-IP-l7O" userLabel="Separator Line">
+                                <rect key="frame" x="17" y="55" width="358" height="1"/>
+                                <color key="backgroundColor" red="0.94117647058823528" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="l0q-EI-jj4"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="5yX-DM-vgp" firstAttribute="leading" secondItem="hyF-tb-TXS" secondAttribute="leading" id="Ago-t0-Z5i"/>
+                            <constraint firstAttribute="bottom" secondItem="iYF-IP-l7O" secondAttribute="bottom" id="Inb-DD-rbQ"/>
+                            <constraint firstAttribute="trailing" secondItem="iYF-IP-l7O" secondAttribute="trailing" id="Nns-vu-mFf"/>
+                            <constraint firstAttribute="bottom" secondItem="5yX-DM-vgp" secondAttribute="bottom" id="WK9-vj-SeK"/>
+                            <constraint firstItem="5yX-DM-vgp" firstAttribute="top" secondItem="hyF-tb-TXS" secondAttribute="top" id="ZZ9-qw-caj"/>
+                            <constraint firstItem="iYF-IP-l7O" firstAttribute="leading" secondItem="hyF-tb-TXS" secondAttribute="leading" constant="17" id="oiw-4d-2s0"/>
+                            <constraint firstAttribute="trailing" secondItem="5yX-DM-vgp" secondAttribute="trailing" id="qdH-ob-h6e"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="hyF-tb-TXS" secondAttribute="bottom" id="DqL-fN-3gX"/>
+                <constraint firstItem="hyF-tb-TXS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="El3-f2-JRz"/>
+                <constraint firstItem="hyF-tb-TXS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="TFK-Q1-nXY"/>
+                <constraint firstAttribute="trailing" secondItem="hyF-tb-TXS" secondAttribute="trailing" id="UIr-zJ-kVP"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="fieldDescriptionLabel" destination="VGn-ss-ajP" id="UiL-2D-hnE"/>
+                <outlet property="fieldEntryLabel" destination="nww-or-THy" id="SEz-dZ-VYs"/>
+            </connections>
+            <point key="canvasLocation" x="-754" y="21"/>
         </collectionViewCell>
     </objects>
 </document>

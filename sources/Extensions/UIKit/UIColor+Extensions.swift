@@ -17,5 +17,9 @@ extension UIColor {
         @nonobjc static var greyishBrown: UIColor {
             return UIColor(white: 74.0 / 255.0, alpha: 1.0)
         }
+
+        @nonobjc static var separatorLine: UIColor {
+            return UIColor(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0)
+        }
     }
 }

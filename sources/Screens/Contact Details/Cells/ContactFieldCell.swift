@@ -18,10 +18,14 @@ class ContactFieldCell: UICollectionViewCell {
         static let contentHeight: CGFloat = 56
     }
 
+    @IBOutlet private weak var fieldDescriptionLabel: UILabel!
+    @IBOutlet private weak var fieldEntryLabel: UILabel!
     weak var delegate: ContactFieldCellDelegate?
 
     func configure(with viewModel: ContactFieldCellViewModel, delegate: ContactFieldCellDelegate? = nil) {
         self.delegate = delegate
+        fieldDescriptionLabel.text = viewModel.fieldDescription
+        fieldEntryLabel.text = viewModel.fieldValue
     }
 
     static func size(for viewModel: ContactFieldCellViewModel, boundingSize: CGSize) -> CGSize {

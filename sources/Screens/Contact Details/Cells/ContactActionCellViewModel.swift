@@ -9,5 +9,5 @@
 import Foundation
 
 struct ContactActionCellViewModel {
-
+    let actionTitle: String
 }

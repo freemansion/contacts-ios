@@ -125,6 +125,7 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
         collectionView.register(R.nib.contactFieldCell)
         collectionView.register(R.nib.contactActionCell)
         collectionView.register(R.nib.contactLoadingCell)
+        collectionView.register(R.nib.genericCollectionViewCell)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -142,6 +143,8 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
         switch item {
         case .loadingContact(let viewModel):
             return ContactLoadingCell.size(for: viewModel, boundingSize: boundingSize)
+        case .verticalSpace(let height):
+            return GenericCollectionViewCell.size(forWidth: boundingSize.width, itemType: .space, preferredHeight: height)
 
         case .preview(.profileHeader(let viewModel)):
             return ContactProfilePreviewCell.size(for: viewModel, boundingSize: boundingSize)
@@ -186,6 +189,11 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
             cell.configure(with: viewModel)
             return cell
 
+        case .verticalSpace:
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.genericCollectionViewCell, for: indexPath)!
+            cell.configure(as: .space)
+            return cell
+
         case .preview(.profileHeader(let viewModel)):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.contactProfilePreviewCell, for: indexPath)!
             cell.configure(with: viewModel, delegate: self)
@@ -200,7 +208,7 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
             return cell
         case .preview(.deleteContact(let viewModel)):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.contactActionCell, for: indexPath)!
-            cell.configure(with: viewModel, delegate: self)
+            cell.configure(with: viewModel)
             return cell
 
         case .edit(.profileHeader(let viewModel)):
@@ -256,9 +264,5 @@ extension ContactViewController: ContactProfilePreviewCellDelegate {
 }
 
 extension ContactViewController: ContactFieldCellDelegate {
-
-}
-
-extension ContactViewController: ContactActionCellDelegate {
 
 }
