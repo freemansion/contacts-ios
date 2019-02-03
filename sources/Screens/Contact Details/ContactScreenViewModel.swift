@@ -143,7 +143,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             }
         case .edit:
             if let contact = state.contact {
-                dataSourceItems = makePreviewDataSource(contact)
+                dataSourceItems = makeEditDataSource(contact)
             } else {
                 dataSourceItems = makeLoadingContactDataSource()
             }

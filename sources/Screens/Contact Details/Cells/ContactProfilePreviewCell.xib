@@ -170,7 +170,6 @@
                                                 </constraints>
                                                 <state key="normal" image="contact_favorite_normal"/>
                                                 <state key="selected" image="contact_favorite_selected"/>
-                                                <state key="highlighted" image="contact_favorite_normal"/>
                                                 <connections>
                                                     <action selector="favoriteButtonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="Osd-3S-4o7"/>
                                                 </connections>

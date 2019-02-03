@@ -10,6 +10,7 @@
 		6F7FE6E3347712F465FB66DF /* Pods_contacts_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC2B46BB651FAC9FD385204B /* Pods_contacts_ios.framework */; };
 		717FD60948D8834CBEDA9C31 /* Pods_ContactsNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61C556B5978A188A036A5C58 /* Pods_ContactsNetwork.framework */; };
 		F01FCC1D2206EDE900C5B655 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FCC1C2206EDE900C5B655 /* GradientView.swift */; };
+		F01FCC1F2206F56500C5B655 /* UINavigationController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F01FCC1E2206F56500C5B655 /* UINavigationController+Extensions.swift */; };
 		F098A00222058E6800E68C95 /* ContactsMainContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */; };
 		F098A00322058E6800E68C95 /* ContactsMainContactCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */; };
 		F098A006220591F300E68C95 /* ContactsMainLoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */; };
@@ -169,6 +170,7 @@
 		CC2B46BB651FAC9FD385204B /* Pods_contacts_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_contacts_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5305A0234C921A5D1285E78 /* Pods-ContactsNetwork.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ContactsNetwork.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ContactsNetwork/Pods-ContactsNetwork.debug.xcconfig"; sourceTree = "<group>"; };
 		F01FCC1C2206EDE900C5B655 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		F01FCC1E2206F56500C5B655 /* UINavigationController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Extensions.swift"; sourceTree = "<group>"; };
 		F098A00022058E6800E68C95 /* ContactsMainContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainContactCell.swift; sourceTree = "<group>"; };
 		F098A00122058E6800E68C95 /* ContactsMainContactCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainContactCell.xib; sourceTree = "<group>"; };
 		F098A004220591F300E68C95 /* ContactsMainLoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainLoadingCell.swift; sourceTree = "<group>"; };
@@ -468,6 +470,7 @@
 				F0EE71BA2206D299000809C6 /* UIAlertController+Extensions.swift */,
 				F0EE718E22069BCD000809C6 /* UIBarButtonItem+Extensions.swift */,
 				F01FCC1C2206EDE900C5B655 /* GradientView.swift */,
+				F01FCC1E2206F56500C5B655 /* UINavigationController+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1103,6 +1106,7 @@
 				F098FD832204961700656B8F /* ContactsMainViewController.swift in Sources */,
 				F098FE1522057DBD00656B8F /* AppDependencies.swift in Sources */,
 				F098A0092205938500E68C95 /* ContactsMainLoadingCellViewModel.swift in Sources */,
+				F01FCC1F2206F56500C5B655 /* UINavigationController+Extensions.swift in Sources */,
 				F098FD9622049FF700656B8F /* AppConfig.swift in Sources */,
 				F0EE71A52206A0EB000809C6 /* ContactFieldCellViewModel.swift in Sources */,
 				F0EE71A92206A117000809C6 /* ContactActionCellViewModel.swift in Sources */,

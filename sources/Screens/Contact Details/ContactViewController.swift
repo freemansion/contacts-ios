@@ -47,6 +47,7 @@ class ContactViewController: UIViewController, UIStoryboardIdentifiable {
     }
 
     private func configureView() {
+        navigationController?.makeWhiteNavigationBar()
         updateNavigationButtons()
         configureCollectionView()
     }

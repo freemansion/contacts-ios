@@ -19,8 +19,12 @@ protocol ContactsMainInput: class {
 
 class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
-    @IBOutlet private weak var groupsBarButton: UIBarButtonItem!
-    @IBOutlet private weak var addBarButton: UIBarButtonItem!
+    private lazy var groupsBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(title: R.string.localizable.contacts_main_groups_button(), style: .plain, target: self, action: #selector(didTouchContactGroupsButton(_:)))
+    }()
+    private lazy var addBarButton: UIBarButtonItem = {
+        return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTouchAddContactButton(_:)))
+    }()
     @IBOutlet private weak var tableView: UITableView!
     weak var output: ContactsMainOutput?
     private lazy var screenViewModel: ContactsMainScreenViewModelType = {
@@ -37,7 +41,9 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
     private func configureView() {
         navigationItem.title = R.string.localizable.contacts_main_screen_title()
-        groupsBarButton.title = R.string.localizable.contacts_main_groups_button()
+        navigationItem.leftBarButtonItem = groupsBarButton
+        navigationItem.rightBarButtonItem = addBarButton
+        navigationController?.makeNavigationBarTranslucent()
 
         tableView.dataSource = self
         tableView.delegate = self
