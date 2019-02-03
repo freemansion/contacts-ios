@@ -1,4 +1,12 @@
+// Contacts Main screen
 "contacts_main_screen_title" = "Contacts";
 "contacts_main_groups_button" = "Groups";
 "contacts_main_loading_contacts_title" = "Loading contacts...";
+
+// Contact Details (view / edit / add new)
+"contacts_details_navigation_cancel" = "Cancel";
+"contacts_details_navigation_edit" = "Edit";
+"contacts_details_navigation_done" = "Done";
+
+// Generic
 "error_alert_ok_button" = "Ok";

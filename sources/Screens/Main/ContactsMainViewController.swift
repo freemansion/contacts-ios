@@ -8,11 +8,17 @@
 
 import UIKit
 
+protocol ContactsMainViewControllerDelegate: class {
+    func didTouchAddContact(viewController: ContactsMainViewController)
+    func showDetailsOfContact(_ contactId: Int, viewController: ContactsMainViewController)
+}
+
 class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
     @IBOutlet private weak var groupsBarButton: UIBarButtonItem!
     @IBOutlet private weak var addBarButton: UIBarButtonItem!
     @IBOutlet private weak var tableView: UITableView!
+    weak var delegate: ContactsMainViewControllerDelegate?
     private lazy var screenViewModel: ContactsMainScreenViewModelType = {
         let viewModel = ContactsMainScreenViewModel()
         viewModel.delegate = self
@@ -41,7 +47,7 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
     }
 
     @IBAction func didTouchAddContactButton(_ sender: Any) {
-        print("didTouchAddContactButton")
+        delegate?.didTouchAddContact(viewController: self)
     }
 
     @IBAction func didTouchContactGroupsButton(_ sender: Any) {
@@ -144,6 +150,17 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
                 return
             }
             cell.configure(with: viewModel)
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = screenViewModel.dataSource.item(for: indexPath)
+        switch item {
+        case .loading:
+            return
+        case .contact(let viewModel):
+            tableView.deselectRow(at: indexPath, animated: true)
+            delegate?.showDetailsOfContact(viewModel.contactId, viewController: self)
         }
     }
 

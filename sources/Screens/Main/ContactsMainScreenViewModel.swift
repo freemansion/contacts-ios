@@ -29,7 +29,7 @@ protocol ContactsMainScreenViewModelActions {
 enum ContactsMainEvent {
     case loading(Bool)
     case error(String)
-    case didLoadContacts([ContactsListPerson])
+    case didLoadContacts
 }
 
 protocol ContactsMainScreenViewModelDelegate: class {
@@ -110,7 +110,9 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     // MARK: Actions:
     func viewWillAppear() {
-        fetchContacts()
+        if state.contacts.isEmpty {
+            fetchContacts()
+        }
     }
 }
 
@@ -119,18 +121,18 @@ extension ContactsMainScreenViewModel {
     private func fetchContacts() {
         sendUIEvent(.loading(true))
         firstly { Promises.fetchAllContacts()
-        }.done { self.sendUIEvent(.didLoadContacts($0))
+        }.done {
+            self.processContacts($0)
+            self.sendUIEvent(.didLoadContacts)
         }.ensure { self.sendUIEvent(.loading(false))
         }.catch { self.sendUIEvent(.error($0.localizedDescription)) }
     }
 
     private func sendUIEvent(_ event: ContactsMainEvent) {
         switch event {
-        case .didLoadContacts(let contacts):
-            processContacts(contacts)
         case .loading(let loading):
             isLoading = loading
-        case .error:
+        case .didLoadContacts, .error:
             break
         }
         updateDataSource()
@@ -143,7 +145,6 @@ extension ContactsMainScreenViewModel {
 
         // 2. split by groups
         var result: [(String, [ContactsListPerson])] = []
-        var idx = 0
         for contact in sorted {
             if let firstChar = contact.fullName.first, let section = result.last, String(firstChar) == section.0 {
                 // updating existing group
@@ -153,8 +154,7 @@ extension ContactsMainScreenViewModel {
             } else if let firstChar = contact.fullName.first {
                 // creating new one
                 let group = (String(firstChar), [contact])
-                result.insert(group, at: idx)
-                idx += 1
+                result.append(group)
             }
 
             // print("\(result.map { "section: \($0.0), contacts: \($0.1.count)" })\n")

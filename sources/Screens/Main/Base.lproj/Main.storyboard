@@ -55,5 +55,20 @@
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="62.518740629685162"/>
         </scene>
+        <!--Contact View Controller-->
+        <scene sceneID="xWk-4K-0J1">
+            <objects>
+                <viewController storyboardIdentifier="ContactViewController" id="Cgm-rl-PmQ" customClass="ContactViewController" customModule="Contacts" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bUM-uo-bFV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="rlR-le-cwj"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WeD-gk-Yyt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="799" y="63"/>
+        </scene>
     </scenes>
 </document>

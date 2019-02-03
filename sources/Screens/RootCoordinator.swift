@@ -8,18 +8,20 @@
 
 import UIKit
 
-struct RootCoordinator {
+final class RootCoordinator {
     private lazy var rootViewController: UIViewController = {
-        return ContactsMainViewController.makeInstance()
+        let vc = ContactsMainViewController.makeInstance()
+        vc.delegate = self
+        return vc
     }()
 
-    private lazy var rootNavigationController: UIViewController = {
+    private lazy var rootNavigationController: UINavigationController = {
         return UINavigationController(rootViewController: rootViewController)
     }()
 
     private(set) var window: UIWindow?
 
-    mutating func instantiateWindow(makeKeyAndVisible: Bool) -> UIWindow {
+    func instantiateWindow(makeKeyAndVisible: Bool) -> UIWindow {
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = rootNavigationController
         if makeKeyAndVisible {
@@ -27,5 +29,36 @@ struct RootCoordinator {
         }
         self.window = window
         return window
+    }
+}
+
+extension RootCoordinator: ContactsMainViewControllerDelegate {
+    func didTouchAddContact(viewController: ContactsMainViewController) {
+        let contactViewController = ContactViewController.makeInstance(mode: .addNew)
+        contactViewController.delegate = self
+        let navigationController = UINavigationController(rootViewController: contactViewController)
+        navigationController.modalPresentationStyle = .overCurrentContext
+        viewController.present(navigationController, animated: true)
+    }
+
+    func showDetailsOfContact(_ contactId: Int, viewController: ContactsMainViewController) {
+        let toViewController = ContactViewController.makeInstance(mode: .view(contactId: contactId))
+        toViewController.delegate = self
+        rootNavigationController.pushViewController(toViewController, animated: true)
+    }
+}
+
+extension RootCoordinator: ContactViewControllerDelegate {
+    func contactViewDidTouchCancel(viewController: ContactViewController, mode: ContactScreenViewModel.Mode) {
+        switch mode {
+        case .addNew:
+            viewController.navigationController?.dismiss(animated: true)
+        case .view, .edit:
+            viewController.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    func contactViewDidCreateNewContact(viewController: ContactViewController) {
+        viewController.navigationController?.dismiss(animated: true)
     }
 }

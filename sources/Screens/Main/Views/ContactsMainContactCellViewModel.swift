@@ -39,4 +39,8 @@ struct ContactsMainContactCellViewModel {
         return contact.isFavorite
     }
 
+    var contactId: Int {
+        return contact.id
+    }
+
 }
