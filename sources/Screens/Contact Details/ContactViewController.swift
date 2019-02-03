@@ -257,6 +257,25 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
     }
     // swiftlint:enable function_body_length
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = screenViewModel.dataSource.item(for: indexPath)
+
+        switch item {
+        case .preview(.deleteContact):
+            let deleteContact: ((UIAlertAction) -> Void) = { [weak self] _ in
+                guard let self = self else { return }
+                self.screenViewModel.actions.deleteContact()
+            }
+
+            presentConfirmationAlert(message: R.string.localizable.contacts_details_delete_alert_title(),
+                                     animated: true,
+                                     confirmationTitle: R.string.localizable.contacts_details_delete_title(),
+                                     confirmationStyle: .destructive,
+                                     handler: deleteContact)
+        default:
+            return
+        }
+    }
 }
 
 extension ContactViewController: ContactProfilePreviewCellDelegate {
@@ -266,3 +285,5 @@ extension ContactViewController: ContactProfilePreviewCellDelegate {
 extension ContactViewController: ContactFieldCellDelegate {
 
 }
+
+extension ContactViewController: ConfirmationAlertPresentable {}

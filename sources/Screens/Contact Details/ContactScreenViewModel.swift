@@ -68,6 +68,7 @@ protocol ContactScreenViewModelActions {
     func didTouchEdit()
     func didTouchCancel()
     func didTouchDone()
+    func deleteContact()
 }
 
 enum ContactScreenEvent {
@@ -214,6 +215,21 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             assertionFailure("view state is inconsistent")
             return
         }
+    }
+
+    func deleteContact() {
+        let contactId: Int?
+        switch state.mode {
+        case .edit(let id):
+            contactId = id
+        case .view(let id):
+            contactId = id
+        case .addNew:
+            contactId = nil
+        }
+
+        guard let id = contactId else { return }
+        print()
     }
 }
 

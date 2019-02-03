@@ -86,6 +86,8 @@
 		F0EE71B52206CDE3000809C6 /* GenericReusableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71B42206CDE3000809C6 /* GenericReusableCell.swift */; };
 		F0EE71B82206CE3B000809C6 /* GenericCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71B62206CE3B000809C6 /* GenericCollectionViewCell.swift */; };
 		F0EE71B92206CE3B000809C6 /* GenericCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */; };
+		F0EE71BB2206D299000809C6 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71BA2206D299000809C6 /* UIAlertController+Extensions.swift */; };
+		F0EE71BD2206D567000809C6 /* ConfirmationAlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71BC2206D567000809C6 /* ConfirmationAlertPresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -247,6 +249,8 @@
 		F0EE71B42206CDE3000809C6 /* GenericReusableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericReusableCell.swift; sourceTree = "<group>"; };
 		F0EE71B62206CE3B000809C6 /* GenericCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericCollectionViewCell.swift; sourceTree = "<group>"; };
 		F0EE71B72206CE3B000809C6 /* GenericCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenericCollectionViewCell.xib; sourceTree = "<group>"; };
+		F0EE71BA2206D299000809C6 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		F0EE71BC2206D567000809C6 /* ConfirmationAlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationAlertPresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -451,6 +455,8 @@
 				F098FD9A2204A07A00656B8F /* Storyboard */,
 				F098FDFE22055E1A00656B8F /* UIColor+Extensions.swift */,
 				F098FE182205834A00656B8F /* ErrorAlertPresentable.swift */,
+				F0EE71BC2206D567000809C6 /* ConfirmationAlertPresentable.swift */,
+				F0EE71BA2206D299000809C6 /* UIAlertController+Extensions.swift */,
 				F0EE718E22069BCD000809C6 /* UIBarButtonItem+Extensions.swift */,
 			);
 			path = UIKit;
@@ -1105,6 +1111,7 @@
 				F0EE71B82206CE3B000809C6 /* GenericCollectionViewCell.swift in Sources */,
 				F098A0112205AA0900E68C95 /* ImageLoader.swift in Sources */,
 				F098FE11220578AA00656B8F /* NetworkDataProvider.swift in Sources */,
+				F0EE71BD2206D567000809C6 /* ConfirmationAlertPresentable.swift in Sources */,
 				F098FDA02204A0AE00656B8F /* Storyboard.swift in Sources */,
 				F098FDFF22055E1A00656B8F /* UIColor+Extensions.swift in Sources */,
 				F0EE71A02206A09A000809C6 /* ContactActionCell.swift in Sources */,
@@ -1113,6 +1120,7 @@
 				F0EE71B32206BD53000809C6 /* ContactLoadingCellViewModel.swift in Sources */,
 				F0EE71B02206BC65000809C6 /* ContactLoadingCell.swift in Sources */,
 				F098FE0F2205713300656B8F /* RootCoordinator.swift in Sources */,
+				F0EE71BB2206D299000809C6 /* UIAlertController+Extensions.swift in Sources */,
 				F098FD9E2204A09F00656B8F /* UIStoryboard+Instantiate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

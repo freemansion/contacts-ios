@@ -18,12 +18,3 @@ extension ErrorAlertPresentable where Self: UIViewController {
         present(alertController, animated: animated, completion: completion)
     }
 }
-
-extension UIAlertController {
-    static func oneButtonAlert(alertTitle: String? = nil, alertMessage: String, buttonTitle: String, buttonHandler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
-        let action = UIAlertAction(title: buttonTitle, style: .default, handler: buttonHandler)
-        alert.addAction(action)
-        return alert
-    }
-}
