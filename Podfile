@@ -13,6 +13,7 @@ def main_pods
     pod 'Sourcery'
     pod 'PromiseKit', '~> 6.0'
     pod 'Nuke'
+    pod 'IQKeyboardManagerSwift'
 end
 
 def network_pods

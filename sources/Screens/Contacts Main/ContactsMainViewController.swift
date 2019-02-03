@@ -14,7 +14,7 @@ protocol ContactsMainOutput: class {
 }
 
 protocol ContactsMainInput: class {
-    func didDeleteContact(id: Int)
+    func didChangeContact(change: ContactChange)
 }
 
 class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
@@ -177,7 +177,7 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 extension ContactsMainViewController: ContactsMainInput {
-    func didDeleteContact(id: Int) {
-        screenViewModel.actions.deleteContact(id: id)
+    func didChangeContact(change: ContactChange) {
+        screenViewModel.actions.didReceiveContactChange(change)
     }
 }

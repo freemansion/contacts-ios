@@ -24,7 +24,7 @@ protocol ContactsMainScreenViewModelDataSource {
 
 protocol ContactsMainScreenViewModelActions {
     func viewWillAppear()
-    func deleteContact(id: Int)
+    func didReceiveContactChange(_ change: ContactChange)
 }
 
 enum ContactsMainEvent {
@@ -116,10 +116,16 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
         }
     }
 
-    func deleteContact(id: Int) {
-        let contacts = state.contacts.filter { $0.id != id }
-        processContacts(contacts)
-        sendUIEvent(.didLoadContacts)
+    func didReceiveContactChange(_ change: ContactChange) {
+        switch change {
+        case .delete(let id):
+            let contacts = state.contacts.filter { $0.id != id }
+            processContacts(contacts)
+            sendUIEvent(.didLoadContacts)
+        case .create, .update:
+            // TODO: implement client side update
+            fetchContacts()
+        }
     }
 }
 

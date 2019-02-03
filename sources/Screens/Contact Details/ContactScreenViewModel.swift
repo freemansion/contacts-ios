@@ -42,6 +42,10 @@ enum ContactScreenUIItem {
 }
 
 struct FieldsInput {
+    enum FieldType {
+        case firstName, lastName, mobile, email
+    }
+
     var firstName: String?
     var lastName: String?
     var mobile: String?
@@ -55,7 +59,6 @@ struct ContactScreenState {
     var currentInput: FieldsInput?
     var isUpdatingFavourite: Bool
 }
-var previousMode: ContactScreenViewModel.Mode?
 
 protocol ContactScreenViewModelDataSource {
     var state: ContactScreenState { get }
@@ -71,6 +74,7 @@ protocol ContactScreenViewModelActions {
     func didTouchDone()
     func deleteContact()
     func handleAction(_ action: ContactProfileAction)
+    func didEditField(_ type: FieldsInput.FieldType, value: String?)
 }
 
 enum ContactScreenEvent {
@@ -78,12 +82,15 @@ enum ContactScreenEvent {
         case loadingData(String)
         case createContact(String)
         case deleteContact(String)
+        case updateContact(String)
     }
 
     case setNeedReload
     case cancelAddNewContact
     case creatingNewContact
-    case didCreateNewContact
+    case didCreateNewContact(contactId: Int)
+    case updatingOrLoadingContact(Bool)
+    case didUpdateContact(contactId: Int)
     case didDeleteContact(contactId: Int)
     case setBusy(Bool)
     case didReceiveAnError(ContactScreenEvent.Error)
@@ -129,7 +136,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         self.state = ContactScreenState(initialMode: mode,
                                         mode: mode,
                                         contact: nil,
-                                        currentInput: nil,
+                                        currentInput: FieldsInput(),
                                         isUpdatingFavourite: false)
         self.dependencies = dependencies
         updateDataSource()
@@ -176,6 +183,11 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         switch state.mode {
         case .view(let contactId):
             state.mode = .edit(contactId: contactId)
+            let contact = state.contact
+            state.currentInput?.firstName = contact?.firstName
+            state.currentInput?.lastName = contact?.lastName
+            state.currentInput?.mobile = contact?.mobile
+            state.currentInput?.email = contact?.email.absoluteString
         case .addNew, .edit:
             assertionFailure("view state is inconsistent")
             return
@@ -205,17 +217,14 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             // create entity and retrieve id
             state.mode = .view(contactId: 1)
 
-            sendUIEvent(.creatingNewContact)
+            sendUIEvent(.didCreateNewContact(contactId: 1))
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.sendUIEvent(.didCreateNewContact)
+                self.sendUIEvent(.didCreateNewContact(contactId: 1))
             }
             return
 
-        case .view:
-            // create entity and retrieve id
-            state.mode = .view(contactId: 1)
-            updateDataSource()
-            sendUIEvent(.setNeedReload)
+        case .view(let contactId):
+            updateContactDetails(contactId: contactId)
         case .edit:
             assertionFailure("view state is inconsistent")
             return
@@ -264,6 +273,19 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             setIsFavorite(!contact.isFavorite, contactId: contact.id)
         }
     }
+
+    func didEditField(_ type: FieldsInput.FieldType, value: String?) {
+        switch type {
+        case .firstName:
+            state.currentInput?.firstName = value
+        case .lastName:
+            state.currentInput?.lastName = value
+        case .mobile:
+            state.currentInput?.mobile = value
+        case .email:
+            state.currentInput?.email = value
+        }
+    }
 }
 
 extension ContactScreenViewModel {
@@ -291,7 +313,7 @@ extension ContactScreenViewModel {
 
         guard let id = contactId else { return }
 
-        sendUIEvent(.setBusy(true))
+        sendUIEvent(.updatingOrLoadingContact(true))
         firstly {
             Promises.fetchContact(id: id)
         }.done {
@@ -299,8 +321,9 @@ extension ContactScreenViewModel {
             self.updateDataSource()
             self.sendUIEvent(.setNeedReload)
         }.ensure {
-            self.sendUIEvent(.setBusy(false))
-        }.catch {
+            self.sendUIEvent(.updatingOrLoadingContact(false))
+        }
+        .catch {
             self.dataSourceItems = []
             self.sendUIEvent(.setNeedReload)
             self.sendUIEvent(.didReceiveAnError(.loadingData($0.localizedDescription)))
@@ -352,29 +375,38 @@ extension ContactScreenViewModel {
 
         /*** First name ***/
         do {
+            let value = state.currentInput?.firstName ?? state.contact?.firstName
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.firstName,
-                                                      fieldValue: state.contact?.firstName)
+                                                      fieldValue: value,
+                                                      editingAllowed: true)
             dataSource += [[.edit(.firstName(viewModel))]]
         }
 
         /*** Last name ***/
         do {
+            let value = state.currentInput?.lastName ?? state.contact?.lastName
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.lastName,
-                                                      fieldValue: state.contact?.lastName)
+                                                      fieldValue: value,
+                                                      editingAllowed: true)
             dataSource += [[.edit(.lastName(viewModel))]]
         }
 
         /*** Mobile ***/
         do {
+            let value = state.currentInput?.mobile ?? state.contact?.mobile
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.mobile,
-                                                      fieldValue: state.contact?.mobile)
+                                                      fieldValue: value,
+                                                      editingAllowed: true)
             dataSource += [[.edit(.mobilePhone(viewModel))]]
         }
 
         /*** Email ***/
         do {
+            let value = state.currentInput?.email ?? state.contact?.email.absoluteString
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
-                                                      fieldValue: state.contact?.email.absoluteString)
+                                                      fieldValue: value,
+                                                      editingAllowed: true,
+                                                      returnKeyType: .done)
             dataSource += [[.edit(.email(viewModel))]]
         }
 
@@ -414,7 +446,8 @@ extension ContactScreenViewModel {
         /*** Email ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
-                                                      fieldValue: nil)
+                                                      fieldValue: nil,
+                                                      returnKeyType: .done)
             dataSource += [[.addNew(.email(viewModel))]]
         }
 
@@ -422,9 +455,12 @@ extension ContactScreenViewModel {
     }
 
     private func makeLoadingContactDataSource() -> [[ContactScreenUIItem]] {
+        return []
+        /*
         let title = R.string.localizable.contacts_details_loading_contact_title()
         let viewModel = ContactLoadingCellViewModel(title: title, isAnimating: true)
         return [[.loadingContact(viewModel)]]
+         */
     }
 
     private func processContact(_ contact: Person) {
@@ -453,7 +489,46 @@ extension ContactScreenViewModel {
         }.catch {
             self.updateDataSource()
             self.sendUIEvent(.setNeedReload)
-            self.sendUIEvent(.didReceiveAnError(.deleteContact($0.localizedDescription)))
+            self.sendUIEvent(.didReceiveAnError(.updateContact($0.localizedDescription)))
         }
     }
+
+    private func updateContactDetails(contactId: Int) {
+        guard let contact = state.contact, let input = state.currentInput,
+                  (contact.firstName != input.firstName) ||
+                  (contact.lastName != input.lastName) ||
+                  (contact.mobile != input.mobile) ||
+                  (contact.email.absoluteString != input.email) else {
+                state.mode = .view(contactId: contactId)
+                updateDataSource()
+                sendUIEvent(.setNeedReload)
+                return
+        }
+
+        sendUIEvent(.updatingOrLoadingContact(true))
+        firstly {
+            updateContactFields(id: contactId)
+        }.done {
+            self.state.mode = .view(contactId: contactId)
+            self.state.currentInput = FieldsInput()
+            self.processContact($0)
+            self.sendUIEvent(.didUpdateContact(contactId: contactId))
+        }.ensure {
+            self.updateDataSource()
+            self.sendUIEvent(.updatingOrLoadingContact(false))
+            self.sendUIEvent(.setNeedReload)
+        }.catch {
+            self.sendUIEvent(.didReceiveAnError(.updateContact($0.localizedDescription)))
+        }
+    }
+
+    private func updateContactFields(id: Int) -> Promise<Person> {
+        return Promises.updateContact(id: id,
+                                      firstName: state.currentInput?.firstName,
+                                      lastName: state.currentInput?.lastName,
+                                      email: state.currentInput?.email,
+                                      mobile: state.currentInput?.mobile,
+                                      profileImageURL: nil)
+    }
+
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IQKeyboardManagerSwift
 
 protocol HasAppConfig {
     var appConfig: AppConfig { get }
@@ -20,18 +21,26 @@ protocol HasNetworkDataProvider {
     var dataProvider: NetworkDataProvider { get }
 }
 
-final class AppDependencies: HasAppConfig, HasAppScreenManager, HasNetworkDataProvider {
+protocol HasKeyboardManager {
+    var appKeyboardManager: IQKeyboardManager { get }
+}
+
+final class AppDependencies: HasAppConfig, HasAppScreenManager, HasNetworkDataProvider, HasKeyboardManager {
+
     let appConfig: AppConfig
     let appScreenManager: AppScreenManager
     let dataProvider: NetworkDataProvider
+    let appKeyboardManager: IQKeyboardManager
 
     static let shared = AppDependencies()
 
     init(appConfig: AppConfig = .default,
          screenManager: AppScreenManager = .shared,
-         dataProvider: NetworkDataProvider = NetworkDataProvider()) {
+         dataProvider: NetworkDataProvider = NetworkDataProvider(),
+         keyboardManager: IQKeyboardManager = .shared) {
         self.appConfig = appConfig
         self.appScreenManager = screenManager
         self.dataProvider = dataProvider
+        self.appKeyboardManager = keyboardManager
     }
 }

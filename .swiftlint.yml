@@ -46,7 +46,7 @@ line_length:
 
 # or they can set both explicitly
 file_length:
-  warning: 500
+  warning: 600
   error: 800
 
 large_tuple: # warn user when using 3 values in tuple, give error if there are 4

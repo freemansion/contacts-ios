@@ -51,17 +51,20 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Sb-AN-mM0">
                                         <rect key="frame" x="102" y="0.0" width="273" height="56"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+ 91 7868765643" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nww-or-THy">
-                                                <rect key="frame" x="21" y="18.5" width="236" height="19.5"/>
-                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mll-UA-jP4">
+                                                <rect key="frame" x="21" y="8" width="236" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="s9b-Rq-sUb"/>
+                                                </constraints>
                                                 <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="my0-a5-e87" firstAttribute="trailing" secondItem="nww-or-THy" secondAttribute="trailing" constant="16" id="Dud-Pm-91I"/>
-                                            <constraint firstItem="nww-or-THy" firstAttribute="leading" secondItem="my0-a5-e87" secondAttribute="leading" constant="21" id="WTQ-TG-fdM"/>
-                                            <constraint firstItem="nww-or-THy" firstAttribute="centerY" secondItem="4Sb-AN-mM0" secondAttribute="centerY" id="dlK-79-Jdc"/>
+                                            <constraint firstItem="Mll-UA-jP4" firstAttribute="leading" secondItem="my0-a5-e87" secondAttribute="leading" constant="21" id="ptB-Z0-9Pf"/>
+                                            <constraint firstItem="my0-a5-e87" firstAttribute="trailing" secondItem="Mll-UA-jP4" secondAttribute="trailing" constant="16" id="wCm-sI-b5p"/>
+                                            <constraint firstItem="Mll-UA-jP4" firstAttribute="centerY" secondItem="4Sb-AN-mM0" secondAttribute="centerY" id="wuj-hj-QgL"/>
                                         </constraints>
                                         <viewLayoutGuide key="safeArea" id="my0-a5-e87"/>
                                     </view>
@@ -98,9 +101,9 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
                 <outlet property="fieldDescriptionLabel" destination="VGn-ss-ajP" id="UiL-2D-hnE"/>
-                <outlet property="fieldEntryLabel" destination="nww-or-THy" id="SEz-dZ-VYs"/>
+                <outlet property="textField" destination="Mll-UA-jP4" id="Fxb-a2-fXv"/>
             </connections>
-            <point key="canvasLocation" x="-754" y="21"/>
+            <point key="canvasLocation" x="-754.39999999999998" y="20.689655172413794"/>
         </collectionViewCell>
     </objects>
 </document>

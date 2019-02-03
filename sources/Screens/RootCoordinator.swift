@@ -58,16 +58,19 @@ extension RootCoordinator: ContactViewControllerDelegate {
         }
     }
 
-    func contactViewDidCreateNewContact(viewController: ContactViewController) {
-        viewController.navigationController?.dismiss(animated: true)
-    }
-
     func contactViewFailedToLoadContact(viewController: ContactViewController) {
         viewController.navigationController?.popViewController(animated: true)
     }
 
-    func contactViewDidDeleteContact(contactId: Int, viewController: ContactViewController) {
-        viewController.navigationController?.popViewController(animated: true)
-        rootViewController.didDeleteContact(id: contactId)
+    func contactViewDidUpdateContact(change: ContactChange, viewController: ContactViewController) {
+        switch change {
+        case .create:
+            viewController.navigationController?.dismiss(animated: true)
+        case .update:
+            break
+        case .delete:
+            viewController.navigationController?.popViewController(animated: true)
+        }
+        rootViewController.didChangeContact(change: change)
     }
 }

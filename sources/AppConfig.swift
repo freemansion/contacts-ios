@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import IQKeyboardManagerSwift
 
 final class AppConfig {
     enum Constants {
@@ -16,9 +17,11 @@ final class AppConfig {
 
     static let `default` = AppConfig()
     private let screenManager = AppScreenManager.shared
+    private let keyboardManager = IQKeyboardManager.shared
 
     func setup() {
         configureAppearance()
+        setupKeyboardManager()
     }
 
     private func configureAppearance() {
@@ -34,5 +37,14 @@ final class AppConfig {
         UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).setTitleTextAttributes(barButtonAttributes, for: .normal)
     }
 
+}
+
+extension AppConfig {
+    private func setupKeyboardManager() {
+        keyboardManager.enable = true
+        keyboardManager.shouldResignOnTouchOutside = true
+        keyboardManager.shouldPlayInputClicks = true
+        keyboardManager.disabledToolbarClasses = [ContactViewController.self]
+    }
 }
 

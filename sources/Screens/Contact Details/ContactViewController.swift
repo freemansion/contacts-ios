@@ -8,11 +8,16 @@
 
 import UIKit
 
+enum ContactChange {
+    case create(id: Int)
+    case update(id: Int)
+    case delete(id: Int)
+}
+
 protocol ContactViewControllerDelegate: class {
     func contactViewDidTouchCancel(viewController: ContactViewController, mode: ContactScreenViewModel.Mode)
-    func contactViewDidCreateNewContact(viewController: ContactViewController)
     func contactViewFailedToLoadContact(viewController: ContactViewController)
-    func contactViewDidDeleteContact(contactId: Int, viewController: ContactViewController)
+    func contactViewDidUpdateContact(change: ContactChange, viewController: ContactViewController)
 }
 
 class ContactViewController: UIViewController, UIStoryboardIdentifiable {
@@ -82,6 +87,7 @@ extension ContactViewController {
     }
 
     @objc private func didTouchDoneButton(_ sender: Any) {
+        view.endEditing(true)
         screenViewModel.actions.didTouchDone()
     }
 
@@ -101,10 +107,19 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
         case .creatingNewContact:
             cancelButton.isEnabled = false
             navigationItem.rightBarButtonItem = .activityIndicatorButton
-        case .didCreateNewContact:
-            delegate?.contactViewDidCreateNewContact(viewController: self)
+        case .updatingOrLoadingContact(let loading):
+            cancelButton.isEnabled = !loading
+            if loading {
+                navigationItem.rightBarButtonItem = .activityIndicatorButton
+            } else {
+                updateNavigationButtons()
+            }
+        case .didCreateNewContact(let id):
+            delegate?.contactViewDidUpdateContact(change: .create(id: id), viewController: self)
+        case .didUpdateContact(let id):
+            delegate?.contactViewDidUpdateContact(change: .update(id: id), viewController: self)
         case .didDeleteContact(let id):
-            delegate?.contactViewDidDeleteContact(contactId: id, viewController: self)
+            delegate?.contactViewDidUpdateContact(change: .delete(id: id), viewController: self)
         case .setBusy(let busy):
             collectionView.reloadData()
             navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !busy }
@@ -114,6 +129,10 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
                 self.delegate?.contactViewFailedToLoadContact(viewController: self)
             })
         case .didReceiveAnError(.createContact(let errorMessage)):
+            presentErrorAlert(message: errorMessage)
+        case .didReceiveAnError(.updateContact(let errorMessage)):
+            cancelButton.isEnabled = true
+            updateNavigationButtons()
             presentErrorAlert(message: errorMessage)
         case .didReceiveAnError(.deleteContact(let errorMessage)):
             presentErrorAlert(message: errorMessage)
@@ -291,7 +310,24 @@ extension ContactViewController: ContactProfilePreviewCellDelegate {
 }
 
 extension ContactViewController: ContactFieldCellDelegate {
-
+    func contactFieldValueChanged(_ value: String?, cell: ContactFieldCell) {
+        guard let indexPath = collectionView.indexPath(for: cell) else {
+            return
+        }
+        let item = screenViewModel.dataSource.item(for: indexPath)
+        switch item {
+        case .edit(.firstName):
+            screenViewModel.actions.didEditField(.firstName, value: value)
+        case .edit(.lastName):
+            screenViewModel.actions.didEditField(.lastName, value: value)
+        case .edit(.mobilePhone):
+            screenViewModel.actions.didEditField(.mobile, value: value)
+        case .edit(.email):
+            screenViewModel.actions.didEditField(.email, value: value)
+        default:
+            return
+        }
+    }
 }
 
 extension ContactViewController: ConfirmationAlertPresentable {}
