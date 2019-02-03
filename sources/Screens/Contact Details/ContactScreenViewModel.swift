@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import ContactModels
+import PromiseKit
 
 enum ContactScreenUIItem {
     enum Preview {
@@ -35,6 +37,7 @@ enum ContactScreenUIItem {
     case preview(Preview)
     case edit(Edit)
     case addNew(AddNew)
+    case loadingContact(ContactLoadingCellViewModel)
 }
 
 struct FieldsInput {
@@ -47,7 +50,7 @@ struct FieldsInput {
 struct ContactScreenState {
     let initialMode: ContactScreenViewModel.Mode
     var mode: ContactScreenViewModel.Mode
-    let initialInput: FieldsInput?
+    var contact: Person?
     var currentInput: FieldsInput?
 }
 var previousMode: ContactScreenViewModel.Mode?
@@ -71,6 +74,8 @@ enum ContactScreenEvent {
     case cancelAddNewContact
     case creatingNewContact
     case didCreateNewContact
+    case loadingContact(Bool)
+    case didReceiveAnError(String)
 }
 
 protocol ContactScreenViewModelDelegate: class {
@@ -111,7 +116,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     init(mode: Mode, dependencies: Dependencies = AppDependencies.shared) {
         self.state = ContactScreenState(initialMode: mode,
                                         mode: mode,
-                                        initialInput: nil,
+                                        contact: nil,
                                         currentInput: nil)
         self.dependencies = dependencies
         updateDataSource()
@@ -120,9 +125,17 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     private func updateDataSource() {
         switch state.mode {
         case .view:
-            dataSourceItems = makePreviewDataSource()
+            if state.contact != nil {
+                dataSourceItems = makePreviewDataSource()
+            } else {
+                dataSourceItems = makeLoadingContactDataSource()
+            }
         case .edit:
-            dataSourceItems = makeEditDataSource()
+            if state.contact != nil {
+                dataSourceItems = makeEditDataSource()
+            } else {
+                dataSourceItems = makeLoadingContactDataSource()
+            }
         case .addNew:
             dataSourceItems = makeAddContactDataSource()
         }
@@ -143,7 +156,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
 
     // MARK: Actions:
     func viewWillAppear() {
-
+        fetchDataIfNeeded()
     }
 
     func didTouchEdit() {
@@ -222,6 +235,14 @@ extension ContactScreenViewModel {
 
         guard let id = contactId else { return }
 
+        sendUIEvent(.loadingContact(true))
+        firstly { Promises.fetchContact(id: id)
+        }.done {
+            self.processContact($0)
+            self.updateDataSource()
+            self.sendUIEvent(.setNeedReload)
+        }.ensure { self.sendUIEvent(.loadingContact(false))
+        }.catch { self.sendUIEvent(.didReceiveAnError($0.localizedDescription)) }
     }
 
     private func makePreviewDataSource() -> [[ContactScreenUIItem]] {
@@ -236,14 +257,14 @@ extension ContactScreenViewModel {
         /*** Mobile phone ***/
         do {
             let viewModel = ContactFieldCellViewModel.init(fieldDescription: FieldDescription.mobile,
-                                                           fieldValue: state.initialInput?.mobile)
+                                                           fieldValue: state.contact?.mobile)
             dataSource += [[.preview(.mobilePhone(viewModel))]]
         }
 
         /*** Email ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
-                                                      fieldValue: state.initialInput?.email)
+                                                      fieldValue: state.contact?.email.absoluteString)
             dataSource += [[.preview(.email(viewModel))]]
         }
 
@@ -268,28 +289,28 @@ extension ContactScreenViewModel {
         /*** First name ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.firstName,
-                                                      fieldValue: state.initialInput?.firstName)
+                                                      fieldValue: state.contact?.firstName)
             dataSource += [[.edit(.firstName(viewModel))]]
         }
 
         /*** Last name ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.lastName,
-                                                      fieldValue: state.initialInput?.lastName)
+                                                      fieldValue: state.contact?.lastName)
             dataSource += [[.edit(.lastName(viewModel))]]
         }
 
         /*** Mobile ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.mobile,
-                                                      fieldValue: state.initialInput?.mobile)
+                                                      fieldValue: state.contact?.mobile)
             dataSource += [[.edit(.mobilePhone(viewModel))]]
         }
 
         /*** Email ***/
         do {
             let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
-                                                      fieldValue: state.initialInput?.email)
+                                                      fieldValue: state.contact?.email.absoluteString)
             dataSource += [[.edit(.email(viewModel))]]
         }
 
@@ -336,4 +357,13 @@ extension ContactScreenViewModel {
         return dataSource
     }
 
+    private func makeLoadingContactDataSource() -> [[ContactScreenUIItem]] {
+        let title = R.string.localizable.contacts_details_loading_contact_title()
+        let viewModel = ContactLoadingCellViewModel(title: title, isAnimating: true)
+        return [[.loadingContact(viewModel)]]
+    }
+
+    private func processContact(_ contact: Person) {
+        state.contact = contact
+    }
 }

@@ -13,6 +13,7 @@ public struct Person: Codable {
     public let firstName: String
     public let lastName: String
     public let email: URL
+    public let mobile: String
     public let profileImageURL: URL
     public let isFavorite: Bool
     public let createdAt: Date
@@ -23,6 +24,7 @@ public struct Person: Codable {
         case firstName = "first_name"
         case lastName = "last_name"
         case email
+        case mobile = "phone_number"
         case profileImageURL = "profile_pic"
         case isFavorite = "favorite"
         case createdAt = "created_at"
@@ -31,11 +33,12 @@ public struct Person: Codable {
 }
 
 public extension Person {
-    init(id: Int, firstName: String, lastName: String, email: URL, profileImageURL: URL, favorite: Bool, createdAt: Date, updatedAt: Date) {
+    init(id: Int, firstName: String, lastName: String, email: URL, mobile: String, profileImageURL: URL, favorite: Bool, createdAt: Date, updatedAt: Date) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.email = email
+        self.mobile = mobile
         self.profileImageURL = profileImageURL
         self.isFavorite = favorite
         self.createdAt = createdAt

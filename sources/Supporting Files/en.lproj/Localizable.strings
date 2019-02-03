@@ -11,6 +11,7 @@
 "contacts_details_last_name_field_title" = "Last Name";
 "contacts_details_mobile_field_title" = "mobile";
 "contacts_details_email_field_title" = "email";
+"contacts_details_loading_contact_title" = "Loading contact...";
 
 // Generic
 "error_alert_ok_button" = "Ok";

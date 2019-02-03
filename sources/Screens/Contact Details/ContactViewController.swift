@@ -87,7 +87,7 @@ extension ContactViewController {
     }
 }
 
-extension ContactViewController: ContactScreenViewModelDelegate {
+extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPresentable {
     func contactsScreenHandleEvent(_ event: ContactScreenEvent, viewModel: ContactScreenViewModelType) {
         switch event {
         case .setNeedReload:
@@ -100,6 +100,11 @@ extension ContactViewController: ContactScreenViewModelDelegate {
             navigationItem.rightBarButtonItem = .activityIndicatorButton
         case .didCreateNewContact:
             delegate?.contactViewDidCreateNewContact(viewController: self)
+        case .loadingContact(let isLoading):
+            collectionView.reloadData()
+            navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = isLoading }
+        case .didReceiveAnError(let errorMessage):
+            presentErrorAlert(message: errorMessage)
         }
     }
 }
@@ -113,6 +118,7 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
         collectionView.register(R.nib.contactProfilePreviewCell)
         collectionView.register(R.nib.contactFieldCell)
         collectionView.register(R.nib.contactActionCell)
+        collectionView.register(R.nib.contactLoadingCell)
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -128,6 +134,9 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
         let boundingSize = collectionView.bounds.size
 
         switch item {
+        case .loadingContact(let viewModel):
+            return ContactLoadingCell.size(for: viewModel, boundingSize: boundingSize)
+ 
         case .preview(.profileHeader(let viewModel)):
             return ContactProfilePreviewCell.size(for: viewModel, boundingSize: boundingSize)
         case .preview(.mobilePhone(let viewModel)):
@@ -166,6 +175,11 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
         let item = screenViewModel.dataSource.item(for: indexPath)
 
         switch item {
+        case .loadingContact(let viewModel):
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.contactLoadingCell, for: indexPath)!
+            cell.configure(with: viewModel)
+            return cell
+
         case .preview(.profileHeader(let viewModel)):
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: R.reuseIdentifier.contactProfilePreviewCell, for: indexPath)!
             cell.configure(with: viewModel, delegate: self)
