@@ -53,6 +53,7 @@ struct ContactScreenState {
     var mode: ContactScreenViewModel.Mode
     var contact: Person?
     var currentInput: FieldsInput?
+    var isUpdatingFavourite: Bool
 }
 var previousMode: ContactScreenViewModel.Mode?
 
@@ -128,7 +129,8 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         self.state = ContactScreenState(initialMode: mode,
                                         mode: mode,
                                         contact: nil,
-                                        currentInput: nil)
+                                        currentInput: nil,
+                                        isUpdatingFavourite: false)
         self.dependencies = dependencies
         updateDataSource()
     }
@@ -246,6 +248,11 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     }
 
     func handleAction(_ action: ContactProfileAction) {
+        guard let contact = state.contact else {
+            assertionFailure("datasource is inconsistent")
+            return
+        }
+
         switch action {
         case .message:
             print("message")
@@ -254,7 +261,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         case .email:
             print("email")
         case .favorite:
-            print("favorite")
+            setIsFavorite(!contact.isFavorite, contactId: contact.id)
         }
     }
 }
@@ -285,12 +292,14 @@ extension ContactScreenViewModel {
         guard let id = contactId else { return }
 
         sendUIEvent(.setBusy(true))
-        firstly { Promises.fetchContact(id: id)
+        firstly {
+            Promises.fetchContact(id: id)
         }.done {
             self.processContact($0)
             self.updateDataSource()
             self.sendUIEvent(.setNeedReload)
-        }.ensure { self.sendUIEvent(.setBusy(false))
+        }.ensure {
+            self.sendUIEvent(.setBusy(false))
         }.catch {
             self.dataSourceItems = []
             self.sendUIEvent(.setNeedReload)
@@ -303,7 +312,7 @@ extension ContactScreenViewModel {
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel(contact: contact)
+            let viewModel = ContactProfilePreviewCellViewModel(contact: contact, isUpdatingFavorite: state.isUpdatingFavourite)
             dataSource += [[.preview(.profileHeader(viewModel))]]
         }
 
@@ -337,7 +346,7 @@ extension ContactScreenViewModel {
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel(contact: contact)
+            let viewModel = ContactProfilePreviewCellViewModel(contact: contact, isUpdatingFavorite: state.isUpdatingFavourite)
             dataSource += [[.edit(.profileHeader(viewModel))]]
         }
 
@@ -420,5 +429,31 @@ extension ContactScreenViewModel {
 
     private func processContact(_ contact: Person) {
         state.contact = contact
+    }
+
+    private func setIsFavorite(_ isFavorite: Bool, contactId: Int) {
+
+        let setBusy: (Bool) -> Void = { [weak self] busy in
+            guard let self = self else { return }
+            self.state.isUpdatingFavourite = busy
+            self.updateDataSource()
+            self.sendUIEvent(.setBusy(busy))
+            self.sendUIEvent(.setNeedReload)
+        }
+
+        setBusy(true)
+        firstly {
+            Promises.updateContact(id: contactId, isFavorite: isFavorite)
+        }.done {
+            self.processContact($0)
+            self.updateDataSource()
+            self.sendUIEvent(.setNeedReload)
+        }.ensure {
+            setBusy(false)
+        }.catch {
+            self.updateDataSource()
+            self.sendUIEvent(.setNeedReload)
+            self.sendUIEvent(.didReceiveAnError(.deleteContact($0.localizedDescription)))
+        }
     }
 }

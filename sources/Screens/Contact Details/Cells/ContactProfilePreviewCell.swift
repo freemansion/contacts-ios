@@ -33,6 +33,7 @@ class ContactProfilePreviewCell: UICollectionViewCell {
     @IBOutlet private weak var emailLabel: UILabel!
     @IBOutlet private weak var favoriteButton: UIButton!
     @IBOutlet private weak var favoriteLabel: UILabel!
+    @IBOutlet private weak var favouriteProgressIndicator: UIActivityIndicatorView!
 
     weak var delegate: ContactProfilePreviewCellDelegate?
 
@@ -42,6 +43,7 @@ class ContactProfilePreviewCell: UICollectionViewCell {
         callLabel.text = R.string.localizable.contacts_details_profile_header_call_title()
         emailLabel.text = R.string.localizable.contacts_details_profile_header_email_title()
         favoriteLabel.text = R.string.localizable.contacts_details_profile_header_favorite_title()
+        favouriteProgressIndicator.isHidden = true
     }
 
     func configure(with viewModel: ContactProfilePreviewCellViewModel, delegate: ContactProfilePreviewCellDelegate? = nil) {
@@ -52,6 +54,13 @@ class ContactProfilePreviewCell: UICollectionViewCell {
                                       into: avatarImageView)
         fullNameLabel.text = viewModel.fullName
         favoriteButton.isSelected = viewModel.isFavorite
+        favouriteProgressIndicator.isHidden = !viewModel.isUpdatingFavorite
+        favoriteButton.isEnabled = !viewModel.isUpdatingFavorite
+        if viewModel.isUpdatingFavorite {
+            favouriteProgressIndicator.startAnimating()
+        } else {
+            favouriteProgressIndicator.stopAnimating()
+        }
     }
 
     @IBAction func messageButtonAction(_ sender: Any) {

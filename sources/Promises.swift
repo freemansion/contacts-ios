@@ -27,7 +27,13 @@ struct Promises {
                                                  route: .fetchContact(request))
     }
 
-    static func updateContact(id: Int, firstName: String?, lastName: String?, email: String?, mobile: String?, profileImageURL: URL?, isFavorite: Bool?) -> Promise<Person> {
+    static func updateContact(id: Int,
+                              firstName: String? = nil,
+                              lastName: String? = nil,
+                              email: String? = nil,
+                              mobile: String? = nil,
+                              profileImageURL: URL? = nil,
+                              isFavorite: Bool? = nil) -> Promise<Person> {
         let request = UpdateContactDetailsRequest(contactId: id, firstName: firstName, lastName: lastName, email: email, mobile: mobile, profileImageURL: profileImageURL, isFavorite: isFavorite)
         return dependencies.dataProvider.request(data: Person.self,
                                                  route: .updateContact(request))

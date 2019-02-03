@@ -180,13 +180,18 @@
                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="20E-op-YOP">
+                                                <rect key="frame" x="12.5" y="12" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="kYR-SY-fom" firstAttribute="width" secondItem="kYR-SY-fom" secondAttribute="height" multiplier="1:1" id="22M-Ks-xg6"/>
                                             <constraint firstItem="cbq-gz-JVu" firstAttribute="centerX" secondItem="kYR-SY-fom" secondAttribute="centerX" id="DON-k1-FsK"/>
                                             <constraint firstItem="kYR-SY-fom" firstAttribute="top" secondItem="FWs-pf-mTx" secondAttribute="top" id="Kxt-zj-bCq"/>
                                             <constraint firstItem="cbq-gz-JVu" firstAttribute="top" secondItem="kYR-SY-fom" secondAttribute="bottom" constant="4" id="lMv-Py-eVV"/>
+                                            <constraint firstItem="20E-op-YOP" firstAttribute="centerX" secondItem="kYR-SY-fom" secondAttribute="centerX" id="tKi-oS-YSp"/>
                                             <constraint firstItem="kYR-SY-fom" firstAttribute="centerX" secondItem="FWs-pf-mTx" secondAttribute="centerX" id="xYi-sv-XjV"/>
+                                            <constraint firstItem="20E-op-YOP" firstAttribute="centerY" secondItem="kYR-SY-fom" secondAttribute="centerY" id="yxx-MI-aYd"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -231,6 +236,7 @@
                 <outlet property="emailLabel" destination="MmF-AY-JtX" id="kJ1-9D-BH0"/>
                 <outlet property="favoriteButton" destination="kYR-SY-fom" id="9Qn-Jz-HfJ"/>
                 <outlet property="favoriteLabel" destination="cbq-gz-JVu" id="2Ac-GT-AxI"/>
+                <outlet property="favouriteProgressIndicator" destination="20E-op-YOP" id="WAH-Mz-bd2"/>
                 <outlet property="fullNameLabel" destination="YHJ-xq-EGX" id="9F8-oZ-BUw"/>
                 <outlet property="messageButton" destination="t93-Pu-yX1" id="oGr-YR-oPc"/>
                 <outlet property="messageLabel" destination="5k2-EJ-M7X" id="Y3F-eY-n68"/>

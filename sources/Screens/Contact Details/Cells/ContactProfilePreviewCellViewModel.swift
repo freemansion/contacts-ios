@@ -11,6 +11,7 @@ import ContactModels
 
 struct ContactProfilePreviewCellViewModel {
     let contact: Person
+    let isUpdatingFavorite: Bool
 
     var avatarURL: URL {
         return contact.profileImageURL
