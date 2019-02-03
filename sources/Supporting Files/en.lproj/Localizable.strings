@@ -7,6 +7,10 @@
 "contacts_details_navigation_cancel" = "Cancel";
 "contacts_details_navigation_edit" = "Edit";
 "contacts_details_navigation_done" = "Done";
+"contacts_details_first_name_field_title" = "First Name";
+"contacts_details_last_name_field_title" = "Last Name";
+"contacts_details_mobile_field_title" = "mobile";
+"contacts_details_email_field_title" = "email";
 
 // Generic
 "error_alert_ok_button" = "Ok";

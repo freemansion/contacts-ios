@@ -37,9 +37,18 @@ enum ContactScreenUIItem {
     case addNew(AddNew)
 }
 
+struct FieldsInput {
+    var firstName: String?
+    var lastName: String?
+    var mobile: String?
+    var email: String?
+}
+
 struct ContactScreenState {
     let initialMode: ContactScreenViewModel.Mode
     var mode: ContactScreenViewModel.Mode
+    let initialInput: FieldsInput?
+    var currentInput: FieldsInput?
 }
 var previousMode: ContactScreenViewModel.Mode?
 
@@ -82,6 +91,13 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         case edit(contactId: Int)
     }
 
+    private enum FieldDescription {
+        static let firstName = R.string.localizable.contacts_details_first_name_field_title()
+        static let lastName = R.string.localizable.contacts_details_last_name_field_title()
+        static let mobile = R.string.localizable.contacts_details_mobile_field_title()
+        static let email = R.string.localizable.contacts_details_email_field_title()
+    }
+
     var dataSource: ContactScreenViewModelDataSource { return self }
     var actions: ContactScreenViewModelActions { return self }
     weak var delegate: ContactScreenViewModelDelegate?
@@ -93,7 +109,10 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     private let dependencies: Dependencies
 
     init(mode: Mode, dependencies: Dependencies = AppDependencies.shared) {
-        self.state = ContactScreenState(initialMode: mode, mode: mode)
+        self.state = ContactScreenState(initialMode: mode,
+                                        mode: mode,
+                                        initialInput: nil,
+                                        currentInput: nil)
         self.dependencies = dependencies
         updateDataSource()
     }
@@ -180,7 +199,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
 
 extension ContactScreenViewModel {
     // MARK: private
-    fileprivate func sendUIEvent(_ event: ContactScreenEvent) {
+    private func sendUIEvent(_ event: ContactScreenEvent) {
         switch event {
         case .creatingNewContact, .didCreateNewContact:
             updateDataSource()
@@ -188,6 +207,21 @@ extension ContactScreenViewModel {
             break
         }
         delegate?.contactsScreenHandleEvent(event, viewModel: self)
+    }
+
+    private func fetchDataIfNeeded() {
+        let contactId: Int?
+        switch state.mode {
+        case .edit(let id):
+            contactId = id
+        case .view(let id):
+            contactId = id
+        case .addNew:
+            contactId = nil
+        }
+
+        guard let id = contactId else { return }
+        
     }
 
     private func makePreviewDataSource() -> [[ContactScreenUIItem]] {
@@ -201,13 +235,15 @@ extension ContactScreenViewModel {
 
         /*** Mobile phone ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel.init(fieldDescription: FieldDescription.mobile,
+                                                           fieldValue: state.initialInput?.mobile)
             dataSource += [[.preview(.mobilePhone(viewModel))]]
         }
 
         /*** Email ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
+                                                      fieldValue: state.initialInput?.email)
             dataSource += [[.preview(.email(viewModel))]]
         }
 
@@ -231,25 +267,29 @@ extension ContactScreenViewModel {
 
         /*** First name ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.firstName,
+                                                      fieldValue: state.initialInput?.firstName)
             dataSource += [[.edit(.firstName(viewModel))]]
         }
 
         /*** Last name ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.lastName,
+                                                      fieldValue: state.initialInput?.lastName)
             dataSource += [[.edit(.lastName(viewModel))]]
         }
 
         /*** Mobile ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.mobile,
+                                                      fieldValue: state.initialInput?.mobile)
             dataSource += [[.edit(.mobilePhone(viewModel))]]
         }
 
         /*** Email ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
+                                                      fieldValue: state.initialInput?.email)
             dataSource += [[.edit(.email(viewModel))]]
         }
 
@@ -267,25 +307,29 @@ extension ContactScreenViewModel {
 
         /*** First name ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.firstName,
+                                                      fieldValue: nil)
             dataSource += [[.addNew(.firstName(viewModel))]]
         }
 
         /*** Last name ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.lastName,
+                                                      fieldValue: nil)
             dataSource += [[.addNew(.lastName(viewModel))]]
         }
 
         /*** Mobile ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.mobile,
+                                                      fieldValue: nil)
             dataSource += [[.addNew(.mobilePhone(viewModel))]]
         }
 
         /*** Email ***/
         do {
-            let viewModel = ContactFieldCellViewModel()
+            let viewModel = ContactFieldCellViewModel(fieldDescription: FieldDescription.email,
+                                                      fieldValue: nil)
             dataSource += [[.addNew(.email(viewModel))]]
         }
 

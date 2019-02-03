@@ -9,5 +9,6 @@
 import Foundation
 
 struct ContactFieldCellViewModel {
-
+    let fieldDescription: String
+    let fieldValue: String?
 }
