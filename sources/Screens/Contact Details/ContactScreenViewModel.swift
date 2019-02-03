@@ -69,6 +69,7 @@ protocol ContactScreenViewModelActions {
     func didTouchCancel()
     func didTouchDone()
     func deleteContact()
+    func handleAction(_ action: ContactProfileAction)
 }
 
 enum ContactScreenEvent {
@@ -135,14 +136,14 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     private func updateDataSource() {
         switch state.mode {
         case .view:
-            if state.contact != nil {
-                dataSourceItems = makePreviewDataSource()
+            if let contact = state.contact {
+                dataSourceItems = makePreviewDataSource(contact)
             } else {
                 dataSourceItems = makeLoadingContactDataSource()
             }
         case .edit:
-            if state.contact != nil {
-                dataSourceItems = makeEditDataSource()
+            if let contact = state.contact {
+                dataSourceItems = makePreviewDataSource(contact)
             } else {
                 dataSourceItems = makeLoadingContactDataSource()
             }
@@ -243,6 +244,19 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             self.sendUIEvent(.didReceiveAnError(.deleteContact($0.localizedDescription)))
         }
     }
+
+    func handleAction(_ action: ContactProfileAction) {
+        switch action {
+        case .message:
+            print("message")
+        case .call:
+            print("call")
+        case .email:
+            print("email")
+        case .favorite:
+            print("favorite")
+        }
+    }
 }
 
 extension ContactScreenViewModel {
@@ -284,12 +298,12 @@ extension ContactScreenViewModel {
         }
     }
 
-    private func makePreviewDataSource() -> [[ContactScreenUIItem]] {
+    private func makePreviewDataSource(_ contact: Person) -> [[ContactScreenUIItem]] {
         var dataSource: [[ContactScreenUIItem]] = []
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel()
+            let viewModel = ContactProfilePreviewCellViewModel(contact: contact)
             dataSource += [[.preview(.profileHeader(viewModel))]]
         }
 
@@ -318,12 +332,12 @@ extension ContactScreenViewModel {
         return dataSource
     }
 
-    private func makeEditDataSource() -> [[ContactScreenUIItem]] {
+    private func makeEditDataSource(_ contact: Person) -> [[ContactScreenUIItem]] {
         var dataSource: [[ContactScreenUIItem]] = []
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel()
+            let viewModel = ContactProfilePreviewCellViewModel(contact: contact)
             dataSource += [[.edit(.profileHeader(viewModel))]]
         }
 
@@ -363,8 +377,8 @@ extension ContactScreenViewModel {
 
         /*** Profile header ***/
         do {
-            let viewModel = ContactProfilePreviewCellViewModel()
-            dataSource += [[.addNew(.profileHeader(viewModel))]]
+//            let viewModel = ContactProfilePreviewCellViewModel()
+//            dataSource += [[.addNew(.profileHeader(viewModel))]]
         }
 
         /*** First name ***/

@@ -284,7 +284,9 @@ extension ContactViewController: UICollectionViewDelegateFlowLayout, UICollectio
 }
 
 extension ContactViewController: ContactProfilePreviewCellDelegate {
-
+    func contactProfileDidReceiveAction(_ action: ContactProfileAction, cell: ContactProfilePreviewCell) {
+        screenViewModel.actions.handleAction(action)
+    }
 }
 
 extension ContactViewController: ContactFieldCellDelegate {

@@ -6,8 +6,21 @@
 //  Copyright © 2019 Stanislau Baranouski. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import ContactModels
 
 struct ContactProfilePreviewCellViewModel {
+    let contact: Person
 
+    var avatarURL: URL {
+        return contact.profileImageURL
+    }
+
+    var fullName: String {
+        return contact.fullName
+    }
+
+    var isFavorite: Bool {
+        return contact.isFavorite
+    }
 }
