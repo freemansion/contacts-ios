@@ -9,7 +9,32 @@
 import Foundation
 
 enum ContactScreenUIItem {
-    case item1
+    enum Preview {
+        case profileHeader(ContactProfilePreviewCellViewModel)
+        case mobilePhone(ContactFieldCellViewModel)
+        case email(ContactFieldCellViewModel)
+        case deleteContact(ContactActionCellViewModel)
+    }
+
+    enum Edit {
+        case profileHeader(ContactProfilePreviewCellViewModel)
+        case firstName(ContactFieldCellViewModel)
+        case lastName(ContactFieldCellViewModel)
+        case mobilePhone(ContactFieldCellViewModel)
+        case email(ContactFieldCellViewModel)
+    }
+
+    enum AddNew {
+        case profileHeader(ContactProfilePreviewCellViewModel)
+        case firstName(ContactFieldCellViewModel)
+        case lastName(ContactFieldCellViewModel)
+        case mobilePhone(ContactFieldCellViewModel)
+        case email(ContactFieldCellViewModel)
+    }
+
+    case preview(Preview)
+    case edit(Edit)
+    case addNew(AddNew)
 }
 
 struct ContactScreenState {
@@ -74,7 +99,14 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
     }
 
     private func updateDataSource() {
-
+        switch state.mode {
+        case .view:
+            dataSourceItems = makePreviewDataSource()
+        case .edit:
+            dataSourceItems = makeEditDataSource()
+        case .addNew:
+            dataSourceItems = makeAddContactDataSource()
+        }
     }
 
     // MARK: DataSource
@@ -137,13 +169,12 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         case .view:
             // create entity and retrieve id
             state.mode = .view(contactId: 1)
+            updateDataSource()
+            sendUIEvent(.setNeedReload)
         case .edit:
             assertionFailure("view state is inconsistent")
             return
         }
-
-        updateDataSource()
-        sendUIEvent(.setNeedReload)
     }
 }
 
@@ -158,4 +189,107 @@ extension ContactScreenViewModel {
         }
         delegate?.contactsScreenHandleEvent(event, viewModel: self)
     }
+
+    private func makePreviewDataSource() -> [[ContactScreenUIItem]] {
+        var dataSource: [[ContactScreenUIItem]] = []
+
+        /*** Profile header ***/
+        do {
+            let viewModel = ContactProfilePreviewCellViewModel()
+            dataSource += [[.preview(.profileHeader(viewModel))]]
+        }
+
+        /*** Mobile phone ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.preview(.mobilePhone(viewModel))]]
+        }
+
+        /*** Email ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.preview(.email(viewModel))]]
+        }
+
+        /*** Delete button ***/
+        do {
+            let viewModel = ContactActionCellViewModel()
+            dataSource += [[.preview(.deleteContact(viewModel))]]
+        }
+
+        return dataSource
+    }
+
+    private func makeEditDataSource() -> [[ContactScreenUIItem]] {
+        var dataSource: [[ContactScreenUIItem]] = []
+
+        /*** Profile header ***/
+        do {
+            let viewModel = ContactProfilePreviewCellViewModel()
+            dataSource += [[.edit(.profileHeader(viewModel))]]
+        }
+
+        /*** First name ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.edit(.firstName(viewModel))]]
+        }
+
+        /*** Last name ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.edit(.lastName(viewModel))]]
+        }
+
+        /*** Mobile ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.edit(.mobilePhone(viewModel))]]
+        }
+
+        /*** Email ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.edit(.email(viewModel))]]
+        }
+
+        return dataSource
+    }
+
+    private func makeAddContactDataSource() -> [[ContactScreenUIItem]] {
+        var dataSource: [[ContactScreenUIItem]] = []
+
+        /*** Profile header ***/
+        do {
+            let viewModel = ContactProfilePreviewCellViewModel()
+            dataSource += [[.addNew(.profileHeader(viewModel))]]
+        }
+
+        /*** First name ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.addNew(.firstName(viewModel))]]
+        }
+
+        /*** Last name ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.addNew(.lastName(viewModel))]]
+        }
+
+        /*** Mobile ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.addNew(.mobilePhone(viewModel))]]
+        }
+
+        /*** Email ***/
+        do {
+            let viewModel = ContactFieldCellViewModel()
+            dataSource += [[.addNew(.email(viewModel))]]
+        }
+
+        return dataSource
+    }
+
 }
