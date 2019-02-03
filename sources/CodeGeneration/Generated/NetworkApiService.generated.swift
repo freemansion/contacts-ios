@@ -9,6 +9,8 @@ extension NetworkApiService {
                 return request
             case .fetchContact(let request):
                 return request
+            case .updateContact(let request):
+                return request
             case .deleteContact(let request):
                 return request
         }
