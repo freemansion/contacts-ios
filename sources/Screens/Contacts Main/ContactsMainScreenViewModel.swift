@@ -24,7 +24,7 @@ protocol ContactsMainScreenViewModelDataSource {
 
 protocol ContactsMainScreenViewModelActions {
     func viewWillAppear()
-    func setNeedReloadDataSource()
+    func deleteContact(id: Int)
 }
 
 enum ContactsMainEvent {
@@ -115,9 +115,11 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
             fetchContacts()
         }
     }
-    
-    func setNeedReloadDataSource() {
-        fetchContacts()
+
+    func deleteContact(id: Int) {
+        let contacts = state.contacts.filter { $0.id != id }
+        processContacts(contacts)
+        sendUIEvent(.didLoadContacts)
     }
 }
 

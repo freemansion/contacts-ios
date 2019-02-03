@@ -14,7 +14,7 @@ protocol ContactsMainOutput: class {
 }
 
 protocol ContactsMainInput: class {
-    func setNeedRefetchData()
+    func didDeleteContact(id: Int)
 }
 
 class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
@@ -171,7 +171,7 @@ extension ContactsMainViewController: UITableViewDataSource, UITableViewDelegate
 }
 
 extension ContactsMainViewController: ContactsMainInput {
-    func setNeedRefetchData() {
-        screenViewModel.actions.setNeedReloadDataSource()
+    func didDeleteContact(id: Int) {
+        screenViewModel.actions.deleteContact(id: id)
     }
 }

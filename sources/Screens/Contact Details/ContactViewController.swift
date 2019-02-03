@@ -12,7 +12,7 @@ protocol ContactViewControllerDelegate: class {
     func contactViewDidTouchCancel(viewController: ContactViewController, mode: ContactScreenViewModel.Mode)
     func contactViewDidCreateNewContact(viewController: ContactViewController)
     func contactViewFailedToLoadContact(viewController: ContactViewController)
-    func contactViewDidDeleteContact(viewController: ContactViewController)
+    func contactViewDidDeleteContact(contactId: Int, viewController: ContactViewController)
 }
 
 class ContactViewController: UIViewController, UIStoryboardIdentifiable {
@@ -102,8 +102,8 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
             navigationItem.rightBarButtonItem = .activityIndicatorButton
         case .didCreateNewContact:
             delegate?.contactViewDidCreateNewContact(viewController: self)
-        case .didDeleteContact:
-            delegate?.contactViewDidDeleteContact(viewController: self)
+        case .didDeleteContact(let id):
+            delegate?.contactViewDidDeleteContact(contactId: id, viewController: self)
         case .setBusy(let busy):
             collectionView.reloadData()
             navigationItem.rightBarButtonItems?.forEach { $0.isEnabled = !busy }

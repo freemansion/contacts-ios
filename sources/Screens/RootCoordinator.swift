@@ -66,8 +66,8 @@ extension RootCoordinator: ContactViewControllerDelegate {
         viewController.navigationController?.popViewController(animated: true)
     }
 
-    func contactViewDidDeleteContact(viewController: ContactViewController) {
+    func contactViewDidDeleteContact(contactId: Int, viewController: ContactViewController) {
         viewController.navigationController?.popViewController(animated: true)
-        rootViewController.setNeedRefetchData()
+        rootViewController.didDeleteContact(id: contactId)
     }
 }

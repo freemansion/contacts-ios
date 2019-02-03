@@ -82,7 +82,7 @@ enum ContactScreenEvent {
     case cancelAddNewContact
     case creatingNewContact
     case didCreateNewContact
-    case didDeleteContact
+    case didDeleteContact(contactId: Int)
     case setBusy(Bool)
     case didReceiveAnError(ContactScreenEvent.Error)
 }
@@ -235,7 +235,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
         sendUIEvent(.setBusy(true))
         firstly { Promises.deleteContact(id: id)
         }.done { _ in
-            self.sendUIEvent(.didDeleteContact)
+            self.sendUIEvent(.didDeleteContact(contactId: id))
         }.ensure { self.sendUIEvent(.setBusy(false))
         }.catch {
             self.updateDataSource()
