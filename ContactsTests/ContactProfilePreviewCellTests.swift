@@ -7,27 +7,109 @@
 //
 
 import XCTest
+import SnapshotTesting
+@testable import Contacts
+import ContactModels
 
 class ContactProfilePreviewCellTests: XCTestCase {
-
+    
+    var contact1: Person!
+    var contact2: Person!
+    var record = false
+    
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        contact1 = Person(id: 1,
+                         firstName: "John",
+                         lastName: "Doe",
+                         email: URL(string: "john.doe@gmail.com")!,
+                         mobile: "+66845683412",
+                         profileImageURL: URL(string: "https://bit.ly/2UzKAmF")!,
+                         favorite: false,
+                         createdAt: Date(),
+                         updatedAt: Date())
+        contact2 = Person(id: 1,
+                          firstName: "Elon",
+                          lastName: "Musk",
+                          email: URL(string: "elon@musk.com")!,
+                          mobile: "+66845683412",
+                          profileImageURL: URL(string: "https://bit.ly/2TrtYxv")!,
+                          favorite: true,
+                          createdAt: Date(),
+                          updatedAt: Date())
     }
-
+    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        contact1 = nil
+        contact2 = nil
     }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func testContactProfilePreviewCell() {
+        let cellViewModel1 = ContactProfilePreviewCellViewModel(contact: contact1,
+                                                               isUpdatingFavorite: false,
+                                                               isUploadingImage: false,
+                                                               state: .view,
+                                                               avatarImage: nil)
+        let cellViewModel2 = ContactProfilePreviewCellViewModel(contact: contact2,
+                                                               isUpdatingFavorite: false,
+                                                               isUploadingImage: false,
+                                                               state: .view,
+                                                               avatarImage: nil)
+        let nib = R.nib.contactProfilePreviewCell
+        let cell = nib.instantiate(withOwner: nil).first as! ContactProfilePreviewCell
+        
+        cell.configure(with: cellViewModel1)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 269)), record: record)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 269)), record: record)
+        
+        cell.configure(with: cellViewModel2)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 269)), record: record)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 269)), record: record)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testContactProfileEditCell() {
+        let cellViewModel1 = ContactProfilePreviewCellViewModel(contact: nil,
+                                                                isUpdatingFavorite: false,
+                                                                isUploadingImage: false,
+                                                                state: .edit,
+                                                                avatarImage: nil)
+        let cellViewModel2 = ContactProfilePreviewCellViewModel(contact: contact2,
+                                                                isUpdatingFavorite: false,
+                                                                isUploadingImage: false,
+                                                                state: .edit,
+                                                                avatarImage: nil)
+        let nib = R.nib.contactProfilePreviewCell
+        let cell = nib.instantiate(withOwner: nil).first as! ContactProfilePreviewCell
+        
+        cell.configure(with: cellViewModel1)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 269)), record: record)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 269)), record: record)
+        
+        cell.configure(with: cellViewModel2)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 269)), record: record)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 269)), record: record)
     }
-
+    
+    func testContactProfileAddContactCell() {
+        let cellViewModel1 = ContactProfilePreviewCellViewModel(contact: contact1,
+                                                                isUpdatingFavorite: false,
+                                                                isUploadingImage: false,
+                                                                state: .add,
+                                                                avatarImage: nil)
+        let cellViewModel2 = ContactProfilePreviewCellViewModel(contact: nil,
+                                                                isUpdatingFavorite: false,
+                                                                isUploadingImage: false,
+                                                                state: .add,
+                                                                avatarImage: nil)
+        let nib = R.nib.contactProfilePreviewCell
+        let cell = nib.instantiate(withOwner: nil).first as! ContactProfilePreviewCell
+        
+        cell.configure(with: cellViewModel1)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 269)), record: record)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 269)), record: record)
+        
+        cell.configure(with: cellViewModel2)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 269)), record: record)
+        assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 269)), record: record)
+    }
+    
 }

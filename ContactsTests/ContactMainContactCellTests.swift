@@ -45,6 +45,7 @@ class ContactMainContactCellTests: XCTestCase {
         let nib = R.nib.contactsMainContactCell
         let cell = nib.instantiate(withOwner: nil).first as! ContactsMainContactCell
         cell.configure(with: cellViewModel)
+        
         assertSnapshot(matching: cell, as: .image(size: .init(width: 375, height: 64)), record: record)
         assertSnapshot(matching: cell, as: .image(size: .init(width: 320, height: 64)), record: record)
     }
