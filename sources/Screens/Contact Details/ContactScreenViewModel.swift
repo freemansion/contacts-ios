@@ -80,6 +80,7 @@ protocol ContactScreenViewModelActions {
     func handleAction(_ action: ContactProfileAction)
     func didEditField(_ type: FieldsInput.FieldType, value: String?)
     func didPickAnAvatarPicture(_ image: UIImage)
+    func setContact(_ contact: Person)
 }
 
 enum ContactScreenEvent {
@@ -147,6 +148,11 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
                                         isUpdatingFavourite: false,
                                         isUploadingImage: false)
         self.dependencies = dependencies
+        updateDataSource()
+    }
+
+    func setContact(_ contact: Person) {
+        state.contact = contact
         updateDataSource()
     }
 

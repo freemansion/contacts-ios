@@ -25,7 +25,7 @@ class ContactViewController: UIViewController, UIStoryboardIdentifiable {
 
     @IBOutlet private weak var collectionView: UICollectionView!
     weak var delegate: ContactViewControllerDelegate?
-    private var screenViewModel: ContactScreenViewModelType!
+    var screenViewModel: ContactScreenViewModelType!
     private var mode: ContactScreenViewModel.Mode {
         return screenViewModel.dataSource.state.mode
     }
