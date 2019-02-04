@@ -52,7 +52,7 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     private enum Constants {
         static let loadingTitle = R.string.localizable.contacts_main_loading_contacts_title()
-        static let personPlaceholder = R.image.person_placeholder()!
+        static let personPlaceholder = R.image.contact_avatar_placeholder()!
     }
 
     var dataSource: ContactsMainScreenViewModelDataSource { return self }

@@ -24,6 +24,17 @@ public struct ContactsListPerson: Codable {
         case isFavorite = "favorite"
         case fullInfoURL = "url"
     }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
+        firstName = try container.decode(String.self, forKey: .firstName)
+        lastName = try container.decode(String.self, forKey: .lastName)
+        // a hack to recover corrupted data while parsing (made only for tha app demo purposes)
+        profileImageURL = try container.decodeIfPresent(URL.self, forKey: .profileImageURL) ?? URL(string: "/images/missing.png")!
+        isFavorite = try container.decode(Bool.self, forKey: .isFavorite)
+        fullInfoURL = try container.decode(URL.self, forKey: .fullInfoURL)
+    }
 }
 
 public extension ContactsListPerson {

@@ -71,6 +71,7 @@
 		F0D62D1C22076411009A682B /* S3Uploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D62D1B22076411009A682B /* S3Uploader.swift */; };
 		F0D62D1E22076CD0009A682B /* CreateContactRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D62D1D22076CD0009A682B /* CreateContactRequest.swift */; };
 		F0D62D2022076E5A009A682B /* create_contact_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F0D62D1F22076E5A009A682B /* create_contact_success.json */; };
+		F0D62D2A22088B35009A682B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D62D2922088B35009A682B /* String+Extensions.swift */; };
 		F0EE71872205BD5C000809C6 /* ContactsMainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */; };
 		F0EE71892205BD65000809C6 /* ContactsMainHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */; };
 		F0EE718B2205D3BD000809C6 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0EE718A2205D3BD000809C6 /* ContactViewController.swift */; };
@@ -244,6 +245,7 @@
 		F0D62D1B22076411009A682B /* S3Uploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Uploader.swift; sourceTree = "<group>"; };
 		F0D62D1D22076CD0009A682B /* CreateContactRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateContactRequest.swift; sourceTree = "<group>"; };
 		F0D62D1F22076E5A009A682B /* create_contact_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = create_contact_success.json; sourceTree = "<group>"; };
+		F0D62D2922088B35009A682B /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		F0EE71862205BD5C000809C6 /* ContactsMainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsMainHeaderView.swift; sourceTree = "<group>"; };
 		F0EE71882205BD65000809C6 /* ContactsMainHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactsMainHeaderView.xib; sourceTree = "<group>"; };
 		F0EE718A2205D3BD000809C6 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -438,6 +440,7 @@
 			isa = PBXGroup;
 			children = (
 				F098FD992204A06E00656B8F /* UIKit */,
+				F0D62D2922088B35009A682B /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1148,6 +1151,7 @@
 				F098FD982204A04500656B8F /* AppScreenManager.swift in Sources */,
 				F098FD8B22049B6D00656B8F /* R.generated.swift in Sources */,
 				F0EE71B52206CDE3000809C6 /* GenericReusableCell.swift in Sources */,
+				F0D62D2A22088B35009A682B /* String+Extensions.swift in Sources */,
 				F0EE719422069FAD000809C6 /* ContactProfilePreviewCell.swift in Sources */,
 				F0EE71982206A003000809C6 /* ContactFieldCell.swift in Sources */,
 				F098FD9C2204A09300656B8F /* UIStoryboardIdentifiable.swift in Sources */,
@@ -1420,15 +1424,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QAMVT46U8;
+				DEVELOPMENT_TEAM = BA36Y82DMA;
 				INFOPLIST_FILE = "sources/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = freemansion.contacts.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oozou.ptt;
 				PRODUCT_NAME = Contacts;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1440,15 +1446,17 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9QAMVT46U8;
+				DEVELOPMENT_TEAM = BA36Y82DMA;
 				INFOPLIST_FILE = "sources/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = freemansion.contacts.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.oozou.ptt;
 				PRODUCT_NAME = Contacts;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -29,11 +29,16 @@ struct ContactProfilePreviewCellViewModel {
     }
 
     var avatarURL: URL? {
-        guard let url = contact?.profileImageURL,
-            url.absoluteString != "/images/missing.png" else {
-                return nil
+        guard let contact = contact else { return nil }
+        let urlString = contact.profileImageURL.absoluteString
+        if urlString == "/images/missing.png" {
+            return nil
+        } else if !urlString.contains("http") {
+            let baseURL = AppConfig.Constants.apiBaseURL
+            return baseURL.appendingPathComponent(contact.profileImageURL.absoluteString)
+        } else {
+            return contact.profileImageURL
         }
-        return contact?.profileImageURL
     }
 
     var fullName: String? {

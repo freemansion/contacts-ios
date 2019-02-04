@@ -194,6 +194,7 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
             state.currentInput?.lastName = contact?.lastName
             state.currentInput?.mobile = contact?.mobile
             state.currentInput?.email = contact?.email.absoluteString
+            state.currentInput?.profileImageURLString = contact?.profileImageURL.absoluteString
         case .addNew, .edit:
             assertionFailure("view state is inconsistent")
             return
@@ -261,11 +262,11 @@ final class ContactScreenViewModel: ContactScreenViewModelType, ContactScreenVie
 
         switch action {
         case .message:
-            print("message")
+            sendSMS()
         case .call:
-            print("call")
+            makeACall()
         case .email:
-            print("email")
+            writeEmail()
         case .favorite:
             setIsFavorite(!contact.isFavorite, contactId: contact.id)
         case .camera:
@@ -565,19 +566,19 @@ extension ContactScreenViewModel {
 
     private func addNewContact() {
         let input = state.currentInput
-        guard let firstName = input?.firstName else {
+        guard let firstName = input?.firstName, firstName.notEmpty else {
             sendUIEvent(.didReceiveAnError(.createContact("first name can not be empty")))
             return
         }
-        guard let lastName = input?.lastName else {
+        guard let lastName = input?.lastName, lastName.notEmpty else {
             sendUIEvent(.didReceiveAnError(.createContact("last name can not be empty")))
             return
         }
-        guard let mobile = input?.mobile else {
+        guard let mobile = input?.mobile, mobile.notEmpty else {
             sendUIEvent(.didReceiveAnError(.createContact("phone number can not be empty")))
             return
         }
-        guard let email = input?.email else {
+        guard let email = input?.email, email.notEmpty else {
             sendUIEvent(.didReceiveAnError(.createContact("email can not be empty")))
             return
         }
