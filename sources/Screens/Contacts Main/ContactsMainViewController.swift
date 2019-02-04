@@ -19,9 +19,6 @@ protocol ContactsMainInput: class {
 
 class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
-    private lazy var groupsBarButton: UIBarButtonItem = {
-        return UIBarButtonItem(title: R.string.localizable.contacts_main_groups_button(), style: .plain, target: self, action: #selector(didTouchContactGroupsButton(_:)))
-    }()
     private lazy var addBarButton: UIBarButtonItem = {
         return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTouchAddContactButton(_:)))
     }()
@@ -41,7 +38,6 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
     private func configureView() {
         navigationItem.title = R.string.localizable.contacts_main_screen_title()
-        navigationItem.leftBarButtonItem = groupsBarButton
         navigationItem.rightBarButtonItem = addBarButton
         navigationController?.makeNavigationBarTranslucent()
 
@@ -58,10 +54,6 @@ class ContactsMainViewController: UIViewController, UIStoryboardIdentifiable {
 
     @IBAction func didTouchAddContactButton(_ sender: Any) {
         output?.didTouchAddContact(viewController: self)
-    }
-
-    @IBAction func didTouchContactGroupsButton(_ sender: Any) {
-        print("didTouchAddContactButton")
     }
 
     static func makeInstance() -> ContactsMainViewController {
