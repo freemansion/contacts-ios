@@ -122,8 +122,7 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
             let contacts = state.contacts.filter { $0.id != id }
             processContacts(contacts)
             sendUIEvent(.didLoadContacts)
-        case .create, .update:
-            // TODO: implement client side update
+        case .create: .update:
             fetchContacts()
         }
     }

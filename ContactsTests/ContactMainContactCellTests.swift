@@ -21,14 +21,14 @@ class ContactMainContactCellTests: XCTestCase {
         contact1 = ContactsListPerson(id: 1,
                                      firstName: "John",
                                      lastName: "Doe",
-                                     profileImageURL: URL(string: "https://bit.ly/2UzKAmF")!,
+                                     profileImageURL: URL(string: "/images/missing.png")!,
                                      favorite: true,
                                      fullInfoURL: URL(string: "https://young-atoll-90416.herokuapp.com/1.json")!)
         
         contact2 = ContactsListPerson(id: 2,
                                       firstName: "Elon",
                                       lastName: "Musk",
-                                      profileImageURL: URL(string: "https://bit.ly/2TrtYxv")!,
+                                      profileImageURL: URL(string: "/images/missing.png")!,
                                       favorite: false,
                                       fullInfoURL: URL(string: "https://young-atoll-90416.herokuapp.com/contacts/1.json")!)
     }

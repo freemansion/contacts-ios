@@ -23,7 +23,7 @@ class ContactProfilePreviewCellTests: XCTestCase {
                          lastName: "Doe",
                          email: URL(string: "john.doe@gmail.com")!,
                          mobile: "+66845683412",
-                         profileImageURL: URL(string: "https://bit.ly/2UzKAmF")!,
+                         profileImageURL: URL(string: "/images/missing.png")!,
                          favorite: false,
                          createdAt: Date(),
                          updatedAt: Date())
@@ -32,7 +32,7 @@ class ContactProfilePreviewCellTests: XCTestCase {
                           lastName: "Musk",
                           email: URL(string: "elon@musk.com")!,
                           mobile: "+66845683412",
-                          profileImageURL: URL(string: "https://bit.ly/2TrtYxv")!,
+                          profileImageURL: URL(string: "/images/missing.png")!,
                           favorite: true,
                           createdAt: Date(),
                           updatedAt: Date())

@@ -22,7 +22,7 @@ class ContactViewControllerTests: XCTestCase {
                          lastName: "Musk",
                          email: URL(string: "elon@musk.com")!,
                          mobile: "+66845683412",
-                         profileImageURL: URL(string: "https://bit.ly/2TrtYxv")!,
+                         profileImageURL: URL(string: "/images/missing.png")!,
                          favorite: true,
                          createdAt: Date(),
                          updatedAt: Date())
