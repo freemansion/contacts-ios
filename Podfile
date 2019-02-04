@@ -29,4 +29,9 @@ end
 target 'contacts-ios' do
   main_pods
   network_pods
+
+  target 'ContactsUITests' do
+      pod 'SnapshotTesting', '~> 1.0'
+  end
+
 end

@@ -840,6 +840,7 @@
 					};
 					F098FD6F2204958C00656B8F = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 						TestTargetID = F098FD502204958A00656B8F;
 					};
 					F098FDA82204A7E400656B8F = {
@@ -1583,6 +1584,7 @@
 			baseConfigurationReference = F1FC496F93F8B2E1044D81AB /* Pods-contacts-ios-ContactsUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9QAMVT46U8;
 				INFOPLIST_FILE = ContactsUITests/Info.plist;

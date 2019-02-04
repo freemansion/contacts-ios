@@ -25,6 +25,7 @@ PODS:
     - R.swift.Library (~> 5.0.0.alpha.2)
   - R.swift.Library (5.0.0.alpha.2)
   - Result (3.2.4)
+  - SnapshotTesting (1.0.0)
   - Sourcery (0.15.0)
   - SwiftLint (0.29.1)
 
@@ -36,6 +37,7 @@ DEPENDENCIES:
   - Nuke
   - PromiseKit (~> 6.0)
   - R.swift (~> 5.0.0.alpha.3)
+  - SnapshotTesting (~> 1.0)
   - Sourcery
   - SwiftLint
 
@@ -52,6 +54,7 @@ SPEC REPOS:
     - R.swift
     - R.swift.Library
     - Result
+    - SnapshotTesting
     - Sourcery
     - SwiftLint
 
@@ -67,9 +70,10 @@ SPEC CHECKSUMS:
   R.swift: ca4207ecc94545a1611ca0b2ae1197458b6ba30a
   R.swift.Library: 3c21b823839bf5a6769dc7f96cb44479dab51b1b
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
+  SnapshotTesting: 7c799dd6fab517da677e9cb83557b12a0253f2da
   Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: 7669f8d0a4fef1fc3e824cc59cc9f21988ff65f1
+PODFILE CHECKSUM: 24c82d476b23ed96eb84735d5cdfb92dce9bd994
 
 COCOAPODS: 1.5.3
