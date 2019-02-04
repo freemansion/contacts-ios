@@ -139,6 +139,8 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
             presentErrorAlert(message: errorMessage)
         case .openMessageComposer(let recepient, let body):
             presentMessageComposer(recepient, body: body)
+        case .openMailComposer(let email, let body):
+            presentMailComposer(email, body: body)
         }
     }
 }
@@ -328,6 +330,24 @@ extension ContactViewController: MFMessageComposeViewControllerDelegate {
             messageController.messageComposeDelegate  = self
             messageController.recipients = [recipient]
             messageController.body = body
+            self.present(messageController, animated: true, completion: nil)
+        }
+    }
+}
+
+extension ContactViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+
+    private func presentMailComposer(_ email: String, body: String?) {
+        if MFMailComposeViewController.canSendMail() {
+            let messageController = MFMailComposeViewController()
+            messageController.mailComposeDelegate  = self
+            messageController.setToRecipients([email])
+            if let body = body {
+                messageController.setMessageBody("<p>\(body)</p>", isHTML: true)
+            }
             self.present(messageController, animated: true, completion: nil)
         }
     }

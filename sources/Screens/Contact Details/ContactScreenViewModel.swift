@@ -100,6 +100,7 @@ enum ContactScreenEvent {
     case setBusy(Bool)
     case didReceiveAnError(ContactScreenEvent.Error)
     case openMessageComposer(recepient: String, body: String?)
+    case openMailComposer(email: String, body: String?)
 }
 
 protocol ContactScreenViewModelDelegate: class {
@@ -613,4 +614,16 @@ extension ContactScreenViewModel {
         sendUIEvent(.openMessageComposer(recepient: mobile, body: "Hi! How are you?"))
     }
 
+    private func writeEmail() {
+        guard let emailTo = state.contact?.email.absoluteString else { return }
+        sendUIEvent(.openMailComposer(email: emailTo, body: "Hi! How are you?"))
+    }
+
+    private func makeACall() {
+        guard let mobile = state.contact?.mobile,
+        let callLink = URL(string: "tel://\(mobile)") else { return }
+        if UIApplication.shared.canOpenURL(callLink) {
+            UIApplication.shared.open(callLink)
+        }
+    }
 }
