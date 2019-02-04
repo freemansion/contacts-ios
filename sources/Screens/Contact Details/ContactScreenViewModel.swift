@@ -99,6 +99,7 @@ enum ContactScreenEvent {
     case didDeleteContact(contactId: Int)
     case setBusy(Bool)
     case didReceiveAnError(ContactScreenEvent.Error)
+    case openMessageComposer(recepient: String, body: String?)
 }
 
 protocol ContactScreenViewModelDelegate: class {
@@ -606,4 +607,10 @@ extension ContactScreenViewModel {
         }
         return
     }
+
+    private func sendSMS() {
+        guard let mobile = state.contact?.mobile else { return }
+        sendUIEvent(.openMessageComposer(recepient: mobile, body: "Hi! How are you?"))
+    }
+
 }

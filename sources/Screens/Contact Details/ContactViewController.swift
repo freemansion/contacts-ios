@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 enum ContactChange {
     case create(id: Int)
@@ -136,6 +137,8 @@ extension ContactViewController: ContactScreenViewModelDelegate, ErrorAlertPrese
             presentErrorAlert(message: errorMessage)
         case .didReceiveAnError(.deleteContact(let errorMessage)):
             presentErrorAlert(message: errorMessage)
+        case .openMessageComposer(let recepient, let body):
+            presentMessageComposer(recepient, body: body)
         }
     }
 }
@@ -310,6 +313,22 @@ extension ContactViewController: ContactProfilePreviewCellDelegate {
             presentImagePicker()
         case .message, .call, .email, .favorite:
             screenViewModel.actions.handleAction(action)
+        }
+    }
+}
+
+extension ContactViewController: MFMessageComposeViewControllerDelegate {
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        controller.dismiss(animated: true)
+    }
+
+    private func presentMessageComposer(_ recipient: String, body: String?) {
+        if MFMessageComposeViewController.canSendText() {
+            let messageController = MFMessageComposeViewController()
+            messageController.messageComposeDelegate  = self
+            messageController.recipients = [recipient]
+            messageController.body = body
+            self.present(messageController, animated: true, completion: nil)
         }
     }
 }
