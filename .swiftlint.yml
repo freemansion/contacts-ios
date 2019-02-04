@@ -10,7 +10,6 @@ opt_in_rules: # some rules are only opt-in
   - comma
 included: # paths to include during linting. `--path` is ignored if present.
   - sources
-  - ContactsTests
   - ContactsUITests
   - ContactModels
   - ContactModelsTests

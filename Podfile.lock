@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.8.0)
+  - Alamofire (4.8.1)
   - AWSCognito (2.7.4):
     - AWSCore (= 2.7.4)
   - AWSCore (2.7.4)
@@ -11,32 +11,32 @@ PODS:
   - Moya/Core (11.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
-  - Nuke (7.5.1)
-  - PromiseKit (6.7.0):
-    - PromiseKit/CorePromise (= 6.7.0)
-    - PromiseKit/Foundation (= 6.7.0)
-    - PromiseKit/UIKit (= 6.7.0)
-  - PromiseKit/CorePromise (6.7.0)
-  - PromiseKit/Foundation (6.7.0):
+  - Nuke (7.5.2)
+  - PromiseKit (6.8.3):
+    - PromiseKit/CorePromise (= 6.8.3)
+    - PromiseKit/Foundation (= 6.8.3)
+    - PromiseKit/UIKit (= 6.8.3)
+  - PromiseKit/CorePromise (6.8.3)
+  - PromiseKit/Foundation (6.8.3):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.7.0):
+  - PromiseKit/UIKit (6.8.3):
     - PromiseKit/CorePromise
   - R.swift (5.0.0.alpha.3):
     - R.swift.Library (~> 5.0.0.alpha.2)
-  - R.swift.Library (5.0.0.alpha.2)
+  - R.swift.Library (5.0.0)
   - Result (3.2.4)
-  - SnapshotTesting (1.0.0)
+  - SnapshotTesting (1.1.0)
   - Sourcery (0.15.0)
-  - SwiftLint (0.29.1)
+  - SwiftLint (0.30.1)
 
 DEPENDENCIES:
-  - AWSCognito
-  - AWSS3
+  - AWSCognito (= 2.7.4)
+  - AWSS3 (= 2.7.4)
   - IQKeyboardManagerSwift
   - Moya (~> 11.0)
   - Nuke
   - PromiseKit (~> 6.0)
-  - R.swift (~> 5.0.0.alpha.3)
+  - R.swift (= 5.0.0.alpha.3)
   - SnapshotTesting (~> 1.0)
   - Sourcery
   - SwiftLint
@@ -59,21 +59,21 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   AWSCognito: 9de12d55c9c925449014116590f69eea5285524f
   AWSCore: 9ff5ac15c4a5dd8419753fe19b9e98f7ba1b7859
   AWSS3: eecae272ea2e50d0da583385906db100fd740dbd
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   Moya: a725035953bc1c0eb1be505ab903984501d82440
-  Nuke: 3814db501e55f17951451839c726ffd91641e9a5
-  PromiseKit: 453ddcc947fe7b302f3ef41882b81d31c554df7f
+  Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
+  PromiseKit: 94c6e781838c5bf4717677d0d882b0e7250c80fc
   R.swift: ca4207ecc94545a1611ca0b2ae1197458b6ba30a
-  R.swift.Library: 3c21b823839bf5a6769dc7f96cb44479dab51b1b
+  R.swift.Library: 0bf390e729bc10bb2c9e4fb78bd043164a7be4ff
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  SnapshotTesting: 7c799dd6fab517da677e9cb83557b12a0253f2da
+  SnapshotTesting: 8ed6a4dceee63f59a60e1bc86f9adbba54eb9287
   Sourcery: 5895672cae353cdbfa95f3f4aaeb75a664d76f6a
-  SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
+  SwiftLint: a54bf1fe12b55c68560eb2a7689dfc81458508f7
 
-PODFILE CHECKSUM: 24c82d476b23ed96eb84735d5cdfb92dce9bd994
+PODFILE CHECKSUM: 9b9d27cfbfb36f08804d6c27d9ef68cf13150cd0
 
 COCOAPODS: 1.5.3

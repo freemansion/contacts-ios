@@ -1,14 +1,14 @@
 //
-//  ContactsTests.swift
+//  ContactProfilePreviewCellTests.swift
 //  ContactsTests
 //
-//  Created by Stanislau Baranouski on 2/1/19.
+//  Created by Stanislau Baranouski on 2/5/19.
 //  Copyright © 2019 Stanislau Baranouski. All rights reserved.
 //
 
 import XCTest
 
-class ContactsTests: XCTestCase {
+class ContactProfilePreviewCellTests: XCTestCase {
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
