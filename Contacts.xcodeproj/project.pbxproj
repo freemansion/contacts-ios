@@ -1555,7 +1555,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 04802505004C3A570EBDD77F /* Pods-contacts-ios-ContactsTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9QAMVT46U8;
@@ -1577,7 +1577,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B5597846C0C833A1199E7203 /* Pods-contacts-ios-ContactsTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9QAMVT46U8;
