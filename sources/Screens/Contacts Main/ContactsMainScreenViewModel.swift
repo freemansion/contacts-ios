@@ -117,13 +117,33 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
     }
 
     func didReceiveContactChange(_ change: ContactChange) {
+        let updateContactId: Int?
         switch change {
         case .delete(let id):
+            updateContactId = nil
             let contacts = state.contacts.filter { $0.id != id }
             processContacts(contacts)
             sendUIEvent(.didLoadContacts)
-        case .create, .update:
-            fetchContacts()
+        case .create(let id):
+            updateContactId = id
+        case .update(let id):
+            updateContactId = id
+        }
+
+        guard let id = updateContactId else { return }
+
+        sendUIEvent(.loading(false))
+        firstly {
+            Promises.fetchContact(id: id)
+        }.done {
+            var contacts = self.state.contacts.filter { $0.id != id }
+            contacts.append(ContactsListPerson.contact(from: $0))
+            self.processContacts(contacts)
+            self.sendUIEvent(.didLoadContacts)
+        }.ensure {
+            self.sendUIEvent(.loading(false))
+        }.catch {
+            self.sendUIEvent(.error($0.localizedDescription))
         }
     }
 }
@@ -174,5 +194,16 @@ extension ContactsMainScreenViewModel {
 
         state.contacts = sorted
         state.groupedContacts = result
+    }
+}
+
+extension ContactsListPerson {
+    static func contact(from person: Person) -> ContactsListPerson {
+        return ContactsListPerson(id: person.id,
+                                  firstName: person.firstName,
+                                  lastName: person.lastName,
+                                  profileImageURL: person.profileImageURL,
+                                  favorite: person.isFavorite,
+                                  fullInfoURL: URL(string: "http://young-atoll-90416.herokuapp.com/contacts/\(person.id).json")!) // fix hardcode
     }
 }
