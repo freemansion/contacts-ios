@@ -8,18 +8,18 @@ inhibit_all_warnings!
 
 def main_pods
     # Utils
-    pod 'R.swift', '~> 5.0.0.alpha.3'
-    pod 'SwiftLint'
-    pod 'Sourcery'
+    pod 'R.swift', '~> 5.0.0.alpha.3' # static resources generator
+    pod 'SwiftLint' # linter
+    pod 'Sourcery' # generate code from stencil templates (for ContactsNetwork.framework)
     pod 'PromiseKit', '~> 6.0'
-    pod 'Nuke'
+    pod 'Nuke' # image caching
     pod 'IQKeyboardManagerSwift'
-    pod 'AWSS3'
-    pod 'AWSCognito'
+    pod 'AWSS3' # to upload an avatar image
+    pod 'AWSCognito' # credentials manager for upload to S3
 end
 
 def network_pods
-    pod 'Moya', '~> 11.0'
+    pod 'Moya', '~> 11.0' # network layer abstraction
 end
 
 target 'ContactsNetwork' do
