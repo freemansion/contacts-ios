@@ -17,9 +17,30 @@ public enum NetworkApiService {
     case deleteContact(DeleteContactRequest)
 }
 
+public enum Environment {
+    case development(baseURL: URL)
+
+    var serverURL: URL {
+        switch self {
+        case .development(let url):
+            return url
+        }
+    }
+}
+
 extension NetworkApiService: TargetType {
+
+    private static var env: Environment?
+
+    public static func setupEnvironment(usingEnv env: Environment) {
+        NetworkApiService.env = env
+    }
+
     public var baseURL: URL {
-        return URL(string: "https://young-atoll-90416.herokuapp.com")!
+        guard let env = NetworkApiService.env else {
+            fatalError("network environment must be set")
+        }
+        return env.serverURL
     }
 
     public var path: String {

@@ -9,10 +9,18 @@
 import Foundation
 import UIKit
 import IQKeyboardManagerSwift
+import ContactsNetwork
 
 final class AppConfig {
     enum Constants {
-        static let apiBaseURL = URL(string: "https://young-atoll-90416.herokuapp.com")!
+        static var apiBaseURL: URL {
+            // TODO: embed base url to xcconfig file
+            #if DEBUG
+            return URL(string: "https://young-atoll-90416.herokuapp.com")!
+            #else
+            return URL(string: "https://young-atoll-90416.herokuapp.com")!
+            #endif
+        }
     }
 
     static let `default` = AppConfig()
@@ -20,8 +28,14 @@ final class AppConfig {
     private let keyboardManager = IQKeyboardManager.shared
 
     func setup() {
+        configureNetworkEnv()
         configureAppearance()
         setupKeyboardManager()
+    }
+
+    private func configureNetworkEnv() {
+        let env = Environment.development(baseURL: Constants.apiBaseURL)
+        NetworkApiService.setupEnvironment(usingEnv: env)
     }
 
     private func configureAppearance() {
