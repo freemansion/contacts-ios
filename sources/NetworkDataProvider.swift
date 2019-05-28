@@ -11,6 +11,7 @@ import ContactModels
 import ContactsNetwork
 import Alamofire
 
+/** NetworkDataProvider is a bridge class between main app and ContactsNetwork module **/
 final class NetworkDataProvider {
     private let dataProvider: DataProvider
 

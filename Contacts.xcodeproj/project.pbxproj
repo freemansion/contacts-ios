@@ -1000,7 +1000,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-contacts-ios-ContactsTests/Pods-contacts-ios-ContactsTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-contacts-ios-ContactsTests/Pods-contacts-ios-ContactsTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -1031,7 +1031,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-contacts-ios-ContactsTests/Pods-contacts-ios-ContactsTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-contacts-ios-ContactsTests/Pods-contacts-ios-ContactsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A26A8FCB6B824FA1B7501A2B /* [CP] Embed Pods Frameworks */ = {
@@ -1042,7 +1042,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-contacts-ios/Pods-contacts-ios-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-contacts-ios/Pods-contacts-ios-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -1071,7 +1071,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-contacts-ios/Pods-contacts-ios-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-contacts-ios/Pods-contacts-ios-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E556745D3C317F6BB0E0480B /* [CP] Check Pods Manifest.lock */ = {

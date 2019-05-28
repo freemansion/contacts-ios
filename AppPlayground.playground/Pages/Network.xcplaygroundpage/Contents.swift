@@ -5,11 +5,16 @@ import Alamofire
 import PlaygroundSupport
 PlaygroundPage.current.needsIndefiniteExecution = true
 
-// In order to execute this Playground page make sure you've built `ContactModels` and `ContactsNetwork` frameworks
+// In order to execute this Playground page make sure you've built `ContactModels` and `ContactsNetwork` target
 // alternatively - you can select `contacts-ios` build scheme and press '⌘ B'
 
-let performFetchContacts = false
-let performFetchContact = true
+// Setup environment
+let url = URL(string: "https://young-atoll-90416.herokuapp.com")!
+let env = Environment.development(baseURL: url)
+NetworkApiService.setupEnvironment(usingEnv: env)
+
+let performFetchContacts = true
+let performFetchContact = false
 
 if performFetchContacts {
     let request = FetchContactsRequest()

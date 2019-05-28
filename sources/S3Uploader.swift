@@ -33,8 +33,8 @@ struct S3ImageUploader {
                             image: UIImage,
                             usingeName imageName: String = NSUUID().uuidString) -> Promise<String> {
         // Configure AWS Cognito Credentials
-        let myIdentityPoolId = config.congitoPoolId
-        let credentialsProvider: AWSCognitoCredentialsProvider = AWSCognitoCredentialsProvider(regionType: config.cognitoRegion, identityPoolId: myIdentityPoolId)
+        let identityPoolId = config.congitoPoolId
+        let credentialsProvider: AWSCognitoCredentialsProvider = AWSCognitoCredentialsProvider(regionType: config.cognitoRegion, identityPoolId: identityPoolId)
         let configuration = AWSServiceConfiguration(region: config.awsServiceRegion, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
 

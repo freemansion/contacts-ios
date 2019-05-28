@@ -14,7 +14,6 @@ import ContactsNetwork
 final class AppConfig {
     enum Constants {
         static var apiBaseURL: URL {
-            // TODO: embed base url to xcconfig file
             #if DEBUG
             return URL(string: "https://young-atoll-90416.herokuapp.com")!
             #else
@@ -61,4 +60,3 @@ extension AppConfig {
         keyboardManager.disabledToolbarClasses = [ContactViewController.self]
     }
 }
-

@@ -111,9 +111,7 @@ final class ContactsMainScreenViewModel: ContactsMainScreenViewModelType, Contac
 
     // MARK: Actions:
     func viewWillAppear() {
-        if state.contacts.isEmpty {
-            fetchContacts()
-        }
+        fetchContacts()
     }
 
     func didReceiveContactChange(_ change: ContactChange) {
@@ -172,6 +170,10 @@ extension ContactsMainScreenViewModel {
     }
 
     private func processContacts(_ contacts: [ContactsListPerson]) {
+        // split contacts by sections
+        // such as:
+        // A / B / С / В / .. X / Y / Z
+
         // 1. sort alpabetically by full name
         let sorted = contacts.sorted(by: { $0.fullName < $1.fullName })
 
@@ -204,6 +206,6 @@ extension ContactsListPerson {
                                   lastName: person.lastName,
                                   profileImageURL: person.profileImageURL,
                                   favorite: person.isFavorite,
-                                  fullInfoURL: URL(string: "http://young-atoll-90416.herokuapp.com/contacts/\(person.id).json")!) // fix hardcode
+                                  fullInfoURL: URL(string: "https://young-atoll-90416.herokuapp.com/contacts/\(person.id).json")!) // fix hardcode
     }
 }
